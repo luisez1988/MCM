@@ -1,0 +1,578 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+		<title>CIE-598: Modeling Continuum Mechanics</title>
+	
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black_bears.css" id="theme">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="plugin/chalkboard/style.css">
+		<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+		<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+		<script type="text/javascript" src="https://flashphoner.com/downloads/builds/flashphoner_client/wcs_api-2.0/current/flashphoner.js"></script> 
+		<script type="text/javascript" src="./plugin/screen_sharing/screen-sharing-min.js"></script>
+		<!-- Shares the screen -->
+	
+	</head>
+	  <body onload="init_api()">
+	
+		<div class="reveal">
+	
+		  <div class="slides">
+					<style>
+					.container{
+							display: flex;
+					}
+					.col{
+							flex: 1;
+					}
+	
+					</style>
+	
+					<div class='footer'>
+						CIE-598
+						Spring 2024
+					</div>
+	
+					<style>
+					.reveal .slides section .fragment.fade-down {
+							opacity: 1;
+							visibility: visible;
+					}
+					.reveal .slides section .fragment.fade-down.visible,
+					.reveal .slides section .fragment.visible:not(.current-fragment) {
+							opacity: 1;
+							margin-top:0px;
+						}
+					.reveal .slides section .fragment.fade-down,
+					.reveal .slides section .fragment.current-fragment {
+							color: #000;
+							margin-top:0px;
+					}
+	
+	
+				</style>
+	
+				<style >
+	
+				.circle {
+			width: 80px;
+			line-height: 80px;
+			border-radius: 50%;
+			text-align: center;
+			font-size: 32px;
+			border: 10px solid #296B64;
+		  }
+		</style>
+				<!-- <section> -->
+					<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+						<div style="margin-top:300px;margin-left:0px" class="qrCode_cont" name="Get pdf">
+							<div class="qrCode" name="https://luisez1988.github.io/Soil-Erosion/Modeling_sediment_transport"> </div>
+						</div>
+			
+						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Modeling Continuum Mechanics">
+							<p style="color:#faffff; font-size:35px">Luis Zambrano-Cruzatty, Ph.D.</p>
+							<p style="color:#faffff; font-size:35px">Spring 2024</p>
+							<!-- <p style="color:#faffff; font-size:35px"> February 8, 2023</p> -->
+							<span id="spanDate_text" style="color:#faffff; font-size:35px"></span>
+						</div>
+					</section>
+
+
+        <!-- <section data-background-image="FiguresGeneral/Normal_slide_Maine.svg">
+					<h1>Contents</h1>
+
+					<div class='container'>
+					<div class='col'>
+						<ul class="contentStyle">
+							<li class="l1">Syllabus</li>
+							<li class="l1">What is modeling cont. mechanics?</li>
+
+														
+						</ul>
+					</div>
+					<div class='col'>
+						<div class='container'>
+							<div class='col'>
+								<div class="stickynote" style="margin-top: 100px;margin-left: 75px;">
+									<p style="margin-top: -10px;"> Objectives covered in this lecture</p>
+									<ul>
+										<li>[O4]: Develop an understanding of  modeling techniques to simulate erosive and sediment transport processes.</li>
+									</ul>
+								</div>
+							</div>
+							<div class='col'>
+							<div class='stickynote' style='margin-top: 100px;margin-left: 75px;'>
+								<p style="margin-top: -20px;">After this lecture we will able to:</p>
+								<ul style="margin-top: -15px;">
+									<li>Describe the fundamental principles involved in modeling sediment transport processes.</li>					
+									<li>Describe the governing equations to model sediment transport.</li>
+									<li>Enlist available modeling software. </li>									
+								</ul>
+							</div>
+							</div>
+							</div>
+					</div>
+					</div>
+				</section> -->
+
+<!--
+ #####  ####### #     # ####### ####### #     # #######  #####
+#     # #     # ##    #    #    #       ##    #    #    #     #
+#       #     # # #   #    #    #       # #   #    #    #
+#       #     # #  #  #    #    #####   #  #  #    #     #####
+#       #     # #   # #    #    #       #   # #    #          #
+#     # #     # #    ##    #    #       #    ##    #    #     #
+ #####  ####### #     #    #    ####### #     #    #     #####
+-->
+
+
+
+
+<section data-background-image="FiguresGeneral/Normal_slide_Maine.svg">
+	<h1>Know your friendly instructor</h1>
+	<div class='container'>
+	<div class='col'>
+		<img src="FiguresGeneral/Picture1.png" class="circle-image">
+		<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+			<p><strong style='color:#7abbe6'>Luis Zambrano-Cruzatty</strong> <br>
+			Assistant Professor <br>
+			Department of Civil and Environmental Engineering <br>
+			email:luis.zambrano@maine.edu
+		</div>
+	</div>
+	<div class='col'>
+		<h4>Education</h4>
+		<ul>
+			<li class='fragment'>Ph.D. and M.Sc.:: Virginia Tech</li>
+			<li class='fragment'>B.Sc. Civil Engineering:: ESPOL, Ecuador</li>
+		</ul>
+	<h4>Research experience</h4>
+		<ul>
+			<li class='fragment'>MPM modeling</li>
+			<li class='fragment'>Constitutive modeling of viscoplasticy of soils</li>
+			<li class='fragment'>Soil erosion and sediment transport</li>
+			<li class='fragment'>Multigas transport phenomena</li>
+		</ul>
+	</div>
+	</div>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Digital services, hardware, software</h1>
+<ul>
+	<li class='fragment'>Brightspace will be use for learning management</li>
+	<li class='fragment'>Brightspace will be use for communications about the class</li>
+	<li class='fragment'>You will need to code or use code. Install a version of Python (Anaconda or Visual code) and Fortran.</li>
+	<li class='fragment'>If you develop code from scratch you are free to use any type of language</li>
+	<li class='fragment'>You would also need to use Plaxis</li>
+	<li class='fragment'>I will grade code efficiency in terms of memory usage and rapidness</li>
+</ul>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h4>How to install Fortran?</h4>
+<ol>
+	<li> Download and install <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&passive=false&cid=2030">Visual Studio Community 2022</a> </li>
+	<li class='fragment'>Download and install the <a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html">One API Base Toolkit 2024</a></li>
+	<li class='fragment'>Download and install the <a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html">One API HPC Toolkit 2024</a></li>
+	<li class='fragment'>You should be all set</li>
+
+</ol>
+
+<div class="fragment">
+	<h4 style="margin-top: 100px;">How to install Plaxis?</h4>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	See the instructions detailed in <a href="https://communities.bentley.com/products/geotech-analysis/w/wiki/65202/first-time-installation---plaxis">this website</a>. For more help contact Andres Espinosa or Danilo Botero.
+	</div>
+
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Suggested textbooks</h1>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ul>
+	<li>Smith, I. M., Griffiths, D. V., & Margetts, L. (2014). Programming the finite element method (Fifth edition.). Chichester, West Sussex, United Kingdom: John Wiley Sons Inc </li>
+	<li>Wood, D. M. (2003). Geotechnical Modelling. CRC Press. </li>
+</ul>
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='https://media.wiley.com/product_data/coverImage300/41/11199733/1119973341.jpg' height='300 px'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<figure>
+<img src='https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/31t-k2r8L1L._AC_UF894,1000_QL80_.jpg' height='300 px'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Course Objectives</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ol style="font-size: 0.9em;">
+	<li class='fragment'><strong style='color:#7abbe6'>Develope awareness and familiarity</strong> with the fundamental conservation laws that govern continuum mechanics.</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Develope a understanding of fundamentals</strong> of elasticity, plasticity, and viscoplasticity for developing or using advanced constitutive models.</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Develope an understanding of fundamentals</strong> of the finite element method to solve quasistatic and dynamic problems.</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Develope an understanding of fundamentals</strong> of time integration schemes and their limitations in convergence and stability of dynamic solutions.</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Develope a practical understanding</strong> of the verification, calibration, and validation processes of continuum	numerical models</li>
+</ol>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Learning outcomes</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ol>
+	<li class='fragment'><strong style='color:#7abbe6'>Describe and explain</strong> the fundamental conservation laws that govern continuum mechanics.</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Describe and explain</strong> the fundamentals of elasticity, plasticity, and viscoplasticity or successfully calibrate constitutive models for engineering applications.</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Develope or make adequate use</strong> of finite element codes to solve the governing equations of continuum mechanics</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Describe and select</strong> appropriate time integration schemes for solving dynamic problems accounting for solution stability</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Verify, calibrate, and validate</strong> continuum numerical models.</li>
+</ol>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Course assessment</h1>
+<table>
+	<tr>
+		<th>Assessment</th>
+		<th>Weight</th>
+	</tr>
+	<tr>
+		<td>Participation in class</td>
+		<td>10%</td>
+	</tr>
+	<tr>
+		<td>Homework</td>
+		<td>30%</td>
+	</tr>
+	<tr>
+		<td>Midterm</td>
+		<td>30%</td>
+	</tr>
+	<tr>
+		<td>Final project</td>
+		<td>30%</td>
+	</tr>
+</table>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Options for assignments</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Some assignments will have two options. You can choose the one that best fit your interests, skills, and time availability. 
+</div>
+<div class='container'>
+<div class='col'>
+<h4>Hardcore</h4>
+<ol>
+	<li class='fragment'>Oriented for <strong style='color:#7abbe6'>users</strong></li>
+	<li class='fragment'>Will have to verify properties or expressions</li>
+	<li class='fragment'>Can use tools as opposed to develop the tools</li>
+	<li class='fragment'>Graded rigorously</li>
+</ol>
+</div>
+<div class='col'>
+<h4>Legendary</h4>
+<ol style="margin-left: 50px;">
+	<li class='fragment'>Oriented for <strong style='color:#7abbe6'>developers</strong></li>
+	<li class='fragment'>Will have to demonstrate properties and expressions</li>
+	<li class='fragment'>Must develop the tools as opposed to use them</li>
+	<li class='fragment'>Relaxed grading</li>
+</ol>
+
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1 style="font-size: 1.4em;">Why modelling continuum mechanics?</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The laws of continuum bodies are written in terms of <strong style='color:#7abbe6'>partial differential equations</strong>. These equations are <strong style='color:#7abbe6'>difficult</strong> to solve analytically. Thus, we need to <strong style='color:#7abbe6'>solve</strong> them <strong style='color:#7abbe6'>numerically</strong> provided some <strong style='color:#7abbe6'>boundary conditions</strong>. We call this problems <span class='atb'>Boundary value problems</span> <br>
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='https://structville.com/wp-content/uploads/2020/12/braced-cut.jpg' width='80%'/>
+<footer style='margin-top: -200px;font-size: 0.8em;color: antiquewhite;'> <em>Reality</em> </footer>
+</figure>
+</div>
+<div class='col'>
+<figure>
+<img src='https://i.ytimg.com/vi/Bonq8I_0PIY/maxresdefault.jpg' width='80%'/>
+<footer style='margin-top: -100px;font-size: 0.8em;'> <em>BVP</em> </footer>
+</figure>
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Numerical modelling</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Numerical modelling is a multidisplinary field that involves <strong style='color:#7abbe6'>mathematics</strong>, <strong style='color:#7abbe6'>physics</strong>, <strong style='color:#7abbe6'>computer science</strong>, and <strong style='color:#7abbe6'>engineering</strong>. <br>
+</div>
+
+<p>Modelling involves <span class='atb'>simplifying</span> a phenomena making <span class='atb'>appropriate assumptions</span>.</p>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px; font-size: 0.85em;'>
+From Wood (2003): <br>
+"The <strong style='color:#7abbe6'>skill</strong> in modelling is to <strong style='color:#7abbe6'>spot the appropriate level of simplification</strong>—to recognize those features which are important and those which are unimportant. Very often engineers are unaware of the simplifications that they have made and problems may arise precisely because the assumptions that have been made are inappropriate in a particular application."
+</div>
+</section>
+
+
+
+
+
+  <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  SCRIIPTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+
+
+
+
+
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_text").innerHTML = months[today.getMonth()] + " " + today.getDate()+ ", " + today.getFullYear();
+</script>
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+<script type="text/javascript">
+		var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+	   var today = new Date();
+	   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/qrcode/qrcode.js"></script>
+<script src="plugin/complete_box/complete_box.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/fullscreen/plugin.js"></script>
+<script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+<script src="plugin/chalkboard/plugin.js"></script>
+<!-- <script src="plugin/audio-slideshow/plugin.js"></script>
+<script src="plugin/audio-slideshow/RecordRTC.js"></script>
+<script src="plugin/audio-slideshow/recorder.js"></script> -->
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/customcontrols/plugin.js"></script>
+<script>
+
+Reveal.configure({ pdfMaxPagesPerSlide: 1 ,
+								   pdfSeparateFragments: false});
+// Also available as an ES module, see:
+// https://revealjs.com/initialization/
+Reveal.initialize({
+   dependencies: [
+	   { src: 'plugin/mouse-pointer/mouse-pointer.js' } , { src: 'plugin/spotlight/spotlight.js' },   ],
+   controls: true,
+   progress: true,
+   center: false,
+   hash: true,
+   transition: 'fade',
+   slideNumber: 'c/t',
+   autoPlayMedia: true,
+   width: 1280,
+   height: 720,
+   math: {
+	   mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+	   config: 'TeX-AMS_HTML-full',
+	   tex2jax: {
+		   inlineMath: [['\\(','\\)']],
+		   displayMath: [['\\[','\\]']],
+		   balanceBraces: true,
+		   processEscapes: false,
+		   processRefs: true,
+		   processEnvironments: true,
+		   preview: 'TeX',
+		   skipTags: ['script','noscript','style','textarea','pre','code'],
+		   ignoreClass: 'tex2jax_ignore',
+		   processClass: 'tex2jax_process'
+	   },
+   },
+
+   spotlight: {
+
+		   // size of the spotlight
+		   size: 100,
+
+		   // true: Locks the mouse pointer inside the presentation
+		   // there is by design (Pointer Lock API) no spotlightCursor and presentingCursor
+		   // displayed regardless of the configured values
+		   lockPointerInsideCanvas: false,
+
+		   // toggle spotlight by holding down the mouse key
+		   toggleSpotlightOnMouseDown: false,
+
+		   // the keyCode pressed and held to turn on spotlight, disabled when set to false
+		   // Problems with this config? Maybe your touchpad is disabled on keypress?
+		   spotlightOnKeyPressAndHold: true,
+
+		   // choose the cursor when spotlight is on. Maybe "crosshair"?
+		   spotlightCursor: 'default',
+
+		   // choose the cursor when spotlight is off and in presentation mode. Maybe "default"?
+		   presentingCursor: 'default',
+
+		   // true: initially in presentation mode, will also be ture if this is not set and toggleSpotlightOnMouseDown is true
+		   initialPresentationMode: true,
+
+		   // true: disable selecting in presentation mode
+		   disablingUserSelect: false,
+
+		   // set to a number as transition duration in ms to enable fade in and out, disabled when set to false
+		   fadeInAndOut: 100,
+
+		   // enable pointer mode
+		   useAsPointer: false,
+
+		   // pointer color (If pointer mode enabled)
+		   pointerColor: 'red'
+   },
+
+   keyboard: {
+		   // alternative to toggleSpotlightOnMouseDown:
+		   // toggle spotlight by pressing key 'c'
+		   32: function() { RevealSpotlight.toggleSpotlight() },
+
+		   // enter/leave presentation mode by pressing key 'p'
+		   80: function() {
+			   RevealSpotlight.togglePresentationMode();
+		   },
+   },
+
+   // Push each slide change to the browser history
+   history: true,
+
+   menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+	   themes: false,
+	   transitions: false,
+	   markers: true,
+	   hideMissingTitles: true,
+	   custom: [
+						   { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+						   { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				   ]
+   },
+//
+// 			audio: {
+// 					prefix: 'chalkboard/',
+// 					suffix: '.ogg',
+// 					defaultDuration: 5,
+// //					textToSpeechURL: "http://api.voicerss.org/?key=[YOUR_KEY]&hl=en-gb&c=ogg&src=",
+// 					advance: 500,
+// 					autoplay: false,
+// 					defaultText: true,
+// 					playerOpacity: 0.2,
+// 				},
+   // ...
+   chalkboard: {
+				   boardmarkerWidth: 3,
+				   chalkWidth: 5,
+				   chalkEffect: 0.05,
+				   src: "chalkboard.json",
+				   // storage: ,
+				   readOnly: false,
+				   transition: 800,
+				   theme: "chalkboard",
+				   background: [ 'rgba(127,127,127,.1)' , path + 'img/blackboard.png' ],
+				   grid: { color: 'rgb(50,50,10,0.5)', distance: 40, width: 2},
+				   eraser: { src: path + 'img/sponge.png', radius: 20},
+				   boardmarkers : [
+								   { color: 'rgba(0,0,0,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+								   { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+								   { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+								   { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+								   { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+								   { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'},
+								   { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'}
+				   ],
+				   chalks: [
+								   { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+								   { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+								   { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+								   { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+								   { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+								   { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+								   { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+				   ]
+		   },
+		   customcontrols: {
+			   controls: [
+				   { icon: '<i class="fa fa-pen-square"></i>',
+					   title: 'Toggle chalkboard (B)',
+					   action: 'RevealChalkboard.toggleChalkboard();'
+				   },
+				   { icon: '<i class="fa fa-pen"></i>',
+					   title: 'Toggle notes canvas (C)',
+					   action: 'RevealChalkboard.toggleNotesCanvas();'
+				   }
+			   ]
+		   },
+
+	   // ...
+   //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   // Learn about plugins: https://revealjs.com/plugins/
+   plugins: [ RevealCustomControls, RevealMath,RevealFullscreen, RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealChalkboard, RevealMenu
+					   ],
+						   // RevealAudioSlideshow, RevealAudioRecorder, RevealMenu, RevealCustomControls],
+	   });
+
+</script>
+
+</html>
