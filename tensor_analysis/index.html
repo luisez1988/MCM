@@ -641,13 +641,13 @@ The determinant of a tensor \(\boldsymbol{S}\) can be expressed as: <br>
 <div class='defBox' name='Double inner product:' style='margin-top: 0px;margin-left: 0px;'>
 The double inner product of two tensors \(\boldsymbol{A}\) and \(\boldsymbol{B}\) is defined as: <br>
 <div class='equationBox'>
-\(\boldsymbol{A}:\boldsymbol{B}= Aij Bij \)
+\(\boldsymbol{A}:\boldsymbol{B}= A_{ij} B_{ij} \)
 </div>
 </div>
 
 <p>We now can measure the <span class='atb'>norm</span> of a tensor using the following expression: <br>
 <div class='equationBox'>
-\( |\boldsymbol{A}|= \sqrt{\boldsymbol{A}:\boldsymbol{A}}= \sqrt{Aij Aij} \)
+\( |\boldsymbol{A}|= \sqrt{\boldsymbol{A}:\boldsymbol{A}}= \sqrt{A_{ij} A_{ij}} \)
 </div> </p>
 
 </section>
@@ -804,6 +804,7 @@ Reveal.initialize({
    transition: 'fade',
    slideNumber: 'c/t',
    autoPlayMedia: true,
+   defaultTiming: 120,
    width: 1280,
    height: 720,
    math: {
