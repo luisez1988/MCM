@@ -1,0 +1,955 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+		<title>CIE-598: Tensor analysis</title>
+	
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black_bears.css" id="theme">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="plugin/chalkboard/style.css">
+		<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+		<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+		<script type="text/javascript" src="https://flashphoner.com/downloads/builds/flashphoner_client/wcs_api-2.0/current/flashphoner.js"></script> 
+		<script type="text/javascript" src="./plugin/screen_sharing/screen-sharing-min.js"></script>
+		<!-- Shares the screen -->
+	
+	</head>
+	  <body onload="init_api()">
+	
+		<div class="reveal">
+	
+		  <div class="slides">
+					<style>
+					.container{
+							display: flex;
+					}
+					.col{
+							flex: 1;
+					}
+	
+					</style>
+	
+					<div class='footer'>
+						CIE-598
+						Spring 2024
+					</div>
+	
+					<style>
+					.reveal .slides section .fragment.fade-down {
+							opacity: 1;
+							visibility: visible;
+					}
+					.reveal .slides section .fragment.fade-down.visible,
+					.reveal .slides section .fragment.visible:not(.current-fragment) {
+							opacity: 1;
+							margin-top:0px;
+						}
+					.reveal .slides section .fragment.fade-down,
+					.reveal .slides section .fragment.current-fragment {
+							color: #000;
+							margin-top:0px;
+					}
+	
+	
+				</style>
+	
+				<style >
+	
+				.circle {
+			width: 80px;
+			line-height: 80px;
+			border-radius: 50%;
+			text-align: center;
+			font-size: 32px;
+			border: 10px solid #296B64;
+		  }
+		</style>
+				<!-- <section> -->
+					<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+						<div style="margin-top:300px;margin-left:0px" class="qrCode_cont" name="Get pdf">
+							<div class="qrCode" name="https://luisez1988.github.io/Soil-Erosion/Modeling_sediment_transport"> </div>
+						</div>
+			
+						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 1: Tensor analysis">
+							<p style="color:#faffff; font-size:35px">Luis Zambrano-Cruzatty, Ph.D.</p>
+							<p style="color:#faffff; font-size:35px">Spring 2024</p>
+							<!-- <p style="color:#faffff; font-size:35px"> February 8, 2023</p> -->
+							<span id="spanDate_text" style="color:#faffff; font-size:35px"></span>
+						</div>
+					</section>
+
+
+        <section data-background-image="FiguresGeneral/Normal_slide_Maine.svg">
+					<h1>Contents</h1>
+
+					<div class='container'>
+					<div class='col'>
+						<ul class="contentStyle">
+							<li class="l1">Notation</li>
+							<li class="l1">Index notation</li>
+							<li class='l1'>Tensors</li>
+							<li class='l1'>Tensor decompositions</li>
+							<li class='l1'>Tensor invariants</li>
+							<li class='l1'>Tensor calculus</li>
+
+
+														
+						</ul>
+					</div>
+					<div class='col'>
+						<div class='container'>
+							<div class='col'>
+								<div class="stickynote" style="margin-top: 100px;margin-left: 75px;">
+									<p style="margin-top: -10px;"> Objectives covered in this lecture</p>
+									<ul>
+										<li>[O1]: Develope awareness and familiarity with the fundamental conservation laws that govern continuum mechanics.</li>
+									</ul>
+								</div>
+							</div>
+							<div class='col'>
+							<div class='stickynote' style='margin-top: 100px;margin-left: 75px;'>
+								<p style="margin-top: -20px;">After this lecture we will able to:</p>
+								<ul style="margin-top: -15px;">
+									<li>Use index notation to write expressions.</li>					
+									<li>Decompose tensors.</li>
+									<li>Find the norm and determinant of a tensor. </li>
+									<li> Calculate gradients and divergence of vector fields</li>									
+								</ul>
+							</div>
+							</div>
+							</div>
+					</div>
+					</div>
+				</section>
+
+<!--
+ #####  ####### #     # ####### ####### #     # #######  #####
+#     # #     # ##    #    #    #       ##    #    #    #     #
+#       #     # # #   #    #    #       # #   #    #    #
+#       #     # #  #  #    #    #####   #  #  #    #     #####
+#       #     # #   # #    #    #       #   # #    #          #
+#     # #     # #    ##    #    #       #    ##    #    #     #
+ #####  ####### #     #    #    ####### #     #    #     #####
+-->
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>General notation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+I will use the following notation throughout the course:
+</div>
+<p>\(\boldsymbol{A} \ \equiv\) <strong style='color:#7abbe6'>Capital bold symbols</strong> are used for <span class='atb'>tensors/matrices</span></p>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+\(\boldsymbol{v}\ \equiv\) <strong style='color:#7abbe6'>Lowercase bold symbols</strong> are used for <span class='atb'>vectors</span>
+</div>
+
+<p>\(a \ \equiv\) <strong style='color:#7abbe6'>Non-bold symbols</strong> will be use for <span class='atb'>scalars</span></p>
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Index notation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The index notation is a way to write expressions in a compact form.
+</div>
+
+<p>Let \(\boldsymbol{x}\) be a vector in \(\mathbb{R}^3\), <strong style='color:#7abbe6'>then the \(i\)-th component of \(\boldsymbol{x}\) is \(x_i\)</strong> for \(i \in \{1, 2, 3\} \) or: <br>
+\(\boldsymbol{x}=\{x_1, x_2, x_3\}\)</p>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Let \(\boldsymbol{S}\) be a tensor in \(\mathbb{R}^{3\times3}\), <strong style='color:#7abbe6'>then the \(i,j\)-th component of \(\boldsymbol{S}\) is \(S_{ij}\)</strong> for \(i,j \in \{1, 2, 3\} \) or: <br>
+\(\boldsymbol{S}=\begin{bmatrix} 
+S_{11}& S_{12}& S_{13}\\
+S_{21}& S_{22}& S_{23}\\
+S_{31}& S_{32}& S_{33}\end{bmatrix}\)
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+If an index is repeated in a term, then we assume summation over that index. For example, <br>
+\(x_i x_i = \sum_{i=1}^3 x_i x_i = x_1 x_1 + x_2 x_2 + x_3 x_3\)
+</div>
+
+<p class="fragment">Note that the result of the operation above is a <span class='atb'>scalar</span>. we say that index \(i\) has contracted upon itself in the expression.</p>
+
+<div class="fragment"> <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	If the indices in a term are repeated more than twice, the expression is <span class='atb'>meaningless</span>. Eg. <br>
+	 \(x_i x_i x_i\) is meaningless.
+	</div></div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.1</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Express a vector \(\boldsymbol{v}\) in terms of its components \(v_i\) and the unit basis vectors \(\boldsymbol{e}_i\) in index notation.
+</div>
+
+<p class="fragment">Solution:
+\(\boldsymbol{v} = v_1 \boldsymbol{e}_1 + v_2 \boldsymbol{e}_2 + v_3 \boldsymbol{e}_3 =  v_i \boldsymbol{e}_i\)</p>
+</p>
+
+<div class="fragment">
+<div class="findingBox" style="margin-top: 100px;">
+	Any vector \(\boldsymbol{v}\) can be expressed as a linear combination of the unit basis vectors \(\boldsymbol{e}_i\) as: <br>
+	<div class='equationBox' style="margin-left: 150px;">
+	\(\boldsymbol{v}=v_i \boldsymbol{e}_i \)
+	</div>
+</div>	
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.2</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+When an index appears in terms only once, we say that the index is <span class='atb'>free</span>.
+Find the meaning of the expression \(\boldsymbol{c} \cdot \boldsymbol{e}_j\).
+</div>
+<p class="fragment">
+Solution: <br>
+Because \(j\) is free, we can <strong style='color:#7abbe6'>freely</strong> assign any value to it from {1, 2, 3} like. <br>
+\(\begin{align*}
+	a_j=&\boldsymbol{c} \cdot \boldsymbol{e}_j\\
+	a_1=&\boldsymbol{c} \cdot \boldsymbol{e}_1\\
+	a_2=&\boldsymbol{c} \cdot \boldsymbol{e}_2\\
+	a_3=&\boldsymbol{c} \cdot \boldsymbol{e}_3  
+\end{align*}\)
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.2</h1>
+<p>Now let's use index notation properly <br>
+\(\begin{align*}
+\boldsymbol{c} \cdot \boldsymbol{e}_j=& c_i \boldsymbol{e}_i \cdot \boldsymbol{e}_j\\
+\end{align*}\) <br>
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that \(\boldsymbol{e}_i \cdot \boldsymbol{e}_j\) by itself has two free indices. As a result it is a matrix that returns 1 only if \(i=j\).  <br>
+		<div class='equationBox' style="margin-left: 250px;">
+		\(\boldsymbol{e}_i \cdot \boldsymbol{e}_j= \delta_{ij}= \boldsymbol{I}\)
+		</div> <br>
+		where \(\delta_{ij}\) is the <span class='atb'>Kronecker delta</span> and \(\boldsymbol{I}\) is the identity matrix.
+		</div>
+</div>
+
+
+
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.2</h1>
+<p>
+	\(\begin{align*}
+	\boldsymbol{c} \cdot \boldsymbol{e}_j=& c_i \boldsymbol{e}_i \cdot \boldsymbol{e}_j\\
+	=& c_i \delta_{ij}\\
+	=& c_j
+	\end{align*}\)	<br>
+
+	<div class="fragment">
+		<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		From this example we conclude that the Kronecker delta swaps the indices of a vector. <br>
+		<div class='equationBox' style="margin-left: 150px;">
+		\(c_i \delta_{ij}= c_j \)
+		</div>
+		</div>
+	</div>
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.3</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the dot product of two vectors \(\boldsymbol{u}\) and \(\boldsymbol{v}\) in index notation.
+</div>
+
+<p class="fragment">Solution: <br>
+\(\begin{align*} 
+\boldsymbol{v} \cdot \boldsymbol{u}= & v_i\boldsymbol{e}_i \cdot u_j\boldsymbol{e}_j  \\
+=& v_i u_j \boldsymbol{e}_i \cdot \boldsymbol{e}_j \\
+=& v_i u_j \delta_{ij} \\
+=& v_i u_i
+\end{align*}\)
+</p>
+
+<div class="fragment">	
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		From this example we conclude that the dot product of two vectors is the sum of the products of their components. <br>
+		<div class='equationBox' style="margin-left: 250px;">
+		\(\boldsymbol{v} \cdot \boldsymbol{u}= v_i u_i \)
+		</div>
+	</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Tensors</h1>
+<div class='defBox' name='Tensor' style='margin-top: 0px;margin-left: 0px;'>
+A tensor is a linear operator that maps a vector in \(\mathbb{R}^3\) to another vector in \(\mathbb{R}^3\). <br>
+</div>
+
+<p>In the expression: <br>
+\(\boldsymbol{v}= \boldsymbol{A}  \boldsymbol{u}\) <br>
+
+\(\boldsymbol{A}\) is a <span class='atb'>second-order</span> tensor that takes \(\boldsymbol{u} \in \mathbb{R}^3\) and transforms it into \(\boldsymbol{v} \in \mathbb{R}^3\). 
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>In index notation: <br>
+\(\begin{align*} 
+\boldsymbol{v}& =\boldsymbol{A}  \boldsymbol{u} \\
+v_i \boldsymbol{e}_i& = \boldsymbol{A} u_j \boldsymbol{e}_j \\
+\boldsymbol{e}_k \cdot v_i \boldsymbol{e}_i& = \boldsymbol{e}_k \cdot \boldsymbol{A} u_j \boldsymbol{e}_j \\
+v_i \boldsymbol{e}_k \cdot \boldsymbol{e}_i& = u_j (\boldsymbol{e}_k \cdot \boldsymbol{A} \boldsymbol{e}_j) \\
+v_i \delta_{ki}& = u_j (\boldsymbol{e}_k \cdot \boldsymbol{A} \boldsymbol{e}_j) \\
+v_k& = u_j (\boldsymbol{e}_k \cdot \boldsymbol{A} \boldsymbol{e}_j)
+
+\end{align*}\)
+</p>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		We show that term in RHS of the equation represent the component \(i, j\)th of tensor \(\boldsymbol{A}\). <br>
+		<div class='equationBox' style="margin-left: 250px;">
+		\(A_{kj}= \boldsymbol{e}_k \cdot \boldsymbol{A} \boldsymbol{e}_j \)
+		</div>
+	</div>
+</div>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+In index notation, the action of a tensor \(\boldsymbol{A}\) on \(\boldsymbol{u}\) is given by: <br>
+<div class='equationBox' style="margin-left: 250px;">
+\(v_i= A_{ij} u_j \)
+</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Dyadic or tensor product' style='margin-top: 5px;margin-left: 0px;'>
+		The tensor product of two vectors \(\boldsymbol{u}\) and \(\boldsymbol{v}\) is defined as <br>
+		\((\boldsymbol{u} \otimes \boldsymbol{v}) \cdot \boldsymbol{a}= (\boldsymbol{a} \cdot  \boldsymbol{u}) \boldsymbol{v}\)
+		</div>
+</div>
+
+<div class="fragment">
+	<p> Let's express the definition in index notation: <br>
+	\(\begin{align*}
+	(\boldsymbol{u} \otimes \boldsymbol{v}) \cdot a_i\boldsymbol{e}_i&= (a_i \boldsymbol{e}_i \cdot  u_j \boldsymbol{e}_j) v_k \boldsymbol{e}_k\\
+	&= a_i u_j v_k (\boldsymbol{e}_i \cdot \boldsymbol{e}_j) \boldsymbol{e}_k\\
+	&= a_i u_j v_k (\boldsymbol{e}_j \otimes \boldsymbol{e}_k) \cdot \boldsymbol{e}_i\\
+	&= u_j v_k (\boldsymbol{e}_j \otimes \boldsymbol{e}_k) \cdot a_i \boldsymbol{e}_i\\
+	\boldsymbol{u} \otimes \boldsymbol{v}&= u_j v_k (\boldsymbol{e}_j \otimes \boldsymbol{e}_k)
+	\end{align*} \)
+	</p>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+\(\boldsymbol{u} \otimes \boldsymbol{v}\) is a second order tensor with \(i, j\) components: <br>
+<div class='equationBox' style="margin-left: 300px;">
+\((\boldsymbol{u} \otimes \boldsymbol{v})_{ij}= u_iv_j\)
+</div>
+</div>
+
+<p class="fragment"> From the last definition we also find an expression for tensors in index notation:</p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 15px;margin-left: 0px;'>
+		Any tensor \(\boldsymbol{A}\) can be expressed as: <br>
+		<div class='equationBox' style="margin-left: 300px;">
+		\(\boldsymbol{A}= A_{ij} \boldsymbol{e}_i \otimes \boldsymbol{e}_j\)
+		</div>
+		</div>
+
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.4</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find \(\boldsymbol{a} \otimes \boldsymbol{b}\) if \(\boldsymbol{a}=\{1, 3, 4\}\) and \(\boldsymbol{b}=\{2, 3, 2\}\). 
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Transpose tensor</h1>
+<div class='defBox' name='Transpose tensor:' style='margin-top: 0px;margin-left: 0px;'>
+The transpose of a tensor \(\boldsymbol{A}\) is defined as \(\boldsymbol{A}^T\): <br>
+<div class='equationBox'>
+	\((\boldsymbol{A}^T)_{ij}= A_{ji}\)
+</div>
+
+</div>
+
+
+
+<p> Some useful identities <br>
+<div class='equationBox' style="margin-left: 450px;">
+\(\boldsymbol{a}\cdot (\boldsymbol{A} \boldsymbol{b})= \boldsymbol{b} \cdot (\boldsymbol{A}^T \boldsymbol{a})\)
+</div> <br>
+<div class='equationBox' style="margin-left: 390px; margin-top: 50px;">
+	\((\boldsymbol{A} \boldsymbol{B})^T= \boldsymbol{A}^T \boldsymbol{B}^T \)
+	</div>
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Symmetric and skew tensor</h1>
+<div class='defBox' name='Symmetric tensor' style='margin-top: 0px;margin-left: 0px;'>
+A tensor is symmetric if and only if \(\boldsymbol{A}^T= \boldsymbol{A}\). 
+</div>
+
+<div class='defBox' name='Skew or antisymmetric tensor' style='margin-top: 25px;margin-left: 0px;'>
+A tensor is skew if and only if \(\boldsymbol{A}^T= -\boldsymbol{A}\).
+</div>
+
+<p class="fragment">
+	Let us take any tensor \(\boldsymbol{A}\) and express it as: <br>
+	\(\boldsymbol{A}= \frac{1}{2}(\boldsymbol{A}+ \boldsymbol{A}^T)+ \frac{1}{2}(\boldsymbol{A}- \boldsymbol{A}^T)\) <br>
+</p>
+
+<div class="fragment"> Then: <br>
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	Any tensor can be decomposed into a symmetric and a skew tensor: <br>
+	<div class='equationBox' style="margin-left: 500px;">
+	\(\boldsymbol{A}= sym\{\boldsymbol{A}\}+ skw\{\boldsymbol{A}\}\)
+	</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Sym of a tensor: ' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\(sym\{A\}\)</strong> is defined as: <br>
+<div class='equationBox' >
+\(sym\{\boldsymbol{A}\}= \frac{1}{2}(\boldsymbol{A}+ \boldsymbol{A}^T)\)
+</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Skw of a tensor: ' style='margin-top: 5px;margin-left: 0px;'>
+		<strong style='color:green'>\(skw\{A\}\)</strong> is defined as: <br>
+		<div class='equationBox' >
+		\(skw\{\boldsymbol{A}\}= \frac{1}{2}(\boldsymbol{A}- \boldsymbol{A}^T)\)
+		</div>
+	</div>
+</div>
+
+<div class="fragment">
+	<h1>Example 1.5</h1>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	For the tensor: <br>
+	 \(\boldsymbol{A}=\begin{bmatrix}
+	1& 2& 3\\
+	3& 5& 6\\
+	2& 2& 1
+	\end{bmatrix}\) <br>
+	Find \(\boldsymbol{A}^T\), \(sym\{\boldsymbol{A}\}\) and \(skw\{\boldsymbol{A}\}\).
+	</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Spherical and deviatoric tensors</h1>
+<div class='defBox' name='Spherical tensor:' style='margin-top: 0px;margin-left: 0px;'>
+A tensor is spherical if and only if \(\boldsymbol{A}= \alpha \boldsymbol{I} \ \  \forall \alpha \in \mathbb{R}\) .
+</div>
+
+<div class='defBox' name='Trace of a tensor:' style='margin-top: 5px;margin-left: 0px;'>
+The trace of a tensor is defined as: <br>
+<div class='equationBox'>
+\(tr(\boldsymbol{A})= A_{ii}\)
+</div>
+</div>
+
+<div class='findingBox' style='margin-top: 5px;margin-left: 0px;'>
+Any tensor can be decomposed into a spherical (\(\boldsymbol{S}_p\)) and a deviatoric (\(\boldsymbol{S}_q\)) tensor: <br>
+<div class='equationBox' style="margin-left: 500px;">
+\(\boldsymbol{S}_p= \frac{tr(\boldsymbol{S})}{3} \boldsymbol{I}= \frac{1}{3}A_{ii}\delta_{jk}\)
+</div>
+
+<div class='equationBox' style="margin-left: 300px;margin-top: 5px;">
+\(\boldsymbol{S}_q= \boldsymbol{S}- \boldsymbol{S}_p\)
+</div>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+For the tensor: <br>
+\(\boldsymbol{S}=\begin{bmatrix}
+1& 2& 3\\
+3& 5& 6\\
+2& 2& 1
+\end{bmatrix}\) <br>
+Find \(\boldsymbol{S}_p\) and \(\boldsymbol{S}_q\).
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Cross product</h1>
+<div class='defBox' name='Alternating symbol:' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\(\epsilon_{ijk}\)</strong> is defined as:
+<div class='equationBox'>
+\(\epsilon_{ijk}=(\boldsymbol{e}_i \times \boldsymbol{e}_j)\cdot \boldsymbol{e}_k\)
+</div>
+</div>
+
+<p class="fragment">Rapid inspection of the alternating symbol definition helps to determine that: <br>
+\(\epsilon_{ijk}= \begin{cases}
+1 & \text{if } ijk \text{ is an even permutation of } 1,2,3\\
+-1 & \text{if } ijk \text{ is an odd permutation of } 1,2,3\\
+0 & \text{if } ijk \text{ is not a permutation of } 1,2,3
+\end{cases}\)
+</p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	Note that from the definition we can obtain the following valuable expression: <br>
+	<div class='equationBox' style="margin-left: 300px;">
+	\(\boldsymbol{e}_i \times \boldsymbol{e}_j= \epsilon_{ijk} \boldsymbol{e}_k\)
+	</div>
+	</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.7</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Using index notation find an expression for the cross product of two vectors \(\boldsymbol{u}\) and \(\boldsymbol{v}\).
+</div>
+
+<p class="fragment">Solution: <br>
+\(\begin{align*}
+\boldsymbol{u} \times \boldsymbol{v}&=  u_i \boldsymbol{e_i} \times v_j \boldsymbol{e}_j \\
+&=u_iv_j \boldsymbol{e_i} \times  \boldsymbol{e}_j\\
+&=u_iv_j \epsilon_{ijk} \boldsymbol{e}_k
+\end{align*}\)
+</p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	From this example we conclude that the \(k\)th component of the cross product of two vectors is: <br>
+	<div class='equationBox' style="margin-left: 400px;">
+	\((\boldsymbol{u} \times \boldsymbol{v})_k= u_iv_j \epsilon_{ijk} \)
+	</div>
+	</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Determinant of a tensor</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We start with the premise that the following ratio is <span class='atb'>invariant</span> regardless of choice of basis: <br>
+\(\cfrac{\boldsymbol{S}\boldsymbol{u}\cdot (\boldsymbol{S}\boldsymbol{v}\times \boldsymbol{S}\boldsymbol{w})}{\boldsymbol{u}\cdot (\boldsymbol{v}\times \boldsymbol{w})}\)
+</div>
+
+<p class="fragment">
+	Recall that the value \(\boldsymbol{u}\cdot (\boldsymbol{v}\times \boldsymbol{w})\) is the <span class='atb'>volume</span> of the parallelepiped formed by the vectors \(\boldsymbol{u}\), \(\boldsymbol{v}\) and \(\boldsymbol{w}\). <br>
+</p>
+
+<figure class="fragment">
+<img src='FiguresGeneral/volume.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Determinant:' style='margin-top: 0px;margin-left: 0px;'>
+The determinant of a tensor <strong style='color:green'>\(\det(\boldsymbol{S})\)</strong> is the ratio of the volume of the parallelepiped defined by vectors \(\boldsymbol{S}\boldsymbol{u}\), \(\boldsymbol{S}\boldsymbol{v}\), and \(\boldsymbol{S}\boldsymbol{w}\); and the volume of the parallelepiped spanned by the basis \(\boldsymbol{u}\), \(\boldsymbol{v}\) and \(\boldsymbol{w}\).
+<div class='equationBox'>
+\(\det(\boldsymbol{S})= \cfrac{\boldsymbol{S}\boldsymbol{u}\cdot (\boldsymbol{S}\boldsymbol{v}\times \boldsymbol{S}\boldsymbol{w})}{\boldsymbol{u}\cdot (\boldsymbol{v}\times \boldsymbol{w})}\)
+</div>
+</div>
+
+<p>Some useful properties which are given without proof: <br>
+\(\det(\boldsymbol{S}^T)=\det(\boldsymbol{S})\) <br>
+\(\det(\boldsymbol{S}\boldsymbol{T})=\det(\boldsymbol{T}\boldsymbol{S})=\det(\boldsymbol{S})\det(\boldsymbol{T})\) <br>
+\(\det(\alpha\boldsymbol{S})=\alpha^3\det(\boldsymbol{S})\) <br>
+\(\det(\boldsymbol{S}^{-1})=\det(\boldsymbol{S})^{-1}\) <br>
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.8</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find an expression for the determinant of the tensor \(\boldsymbol{S}\) in terms of its components \(S_{ij}\).
+</div>
+<p class="fragment">
+Solution: <br>
+\(\begin{align*}
+ (\boldsymbol{e}_p\times \boldsymbol{e}_r) \cdot \boldsymbol{e}_r \det(\boldsymbol{S})&=  (\boldsymbol{S}\boldsymbol{e}_p\times \boldsymbol{S}\boldsymbol{e}_q) \cdot \boldsymbol{S}\boldsymbol{e}_r\\
+\epsilon_{pqr} \det(\boldsymbol{S})&= (\boldsymbol{a}\times \boldsymbol{b}) \cdot \boldsymbol{c}\\
+&= (a_i b_j \epsilon_{ijk})c_k\\
+&= \epsilon_{ijk} S_{ip} S_{jq} S_{kr} \\
+\epsilon_{pqr}^2 \det(\boldsymbol{S})&= S_{ip}S_{jq}S_{kr} \epsilon_{ijk} \epsilon_{pqr} \\
+\det(\boldsymbol{S})&= \frac{1}{6}S_{ip}S_{jq}S_{kr} \epsilon_{ijk} \epsilon_{pqr}
+\end{align*}\)
+</p>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The determinant of a tensor \(\boldsymbol{S}\) can be expressed as: <br>
+<div class='equationBox' style="margin-left: 600px;">
+\(\det(\boldsymbol{S})= \frac{1}{6}S_{ip}S_{jq}S_{kr} \epsilon_{ijk} \epsilon_{pqr}\)
+</div>
+</div>
+
+<p>Since the determinant of the tensor is needed to invert the tensor, we might express the components of the inverse tensor without proof. <br>
+<div class='equationBox'>
+\(S^{-1}_{ij}=\frac{1}{2} \frac{1}{\det(\boldsymbol{S})} \epsilon_{ikl} \epsilon_{jmn} S_{mk} S_{nl}\)
+</div>
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Tensor inner product</h1>
+
+<div class='defBox' name='Double inner product:' style='margin-top: 0px;margin-left: 0px;'>
+The double inner product of two tensors \(\boldsymbol{A}\) and \(\boldsymbol{B}\) is defined as: <br>
+<div class='equationBox'>
+\(\boldsymbol{A}:\boldsymbol{B}= Aij Bij \)
+</div>
+</div>
+
+<p>We now can measure the <span class='atb'>norm</span> of a tensor using the following expression: <br>
+<div class='equationBox'>
+\( |\boldsymbol{A}|= \sqrt{\boldsymbol{A}:\boldsymbol{A}}= \sqrt{Aij Aij} \)
+</div> </p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.9</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+For the tensors: <br>
+\(\boldsymbol{A}=\begin{bmatrix}
+1& 2& 3\\
+3& 1& 0\\
+0& 0& 1
+\end{bmatrix}\) <br>
+\(\boldsymbol{B}=\begin{bmatrix}
+1& 1& 1\\
+0& 1& 0\\
+0& 0& 1
+\end{bmatrix}\) <br>
+Find \(\boldsymbol{A}:\boldsymbol{B}\), the norm of \(\boldsymbol{A}\) and the norm of \(\boldsymbol{B}\).
+
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Gradient of a tensor</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Derivative operators can be applied to tensors in time and space. The former does not require many attention for now. However, spatial derivatives on vectors and tensors could be difficult to visualize.
+</div>
+
+<div class='defBox' name='Spatial derivatives operator' style='margin-top: 5px;margin-left: 0px;'>
+Because there are three spatial dimensions we can construct an operator defined as: <br>
+<div class='equationBox'>
+\(\nabla=\left(\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z} \right) = \left(\frac{\partial}{\partial x_1}, \frac{\partial}{\partial x_2}, \frac{\partial}{\partial x_3} \right)= \frac{\partial}{\partial x_i}\boldsymbol{e}_i \)
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Gradient of a vector' style='margin-top: 0px;margin-left: 0px;'>
+The gradient of a vector is defined as: <br>
+<div class='equationBox'>
+\(\nabla \boldsymbol{v}= \frac{\partial v_i}{\partial x_j}= v_{i,j}\)
+</div>
+</div>
+
+<p>Note that the gradient of a vector field is a <span class='atb'>second order tensor</span></p>
+
+<h1>Example 1.10</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+For the vector field \(\boldsymbol{v}= \{x^2, y^2, z^2\}\) find \(\nabla \boldsymbol{v}\).
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Divergence</h1>
+<div class='defBox' name='Divergence operator' style='margin-top: 0px;margin-left: 0px;'>
+The divergence operator is defined as \(\nabla \cdot\) and applied to a vector field it is: <br>
+<div class='equationBox'>
+\(\nabla \cdot \boldsymbol{v}= \frac{\partial v_i}{\partial x_i}= v_{i,i}\)
+</div>
+</div>
+<p>Note that the divergence of a vector field is a <span class='atb'>scalar field</span>. The divergence of a tensor field is a <span class='atb'>vector field</span></p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 1.11</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the divergence of the same vector field as in the previous example. Also find the divergence of the gradient tensor of the same field.
+</div>
+
+</section>
+
+<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  SCRIIPTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+
+
+
+
+
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_text").innerHTML = months[today.getMonth()] + " " + today.getDate()+ ", " + today.getFullYear();
+</script>
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+<script type="text/javascript">
+		var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+	   var today = new Date();
+	   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/qrcode/qrcode.js"></script>
+<script src="plugin/complete_box/complete_box.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/fullscreen/plugin.js"></script>
+<script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+<script src="plugin/chalkboard/plugin.js"></script>
+<!-- <script src="plugin/audio-slideshow/plugin.js"></script>
+<script src="plugin/audio-slideshow/RecordRTC.js"></script>
+<script src="plugin/audio-slideshow/recorder.js"></script> -->
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/customcontrols/plugin.js"></script>
+<script>
+
+Reveal.configure({ pdfMaxPagesPerSlide: 1 ,
+								   pdfSeparateFragments: false});
+// Also available as an ES module, see:
+// https://revealjs.com/initialization/
+Reveal.initialize({
+   dependencies: [
+	   { src: 'plugin/mouse-pointer/mouse-pointer.js' } , { src: 'plugin/spotlight/spotlight.js' },   ],
+   controls: true,
+   progress: true,
+   center: false,
+   hash: true,
+   transition: 'fade',
+   slideNumber: 'c/t',
+   autoPlayMedia: true,
+   width: 1280,
+   height: 720,
+   math: {
+	   mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+	   config: 'TeX-AMS_HTML-full',
+	   tex2jax: {
+		   inlineMath: [['\\(','\\)']],
+		   displayMath: [['\\[','\\]']],
+		   balanceBraces: true,
+		   processEscapes: false,
+		   processRefs: true,
+		   processEnvironments: true,
+		   preview: 'TeX',
+		   skipTags: ['script','noscript','style','textarea','pre','code'],
+		   ignoreClass: 'tex2jax_ignore',
+		   processClass: 'tex2jax_process'
+	   },
+   },
+
+   spotlight: {
+
+		   // size of the spotlight
+		   size: 100,
+
+		   // true: Locks the mouse pointer inside the presentation
+		   // there is by design (Pointer Lock API) no spotlightCursor and presentingCursor
+		   // displayed regardless of the configured values
+		   lockPointerInsideCanvas: false,
+
+		   // toggle spotlight by holding down the mouse key
+		   toggleSpotlightOnMouseDown: false,
+
+		   // the keyCode pressed and held to turn on spotlight, disabled when set to false
+		   // Problems with this config? Maybe your touchpad is disabled on keypress?
+		   spotlightOnKeyPressAndHold: true,
+
+		   // choose the cursor when spotlight is on. Maybe "crosshair"?
+		   spotlightCursor: 'default',
+
+		   // choose the cursor when spotlight is off and in presentation mode. Maybe "default"?
+		   presentingCursor: 'default',
+
+		   // true: initially in presentation mode, will also be ture if this is not set and toggleSpotlightOnMouseDown is true
+		   initialPresentationMode: true,
+
+		   // true: disable selecting in presentation mode
+		   disablingUserSelect: false,
+
+		   // set to a number as transition duration in ms to enable fade in and out, disabled when set to false
+		   fadeInAndOut: 100,
+
+		   // enable pointer mode
+		   useAsPointer: false,
+
+		   // pointer color (If pointer mode enabled)
+		   pointerColor: 'red'
+   },
+
+   keyboard: {
+		   // alternative to toggleSpotlightOnMouseDown:
+		   // toggle spotlight by pressing key 'c'
+		   32: function() { RevealSpotlight.toggleSpotlight() },
+
+		   // enter/leave presentation mode by pressing key 'p'
+		   80: function() {
+			   RevealSpotlight.togglePresentationMode();
+		   },
+   },
+
+   // Push each slide change to the browser history
+   history: true,
+
+   menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+	   themes: false,
+	   transitions: false,
+	   markers: true,
+	   hideMissingTitles: true,
+	   custom: [
+						   { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+						   { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				   ]
+   },
+//
+// 			audio: {
+// 					prefix: 'chalkboard/',
+// 					suffix: '.ogg',
+// 					defaultDuration: 5,
+// //					textToSpeechURL: "http://api.voicerss.org/?key=[YOUR_KEY]&hl=en-gb&c=ogg&src=",
+// 					advance: 500,
+// 					autoplay: false,
+// 					defaultText: true,
+// 					playerOpacity: 0.2,
+// 				},
+   // ...
+   chalkboard: {
+				   boardmarkerWidth: 3,
+				   chalkWidth: 5,
+				   chalkEffect: 0.05,
+				   src: "chalkboard.json",
+				   // storage: ,
+				   readOnly: false,
+				   transition: 800,
+				   theme: "chalkboard",
+				   background: [ 'rgba(127,127,127,.1)' , path + 'img/blackboard.png' ],
+				   grid: { color: 'rgb(50,50,10,0.5)', distance: 40, width: 2},
+				   eraser: { src: path + 'img/sponge.png', radius: 20},
+				   boardmarkers : [
+								   { color: 'rgba(0,0,0,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+								   { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+								   { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+								   { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+								   { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+								   { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'},
+								   { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'}
+				   ],
+				   chalks: [
+								   { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+								   { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+								   { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+								   { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+								   { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+								   { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+								   { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+				   ]
+		   },
+		   customcontrols: {
+			   controls: [
+				   { icon: '<i class="fa fa-pen-square"></i>',
+					   title: 'Toggle chalkboard (B)',
+					   action: 'RevealChalkboard.toggleChalkboard();'
+				   },
+				   { icon: '<i class="fa fa-pen"></i>',
+					   title: 'Toggle notes canvas (C)',
+					   action: 'RevealChalkboard.toggleNotesCanvas();'
+				   }
+			   ]
+		   },
+
+	   // ...
+   //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   // Learn about plugins: https://revealjs.com/plugins/
+   plugins: [ RevealCustomControls, RevealMath,RevealFullscreen, RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealChalkboard, RevealMenu
+					   ],
+						   // RevealAudioSlideshow, RevealAudioRecorder, RevealMenu, RevealCustomControls],
+	   });
+
+</script>
+
+</html>
