@@ -1,0 +1,999 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+		<title>CIE-598: Continuum mechanics</title>
+	
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black_bears.css" id="theme">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="plugin/chalkboard/style.css">
+		<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+		<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+		<script type="text/javascript" src="https://flashphoner.com/downloads/builds/flashphoner_client/wcs_api-2.0/current/flashphoner.js"></script> 
+		<script type="text/javascript" src="./plugin/screen_sharing/screen-sharing-min.js"></script>
+		<!-- Shares the screen -->
+	
+	</head>
+	  <body onload="init_api()">
+	
+		<div class="reveal">
+	
+		  <div class="slides">
+					<style>
+					.container{
+							display: flex;
+					}
+					.col{
+							flex: 1;
+					}
+	
+					</style>
+	
+					<div class='footer'>
+						CIE-598
+						Spring 2024
+					</div>
+	
+					<style>
+					.reveal .slides section .fragment.fade-down {
+							opacity: 1;
+							visibility: visible;
+					}
+					.reveal .slides section .fragment.fade-down.visible,
+					.reveal .slides section .fragment.visible:not(.current-fragment) {
+							opacity: 1;
+							margin-top:0px;
+						}
+					.reveal .slides section .fragment.fade-down,
+					.reveal .slides section .fragment.current-fragment {
+							color: #000;
+							margin-top:0px;
+					}
+	
+	
+				</style>
+	
+				<style >
+	
+				.circle {
+			width: 80px;
+			line-height: 80px;
+			border-radius: 50%;
+			text-align: center;
+			font-size: 32px;
+			border: 10px solid #296B64;
+		  }
+		</style>
+				<!-- <section> -->
+					<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+						<div style="margin-top:300px;margin-left:0px" class="qrCode_cont" name="Get pdf">
+							<div class="qrCode" name="https://luisez1988.github.io/Soil-Erosion/Modeling_sediment_transport"> </div>
+						</div>
+			
+						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 2: introduction to continuum mechanics">
+							<p style="color:#faffff; font-size:35px">Luis Zambrano-Cruzatty, Ph.D.</p>
+							<p style="color:#faffff; font-size:35px">Spring 2024</p>
+							<!-- <p style="color:#faffff; font-size:35px"> February 8, 2023</p> -->
+							<span id="spanDate_text" style="color:#faffff; font-size:35px"></span>
+						</div>
+					</section>
+
+
+        <section data-background-image="FiguresGeneral/Normal_slide_Maine.svg">
+					<h1>Contents</h1>
+
+					<div class='container'>
+					<div class='col'>
+						<ul class="contentStyle">
+							<li class="l1">Lagrangian and Eulerian motion</li>							
+							<li class='l1'>Deformation, Strain, and strain rate tensors</li>
+							<li class='l1'>Stress tensor</li>
+							<li class='l1'>Balance equations</li>													
+						</ul>
+					</div>
+					<div class='col'>
+						<div class='container'>
+							<div class='col'>
+								<div class="stickynote" style="margin-top: 100px;margin-left: 75px;">
+									<p style="margin-top: -10px;"> Objectives covered in this lecture</p>
+									<ul>
+										<li>[O1]: Develope awareness and familiarity with the fundamental conservation laws that govern continuum mechanics.</li>
+									</ul>
+								</div>
+							</div>
+							<div class='col'>
+							<div class='stickynote' style='margin-top: 100px;margin-left: 75px;'>
+								<p style="margin-top: -20px;">After this lecture we will able to:</p>
+								<ul style="margin-top: -15px;">
+									<li>Describe motion using Lagrangian and Eulerian descriptions.</li>					
+									<li>Define strain and stress tensors and calculate their invariants.</li>
+									<li>Describe the fundamental conservation equations of continua. </li>									
+								</ul>
+							</div>
+							</div>
+							</div>
+					</div>
+					</div>
+				</section>
+
+<!--
+ #####  ####### #     # ####### ####### #     # #######  #####
+#     # #     # ##    #    #    #       ##    #    #    #     #
+#       #     # # #   #    #    #       # #   #    #    #
+#       #     # #  #  #    #    #####   #  #  #    #     #####
+#       #     # #   # #    #    #       #   # #    #          #
+#     # #     # #    ##    #    #       #    ##    #    #     #
+ #####  ####### #     #    #    ####### #     #    #     #####
+-->
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>What is the continua?</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+It is an <span class='atb'>idealization</span> of matter substances that assumes it is <strong style='color:#7abbe6'>continuos</strong> at all scales. 
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/volume.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p> In a continuum with volume defined by solid region \(\Omega\) with closed surface \(\partial \Omega\), it is always <span class='atb'>possible</span> to find a subregion \(\mathcal{B} \subset \Omega \) with closed surface \(\partial \mathcal{B}\) that is also <span class='atb'>a continuum body</span>. </p>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+In <strong style='color:#7abbe6'>reality</strong> if we keep "zooming in" we will eventually reach a point where the matter is made of <span class='atb'>particles</span>. Eg. <br>
+<ul>
+	<li>Soils (particle level)</li>
+	<li>Molecules (molecular level)</li>
+	<li>Atoms (atomic level)</li>
+	<li>Fundamental particles (quantum level)</li>
+</ul>
+</div>
+
+<div class='findingBox' style='margin-top: 5px;margin-left: 0px;'>
+We <span class='atb'>hypothesize</span> that matter is a <strong style='color:#7abbe6'>continuum</strong> if the <span class='atb'>smallest</span> of the <strong style='color:#7abbe6'>large-scale characteristic lengths</strong> of a body (\(L_{min}\)) are <strong style='color:#7abbe6'>much larger</strong> than the <span class='atb'>largest</span> of the <strong style='color:#7abbe6'>small-scale characteristic lengths</strong> of the microscopic level (\(D_{max}\)). <br>
+<div class='equationBox' style="margin-left: 300px;">
+\(L_{min}>> D_{max}\)
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.1</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+For the problems illustrated below, asses if the hypothesis of continuum is valid. 
+</div>
+<figure>
+<img src='FiguresGeneral/scales.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Body configurations</h1>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/configurations.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+A body in its <span class='atb'>reference configuration</span> undergoes a <strong style='color:#7abbe6'>deformation</strong> mapped by the <span class='atb'>deformation function</span> \(\boldsymbol{x}=\chi(\boldsymbol{X}, t)\), that takes <span class='atb'>material point coordinates</span> \(\boldsymbol{X}\) and transforms them into <span class='atb'>spatial point coordinates</span> \(\boldsymbol{x}\).
+</div>
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<h1>Body configurations</h1>
+	<div class='container'>
+	<div class='col'>
+	<figure>
+	<img src='FiguresGeneral/configurations.svg' width='100%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+	</div>
+	<div class='col'>
+	<div class='defBox' name='Displacement field' style='margin-top: 0px;margin-left: 0px;'>
+	The displacement field <strong style='color:green'>\(\boldsymbol{u}\)</strong> defines the <span class='atb'>displacement</span> of a material point from its <span class='atb'>reference position</span> to its <span class='atb'>current position</span>. <br>
+	<div class='equationBox'>
+	\(\boldsymbol{u}=\boldsymbol{x}-\boldsymbol{X}\)
+	</div>
+	</div>
+	</div>
+	</div>
+	</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Time differentiation</h1>
+<div class='defBox' name='Intensive properties:' style='margin-top: 0px;margin-left: 0px;'>
+Are properties that are <span class='atb'>independent</span> of the <span class='atb'>amount</span> of matter in the body and are trackable for each material point. Eg. <strong style='color:#7abbe6'>displacement</strong>, <strong style='color:#7abbe6'>velocity</strong>, <strong style='color:#7abbe6'>acceleration</strong>, <strong style='color:#7abbe6'>temperature</strong>, <strong style='color:#7abbe6'>pressure</strong>, etc.
+</div>
+
+<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+We can differentiate scalar, vector, and tensor fields with respect to time following a <strong style='color:#7abbe6'>material point</strong> a.k.a. <span class='atb'>Lagrangian description of movement</span> or a <strong style='color:#7abbe6'>spatial point</strong> a.k.a. <span class='atb'>Eulerian description of movement</span> as follows:
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p> We can denote the rate of change of any intensive property of a material point as: <br>
+\(\dot{\alpha}= \frac{D \alpha}{Dt}, \ \ \dot{\boldsymbol{a}}=\frac{D \boldsymbol{a}}{Dt}, \ \ \dot{\boldsymbol{S}}=\frac{D \boldsymbol{S}}{Dt}\) <br>
+To achieve this we <strong style='color:#7abbe6'>fixe</strong> position <strong style='color:#7abbe6'>\(\boldsymbol{X}\)</strong>.
+</p>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Note that we can now define the material point <strong style='color:#7abbe6'>velocity</strong> and <strong style='color:#7abbe6'>acceleration</strong> as: <br>
+	<div class='equationBox' style="margin-left: 400px;">
+	\(\boldsymbol{v}( t)= \dot{\boldsymbol{u}}= \frac{D\boldsymbol{u}}{Dt} \)
+	</div> <br>
+	<div class='equationBox' style="margin-left: 400px;margin-top: 5px;">
+	\(\boldsymbol{a( t)}= \dot{\boldsymbol{v}}= \frac{D\boldsymbol{v}}{Dt} \)
+	</div>
+	</div>
+</div>
+
+<p class="fragment"> This are <strong style='color:#7abbe6'>Lagrangian</strong> variables. But why if we want to track then <strong style='color:#7abbe6'>stationed</strong> in a <strong style='color:#7abbe6'>fixed</strong> point?</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Realize that when tracking a material point we let for example \(\boldsymbol{v}(t)\) be a function of time only. We now are interested in tracking the property at the Eulerian point \(\boldsymbol{x}\) or  \(\boldsymbol{v}(\boldsymbol{x}, t)\): 
+</div>
+
+<p class="fragment">\( \begin{align*}
+	\frac{D \boldsymbol{u}^m(t)} {Dt}&= \cfrac{\partial}{\partial t} (\boldsymbol{u^s}(\chi(\boldsymbol{X}, t),t)) \\
+	&= \cfrac{\partial \boldsymbol{u^s}}{\partial t} + \cfrac{\partial \boldsymbol{u^s}}{\partial \boldsymbol{X}} \cfrac{\partial \boldsymbol{X}}{\partial t} \\ 
+
+	\end{align*}\) </p>
+
+	<div class="fragment">
+		<div class='defBox' name='Material derivative' style='margin-top: 0px;margin-left: 0px;'>
+			<strong style='color:green'>\(\frac{D}{Dt}\):</strong> is an operator that allows changing from a Lagrangian description to an Eulerian description. <br>
+			<div class='equationBox'>
+			\(\cfrac{D (*)}{Dt}= \cfrac{\partial (*)}{\partial t} + \boldsymbol{v}^s \cdot \nabla (*)\)
+			</div>
+		</div>
+	</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+<iframe class='stretch' src='https://www.youtube.com/embed/9sS--qoB7NE?autoplay=1&loop=1&playlist=9sS--qoB7NE' ></iframe>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Rigid body motions</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<div class='container'>
+<div class='col'>
+<h4>Translation</h4>
+\(\boldsymbol{x}= \boldsymbol{X}+\boldsymbol{c} \implies \boldsymbol{u}= \boldsymbol{c} \)
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/rigig_translation.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+</div>
+
+<div class="fragment">
+<div class='container'>
+<div class='col'>
+	<h4>Rigid rotation </h4>
+	<p>\(\boldsymbol{x}= \boldsymbol{Q}\boldsymbol{X} \implies \boldsymbol{u}= (\boldsymbol{Q}-\boldsymbol{I})\boldsymbol{X}\) <br>
+	\(\boldsymbol{Q}\boldsymbol{Q}^T=\boldsymbol{I}\)
+	</p>
+</div>
+<div class='col'>
+	<figure>
+		<img src='FiguresGeneral/rigig_rotation.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+</div>
+</div>
+</div>
+
+<div class="fragment"> 
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		<div class='container'>
+		<div class='col'>
+		<h4>Translation and rotation</h4>
+		\(\boldsymbol{x}= \boldsymbol{Q}\boldsymbol{X}+\boldsymbol{c}\) <br>
+		\(\implies \boldsymbol{u}= (\boldsymbol{Q}-\boldsymbol{I})\boldsymbol{X}+\boldsymbol{c} \)
+		</div>
+		<div class='col'>
+		<figure>
+		<img src='FiguresGeneral/rigig_general.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+		</figure>
+		</div>
+		</div>
+		</div>
+</div>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Deformation and strain</h1>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/deformations.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p class="fragment">Recall: <br>
+\(\boldsymbol{x}= \chi(\boldsymbol{X}, t)\) <br>
+\(d \boldsymbol{x}= \cfrac{\partial \chi(\boldsymbol{X}, t)}{\partial \boldsymbol{X}} d \boldsymbol {X} \) <br>
+\(d \boldsymbol{x}= \boldsymbol{F} d \boldsymbol {X} \)
+</p>
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		We can define the <strong style='color:#7abbe6'>deformation gradient tensor</strong> as: <br>
+		<div class='equationBox'>
+		\(\boldsymbol{F}= \cfrac{\partial \boldsymbol{x}}{\partial \boldsymbol{X}} \)
+		</div>
+	
+	</div>
+</div>
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+	<figure>
+		<img src='FiguresGeneral/deformations.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+</div>
+<div class='col'>
+<p class="fragment" style="font-size: 0.8em;">
+\(\begin{align*}
+\boldsymbol{X}+\boldsymbol{u}(\boldsymbol{X})+ d \boldsymbol{x}
+&= \boldsymbol{X}+d \boldsymbol{X}+ \boldsymbol{u}(\boldsymbol{X}+d \boldsymbol{X})  \\
+\boldsymbol{u}(\boldsymbol{X})+ d \boldsymbol{x} &= \boldsymbol{u}(\boldsymbol{X}+d \boldsymbol{X})+d \boldsymbol{X}  \\
+d \boldsymbol{x}&=  d \boldsymbol{X} + \boldsymbol{u}(\boldsymbol{X}+d \boldsymbol{X})- \boldsymbol{u}(\boldsymbol{X})\\
+d \boldsymbol{x}&=  d \boldsymbol{X} + \nabla \boldsymbol{u} d \boldsymbol{X}\\
+d \boldsymbol{x}&=  (\nabla \boldsymbol{u}+ \boldsymbol{I}) d \boldsymbol{X} 
+\end{align*} \)	
+</p>
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		This implies that: <br>
+		<div class='equationBox'>
+		\(\boldsymbol{F}= \nabla \boldsymbol{u}+ \boldsymbol{I} \)
+		</div>
+	</div>	
+</div>
+
+
+</div>
+</div>
+<div class="fragment">
+	<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+		Note that we still require a way to measure the "amount" of deformation. We can do this taking the ratio of the magnitudes of the deformation over the original length of a fiber. <br>
+		\(\varepsilon=\frac{\Delta L}{L_0}\)
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+<p>\(\begin{align*}
+	d \boldsymbol{x} \cdot d \boldsymbol{x}&=  \boldsymbol{F} d \boldsymbol{X} \cdot \boldsymbol{F} d \boldsymbol{X} \\
+	|| d \boldsymbol{x} ||^2&= d \boldsymbol{X} \cdot \boldsymbol{F}^T \boldsymbol{F} \cdot d \boldsymbol{X} \\
+	\end{align*} \)  </p>
+</div>
+<div class='col'>
+<div class="fragment">
+	<div class='defBox' name='Right Cauchy-Green deformation tensor' style='margin-top: 0px;margin-left: 0px;'>
+	<div class='equationBox'>
+	\(\boldsymbol{C}= \boldsymbol{F}^T\boldsymbol{F}\)
+	</div>
+	</div>
+</div>
+</div>
+</div>
+<div class="fragment" >
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that if \(\boldsymbol{F}^T\boldsymbol{F}=\boldsymbol{I} \implies || d \boldsymbol{x} ||^2= || d \boldsymbol{X} ||^2\) or <span class='atb'>rigid motion</span>
+	</div>
+</div>
+<p class="fragment"> 
+\(\begin{align*}
+	\boldsymbol{C}&= \boldsymbol{F}^T\boldsymbol{F} \\
+	&= (\nabla \boldsymbol{u}+ \boldsymbol{I})^T(\nabla \boldsymbol{u}+ \boldsymbol{I}) \\
+	&= \nabla \boldsymbol{u}^T \nabla \boldsymbol{u}+ \nabla \boldsymbol{u}^T + \nabla \boldsymbol{u} + \boldsymbol{I}
+	
+\end{align*}	\)
+</p>
+
+<div class='container'>
+<div class='col'>
+	<div class="fragment">
+		<div class='defBox' name='Green strain tensor:' style='margin-top: 0px;margin-left: 0px;'>
+		<div class='equationBox'>
+		\(\boldsymbol{\varepsilon}= \frac{1}{2}(\nabla \boldsymbol{u}+ \nabla \boldsymbol{u}^T + \nabla \boldsymbol{u}^T \nabla \boldsymbol{u})\)
+		</div>
+		</div>
+	</div>
+</div>
+<div class='col'>
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		This tensor is: <br>
+		<ul>
+			<li>Symmetric </li>
+			<li>Valid for <strong style='color:#7abbe6'>finite</strong> deformations</li>
+		</ul>
+	</div>
+</div>
+	
+</div>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Small (Infinitesimal) strain tensor</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	As mentioned before \(\boldsymbol{u}\) is defined between two "<strong style='color:#7abbe6'>snapshots</strong>" indifferent of time. In some engineering applications, and more importantly in <strong style='color:#7abbe6'>numerical modelling</strong> we calculate change in very small or <strong style='color:#7abbe6'>infinitesimal</strong> increments. Therefore, we can safely assume that \(\nabla \boldsymbol{u}^T \nabla \boldsymbol{u} \approx \boldsymbol{0}\)
+</div>
+
+<div class='defBox' name='Small Green strain tensor' style='margin-top: 10px;margin-left: 0px;'>
+	<div class='equationBox'>
+		\(\boldsymbol{\varepsilon}= \frac{1}{2}(\nabla \boldsymbol{u}+ \nabla \boldsymbol{u}^T )\)
+	</div>
+</div>
+
+<p>Note that \(\boldsymbol{\varepsilon}\) is the <span class='atb'>symmetric part</span> os the displacement gradient.</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>
+	\(
+		\boldsymbol{\varepsilon} =
+		\begin{bmatrix}
+		\frac{\partial u_1}{\partial X_1} & \frac{1}{2}(\frac{\partial u_1}{\partial X_2}+\frac{\partial u_2}{\partial X_1}) & \frac{1}{2}(\frac{\partial u_1}{\partial X_3}+\frac{\partial u_3}{\partial X_1}) \\
+		\frac{1}{2}(\frac{\partial u_1}{\partial X_2}+\frac{\partial u_2}{\partial X_1}) & \frac{\partial u_2}{\partial X_2} & \frac{1}{2}(\frac{\partial u_2}{\partial X_3}+\frac{\partial u_3}{\partial X_2}) \\
+		\frac{1}{2}(\frac{\partial u_1}{\partial X_3}+\frac{\partial u_3}{\partial X_1}) & \frac{1}{2}(\frac{\partial u_2}{\partial X_3}+\frac{\partial u_3}{\partial X_2}) & \frac{\partial u_3}{\partial X_3}
+		\end{bmatrix}	
+	\)
+</p>
+
+<div class='container'>
+<div class='col'>
+<div class="fragment">
+<figure>
+<img src='FiguresGeneral/vol_strain.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+<div class='col'>
+	<figure class="fragment">
+		<img src='FiguresGeneral/distortion.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that the trace of the strain tensor is the sum of the axial strains, which is equal to the volumetric strain (<strong style='color:green'>\(\varepsilon_v\)</strong>) also is the divergence of the displacement vector field: <br>
+		<div class='equationBox' style="margin-left: 500px;">
+			\(tr(\boldsymbol{\varepsilon})= \varepsilon_{ii}= \nabla \cdot \boldsymbol{u}= \varepsilon_v\)
+		</div>
+		</div>
+
+	<div class='findingBox' style='margin-top: 10px;margin-left: 0px;'>
+			We can now decompose the strain tensor into its <span class='atb'>volumetric</span> and <span class='atb'>deviatoric</span> parts: <br>
+			<div class='equationBox' style="margin-left: 300px;">
+			\(\boldsymbol{\epsilon}= \boldsymbol{\varepsilon}- \varepsilon_v \boldsymbol{I}\)
+			</div>
+	</div>
+
+	<p>Note that the deviatoric strain tensor represents the <span class='atb'>distortions</span> of the body, while the volumetric strain tensor the <span class='atb'>dilation or compression</span> of the body.</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Deviatoric strain</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The <strong style='color:#7abbe6'>invariants</strong> of a tensor are <strong style='color:#7abbe6'>scalar</strong> values that are <span class='atb'>independent</span> of the <span class='atb'>coordinate system</span>. In constitutive modeling, we use invariants because it facilitates and reduce the computational cost associated with matrix operations. 
+</div>
+
+<p> Note that the trace of a tensor is invariant. Besides the norm of the deviatoric tensor is also an invariant. Furthermore, any operation and combination of invariants is also an invariant.</p>
+
+<div class='defBox' name='Deviatoric strain' style='margin-top: 0px;margin-left: 0px;'>
+	<div class='equationBox'>
+		\(\varepsilon_q= \sqrt{3/2  ||\boldsymbol{\epsilon}||}=\sqrt{3/2  \boldsymbol{\epsilon}:\boldsymbol{\epsilon}} \)
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.2</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find and expression for the deformation function of <strong style='color:#7abbe6'>pure extension/compression deformation</strong>. Then determine the deformation gradient tensor, the small strain tensor, the deviatoric strain tensor, and volumetric strain.
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/example22.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.3</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Find and expression for the deformation function of <strong style='color:#7abbe6'>simple shear deformation</strong>. Then determine the deformation gradient tensor, the small strain tensor, the deviatoric strain tensor, volumetric strain, and deviatoric strain. Show that \(\gamma_{xy}= 2\varepsilon_{xy}\)
+	</div>
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/example23.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.4</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Find and expression for the deformation function of <strong style='color:#7abbe6'>pure shear deformation</strong>. Then determine the deformation gradient tensor, the small strain tensor, the deviatoric strain tensor, volumetric strain, and deviatoric strain. 
+	</div>
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/example24.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+</div>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>The velocity gradient tensor</h1>
+<div class='defBox' name='Velocity gradient:' style='margin-top: 0px;margin-left: 0px;'>
+The velocity gradient tensor is defined with the spatial coordinates as: <br>
+<div class='equationBox'>
+\(\boldsymbol{L}= \cfrac{\partial \boldsymbol{v}^s}{\partial \boldsymbol{x}} \)
+</div>
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/velocities.svg' width='80%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+	<p>The differential of the velocity could be express ass: <br>
+	\(\begin{align*}
+		d \boldsymbol{v}^s&= \cfrac{\partial \boldsymbol{v}^s}{\partial \boldsymbol{x}} d \boldsymbol{x} \\
+		&= \boldsymbol{L} d \boldsymbol{x}
+		\end{align*}\)
+	</p>
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Strain rate tensor</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We can now decompose \(\boldsymbol{L}\) into a <strong style='color:#7abbe6'>symmetric</strong> and <span class='atb'>skew</span> part.
+</div>
+
+
+<div class='container'>
+<div class='col'>
+<h4>Strain rate tensor</h4>
+<div class='defBox' name='Strain rate tensor:' style='margin-top: 0px;margin-left: 0px;'>
+Is the symmetric part of \(\boldsymbol{L}\):
+<div class='equationBox' style="font-size: 0.9em;">
+\(\boldsymbol{D}= sym(L)= \frac{1}{2}(\nabla_x \boldsymbol{v}^s + \nabla_x \boldsymbol{v}^{sT})\)
+</div>
+</div>
+<p> Measures deformations around a fixed Eulerian point</p>	
+</div>
+
+
+<div class='col'>
+	<h4>Spin tensor</h4>
+	<div class='defBox' name='Strain rate tensor:' style='margin-top: 0px;margin-left: 5px;'>
+	Is the skew part of \(\boldsymbol{L}\):
+	<div class='equationBox' style="font-size: 0.9em;">
+	\(\boldsymbol{W}= skw(L)= \frac{1}{2}(\nabla_x \boldsymbol{v}^s - \nabla_x \boldsymbol{v}^{sT})\)
+	</div>
+	</div>
+	<p> Measures vorticity around a fixed Eulerian point</p>
+
+
+</div>
+</div>
+
+<p>But we want to find the <strong style='color:#7abbe6'>Lagrangian</strong> strain rate.</p>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>Let's start measuring the rate of change of a fiber in the current configuration: <br>
+\( \begin{align}
+\frac{\partial (d \boldsymbol{x} \cdot d \boldsymbol{x})}{\partial t} &= d \frac{\partial  \boldsymbol{x} }{\partial t} \cdot d \boldsymbol{x} + d \boldsymbol{x} \cdot d \frac{\partial  \boldsymbol{x} }{\partial t} \\
+&= d \boldsymbol{v}^s \cdot d \boldsymbol{x} + d \boldsymbol{x} \cdot d \boldsymbol{v}^s \\
+&= ( d \boldsymbol{x} \boldsymbol{L} ) \cdot d \boldsymbol{x} + d \boldsymbol{x} \cdot ( \boldsymbol{L} d \boldsymbol{x} ) \\
+&=  d \boldsymbol{x} \cdot (\boldsymbol{L}^T+ \boldsymbol{L}) \cdot d \boldsymbol{x} \\
+&= 2 d \boldsymbol{x} \cdot  \boldsymbol{D} \cdot d \boldsymbol{x} \\
+\end{align} \)
+</p>
+
+<p>I will give without proof the following relationship: <br>
+\(\frac{\partial d\boldsymbol{x} \cdot d\boldsymbol{x}  }{\partial t}= 2 d \boldsymbol{X} \cdot \dot{\boldsymbol{\varepsilon}} \cdot  d \boldsymbol{X}\)
+</p>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p> 
+\( \begin{align}
+ d \boldsymbol{X} \cdot \dot{\boldsymbol{\varepsilon}} \cdot  d \boldsymbol{X} &= d \boldsymbol{x} \cdot  \boldsymbol{D} \cdot d \boldsymbol{x}\\
+ &= d \boldsymbol{X} \cdot \boldsymbol{F}^T \cdot \boldsymbol{D} \cdot \boldsymbol{F} \cdot d \boldsymbol{X} \\
+\end{align} \)
+</p>
+
+<div class="fragment"> 
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		We now have an expression relating the <strong style='color:#7abbe6'>Lagrangian</strong> and <strong style='color:#7abbe6'>Eulerian</strong> strain rate tensors: <br>
+	<div class='equationBox' style="margin-left: 300px;">
+	\(\dot{\boldsymbol{\varepsilon}}= \boldsymbol{F}^T \cdot \boldsymbol{D} \cdot \boldsymbol{F} \)
+	</div>
+
+	
+</div>
+
+<div class="fragment">
+<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+Note that for <strong style='color:#7abbe6'>infinitesimal</strong> deformation, the deformation gradient tensor approaches the identity matrix, and the Lagrangian and Eulerian strain rate tensors are equal.
+</div>
+
+</div>
+
+<div class="fragment">
+	<p >You should be able to proof that: <br>
+		<div class='equationBox' style="margin-left: 400px;">
+		\( \dot{\varepsilon}_v= \nabla \cdot \boldsymbol{v}= tr(\dot{\boldsymbol{\varepsilon}}) \)
+		</div>
+	</p>
+
+</div>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.5</h1>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the strain tensor, volumetric and deviatoric strain rate of a <strong style='color:#7abbe6'>pure extension/compression deformation</strong>.
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the strain tensor, volumetric and deviatoric strain rate of a <strong style='color:#7abbe6'>simple shear deformation</strong>.
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.7</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the strain tensor, volumetric and deviatoric strain rate of a <strong style='color:#7abbe6'>pure shear deformation</strong>.
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  SCRIIPTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+
+
+
+
+
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_text").innerHTML = months[today.getMonth()] + " " + today.getDate()+ ", " + today.getFullYear();
+</script>
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+<script type="text/javascript">
+		var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+	   var today = new Date();
+	   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/qrcode/qrcode.js"></script>
+<script src="plugin/complete_box/complete_box.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/fullscreen/plugin.js"></script>
+<script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+<script src="plugin/chalkboard/plugin.js"></script>
+<!-- <script src="plugin/audio-slideshow/plugin.js"></script>
+<script src="plugin/audio-slideshow/RecordRTC.js"></script>
+<script src="plugin/audio-slideshow/recorder.js"></script> -->
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/customcontrols/plugin.js"></script>
+<script>
+
+Reveal.configure({ pdfMaxPagesPerSlide: 1 ,
+								   pdfSeparateFragments: false});
+// Also available as an ES module, see:
+// https://revealjs.com/initialization/
+Reveal.initialize({
+   dependencies: [
+	   { src: 'plugin/mouse-pointer/mouse-pointer.js' } , { src: 'plugin/spotlight/spotlight.js' },   ],
+   controls: true,
+   progress: true,
+   center: false,
+   hash: true,
+   transition: 'fade',
+   slideNumber: 'c/t',
+   autoPlayMedia: true,
+   defaultTiming: 120,
+   width: 1280,
+   height: 720,
+   math: {
+	   mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+	   config: 'TeX-AMS_HTML-full',
+	   tex2jax: {
+		   inlineMath: [['\\(','\\)']],
+		   displayMath: [['\\[','\\]']],
+		   balanceBraces: true,
+		   processEscapes: false,
+		   processRefs: true,
+		   processEnvironments: true,
+		   preview: 'TeX',
+		   skipTags: ['script','noscript','style','textarea','pre','code'],
+		   ignoreClass: 'tex2jax_ignore',
+		   processClass: 'tex2jax_process'
+	   },
+   },
+
+   spotlight: {
+
+		   // size of the spotlight
+		   size: 100,
+
+		   // true: Locks the mouse pointer inside the presentation
+		   // there is by design (Pointer Lock API) no spotlightCursor and presentingCursor
+		   // displayed regardless of the configured values
+		   lockPointerInsideCanvas: false,
+
+		   // toggle spotlight by holding down the mouse key
+		   toggleSpotlightOnMouseDown: false,
+
+		   // the keyCode pressed and held to turn on spotlight, disabled when set to false
+		   // Problems with this config? Maybe your touchpad is disabled on keypress?
+		   spotlightOnKeyPressAndHold: true,
+
+		   // choose the cursor when spotlight is on. Maybe "crosshair"?
+		   spotlightCursor: 'default',
+
+		   // choose the cursor when spotlight is off and in presentation mode. Maybe "default"?
+		   presentingCursor: 'default',
+
+		   // true: initially in presentation mode, will also be ture if this is not set and toggleSpotlightOnMouseDown is true
+		   initialPresentationMode: true,
+
+		   // true: disable selecting in presentation mode
+		   disablingUserSelect: false,
+
+		   // set to a number as transition duration in ms to enable fade in and out, disabled when set to false
+		   fadeInAndOut: 100,
+
+		   // enable pointer mode
+		   useAsPointer: false,
+
+		   // pointer color (If pointer mode enabled)
+		   pointerColor: 'red'
+   },
+
+   keyboard: {
+		   // alternative to toggleSpotlightOnMouseDown:
+		   // toggle spotlight by pressing key 'c'
+		   32: function() { RevealSpotlight.toggleSpotlight() },
+
+		   // enter/leave presentation mode by pressing key 'p'
+		   80: function() {
+			   RevealSpotlight.togglePresentationMode();
+		   },
+   },
+
+   // Push each slide change to the browser history
+   history: true,
+
+   menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+	   themes: false,
+	   transitions: false,
+	   markers: true,
+	   hideMissingTitles: true,
+	   custom: [
+						   { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+						   { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				   ]
+   },
+//
+// 			audio: {
+// 					prefix: 'chalkboard/',
+// 					suffix: '.ogg',
+// 					defaultDuration: 5,
+// //					textToSpeechURL: "http://api.voicerss.org/?key=[YOUR_KEY]&hl=en-gb&c=ogg&src=",
+// 					advance: 500,
+// 					autoplay: false,
+// 					defaultText: true,
+// 					playerOpacity: 0.2,
+// 				},
+   // ...
+   chalkboard: {
+				   boardmarkerWidth: 3,
+				   chalkWidth: 5,
+				   chalkEffect: 0.05,
+				   src: "chalkboard.json",
+				   // storage: ,
+				   readOnly: false,
+				   transition: 800,
+				   theme: "chalkboard",
+				   background: [ 'rgba(127,127,127,.1)' , path + 'img/blackboard.png' ],
+				   grid: { color: 'rgb(50,50,10,0.5)', distance: 40, width: 2},
+				   eraser: { src: path + 'img/sponge.png', radius: 20},
+				   boardmarkers : [
+								   { color: 'rgba(0,0,0,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+								   { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+								   { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+								   { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+								   { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+								   { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'},
+								   { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'}
+				   ],
+				   chalks: [
+								   { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+								   { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+								   { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+								   { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+								   { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+								   { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+								   { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+				   ]
+		   },
+		   customcontrols: {
+			   controls: [
+				   { icon: '<i class="fa fa-pen-square"></i>',
+					   title: 'Toggle chalkboard (B)',
+					   action: 'RevealChalkboard.toggleChalkboard();'
+				   },
+				   { icon: '<i class="fa fa-pen"></i>',
+					   title: 'Toggle notes canvas (C)',
+					   action: 'RevealChalkboard.toggleNotesCanvas();'
+				   }
+			   ]
+		   },
+
+	   // ...
+   //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   // Learn about plugins: https://revealjs.com/plugins/
+   plugins: [ RevealCustomControls, RevealMath,RevealFullscreen, RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealChalkboard, RevealMenu
+					   ],
+						   // RevealAudioSlideshow, RevealAudioRecorder, RevealMenu, RevealCustomControls],
+	   });
+
+</script>
+
+</html>
