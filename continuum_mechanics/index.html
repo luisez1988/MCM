@@ -822,6 +822,150 @@ Find the strain tensor, volumetric and deviatoric strain rate of a <strong style
 </section>
 
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+What if we want to find the traction that <strong style='color:#7abbe6'>vanishes all shear stresses</strong> in a certain plane? <br>
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/principal.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p class="fragment">\( \begin{align}
+\boldsymbol{t}&= \alpha \boldsymbol{n} \\
+\boldsymbol{\sigma} \cdot \boldsymbol{n}&= \alpha \boldsymbol{n} \\
+\boldsymbol{\sigma} \cdot \boldsymbol{n} -\alpha \boldsymbol{n}&= \boldsymbol{0} \\
+(\boldsymbol{\sigma} -\alpha \boldsymbol{I}) \cdot \boldsymbol{n}&= \boldsymbol{0} \\
+(\boldsymbol{\sigma} -\alpha \boldsymbol{I}) &= \boldsymbol{0}
+
+
+\end{align} \)   </p>
+</div>
+</div>
+
+
+<div class="fragment"> <div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The <span class='atb'>principal stresses</span> of a stress tensor are the eigenvalues of the stress tensor, and the <span class='atb'>principal directions</span> are the eigenvectors of the stress tensor.
+</div>  </div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Stress invariants</h1>
+<div class='textBox' style='margin-top: -20px;margin-left: 0px;'>
+Note that the <strong style='color:#7abbe6'>principal stresses</strong> are invariants of the stress tensor. Recall that the <span class='atb'>trace</span> of the tensor is also invariant.
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Mean stress' style='margin-top: 10px;margin-left: 0px;'>
+		<strong style='color:green'>\(p\):</strong> is defined as:
+		<div class='equationBox'>
+		\( p=\frac{1}{3} tr(\boldsymbol{\sigma})= \frac{1}{3} \sigma_{ii}\)
+		</div>
+		</div>
+</div>
+
+
+<div class="fragment">
+	<div class='defBox' name='Deviatoric stress tensor:' style='margin-top: 10px;margin-left: 0px;'>
+		<div class='equationBox'>
+		\( \boldsymbol{\sigma}^q= \boldsymbol{\sigma} - p \boldsymbol{I} \)
+		</div>
+	</div>
+
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Deviatoric stress' style='margin-top: 10px;margin-left: 0px;'>
+		<strong style='color:green'>\(q\):</strong> is defined as:
+		<div class='equationBox'>
+		\( q= \sqrt{\frac{2}{3} \boldsymbol{\sigma}^q: \boldsymbol{\sigma}^q}= \sqrt{\frac{2}{3} \sigma^q_{ij}\sigma^q_{ij}}  \)
+	</div>
+</div>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.8</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+An undrained isotropic triaxial compression test is conducted on a soil specimen. At failure, the stress on the piston read 100 kPa. The initial cell pressure read was 50 kPa. Find the mean stress, deviatoric stress, and the principal stresses at failure. Plot the stress path in a \(q\) vs \(p\) plot. What is the slope of the path?
+</div>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Principle of effective stresses</h1>
+<div class='defBox' name='Effective stress tensor' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\(\boldsymbol{\sigma}'\):</strong>
+<div class='equationBox'>
+\( \boldsymbol{\sigma}'= \boldsymbol{\sigma}- u \boldsymbol{I} \)
+
+</div> <br>
+\(u\)= Pore pressure
+</div>
+
+<div class='container'>
+<div class='col'>
+<p class="fragment"> \( \begin{align}
+p'&=\frac{1}{3}	 [tr(\boldsymbol{\sigma}')= tr(\boldsymbol{\sigma})- tr(u \boldsymbol{I})] \\
+&=\frac{1}{3} [tr(\boldsymbol{\sigma})- 3u] \\
+&= p- u
+\end{align} \)  </p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+	The mean effective stress is: <br>
+	<div class='equationBox'>
+	\( p'=p-u \)
+	</div>
+	</div>  </div>
+</div>
+
+
+<div class='col'>
+<p class="fragment">
+\( \begin{align}
+\boldsymbol{\sigma}_q' &= \boldsymbol{\sigma}'- p' \boldsymbol{I}\\
+&= \boldsymbol{\sigma}- (p'+ u) \boldsymbol{I} \\
+&= \boldsymbol{\sigma}- p \boldsymbol{I}\\
+&= \boldsymbol{\sigma}_q
+\end{align} \)
+
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 42px;margin-left: 5px;'>
+Pore pressure <span class='atb'>does not affect</span> deviatoric stresses.
+</div>	
+</div>
+
+</div>
+</div>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Octahedral stresses</h1>
+<figure>
+<img src='' width='%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+
+</section>
+
+
 
 
 
