@@ -854,12 +854,59 @@ The <span class='atb'>principal stresses</span> of a stress tensor are the eigen
 
 </section>
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<h1>Stress invariants</h1>
+	<div class='textBox' style='margin-top: -20px;margin-left: 0px;'>
+	Note that the <strong style='color:#7abbe6'>principal stresses</strong> are invariants of the stress tensor.
+	</div>
+	
+	<div class="fragment">
+		<div class='defBox' name='First invariant' style='margin-top: 10px;margin-left: 0px;'>
+			<strong style='color:green'>\(J_1\):</strong> is defined as:
+			<div class='equationBox'>
+			\( J_1= tr(\boldsymbol{\sigma})= \sigma_{ii}\)
+			</div>
+			</div>
+	</div>
+	
+	
+	<div class="fragment">
+		<div class='defBox' name='Deviatoric stress tensor:' style='margin-top: 10px;margin-left: 0px;'>
+			<div class='equationBox'>
+			\( \boldsymbol{\sigma}^q= \boldsymbol{\sigma} - p \boldsymbol{I} \)
+			</div>
+		</div>
+	
+	</div>
+	
+	<div class="fragment">
+		<div class='defBox' name='Second invariant' style='margin-top: 10px;margin-left: 0px;'>
+			<strong style='color:green'>\(J_2\):</strong> is defined as:
+			<div class='equationBox'>
+			\( J_2= \frac{1}{2} \boldsymbol{\sigma}^q: \boldsymbol{\sigma}^q= \frac{1}{2} \sigma^q_{ij}\sigma^q_{ij}  \)
+		</div>
+	</div>
+	
+	
+	
+	</section>
+
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Stress invariants</h1>
-<div class='textBox' style='margin-top: -20px;margin-left: 0px;'>
-Note that the <strong style='color:#7abbe6'>principal stresses</strong> are invariants of the stress tensor. Recall that the <span class='atb'>trace</span> of the tensor is also invariant.
+
+	<div class='defBox' name='Third invariant' style='margin-top: 0px;margin-left: 0px;'>
+	<strong style='color:green'>\(J_3\):</strong> is defined as:
+	<div class='equationBox'>
+	\( J_3= \det{  \boldsymbol{\sigma}^q }= \frac{1}{3}tr(\boldsymbol{\sigma}^q \cdot \boldsymbol{\sigma}^q \cdot \boldsymbol{\sigma}^q)= \frac{1}{3}\sigma^q_{ij} \sigma^q_{jk} \sigma^q_{ki} \)
+	</div>
+	</div>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+		Recall that the <span class='atb'>trace</span> of the tensor is also invariant.
+		</div>
 </div>
+
 
 <div class="fragment">
 	<div class='defBox' name='Mean stress' style='margin-top: 10px;margin-left: 0px;'>
@@ -872,19 +919,10 @@ Note that the <strong style='color:#7abbe6'>principal stresses</strong> are inva
 
 
 <div class="fragment">
-	<div class='defBox' name='Deviatoric stress tensor:' style='margin-top: 10px;margin-left: 0px;'>
-		<div class='equationBox'>
-		\( \boldsymbol{\sigma}^q= \boldsymbol{\sigma} - p \boldsymbol{I} \)
-		</div>
-	</div>
-
-</div>
-
-<div class="fragment">
 	<div class='defBox' name='Deviatoric stress' style='margin-top: 10px;margin-left: 0px;'>
 		<strong style='color:green'>\(q\):</strong> is defined as:
 		<div class='equationBox'>
-		\( q= \sqrt{\frac{3}{2} \boldsymbol{\sigma}^q: \boldsymbol{\sigma}^q}= \sqrt{\frac{3}{2} \sigma^q_{ij}\sigma^q_{ij}}  \)
+		\( q= \sqrt{\frac{3}{2} \boldsymbol{\sigma}^q: \boldsymbol{\sigma}^q}= \sqrt{\frac{3}{2} \sigma^q_{ij}\sigma^q_{ij}}= \sqrt{3 J_2}  \)
 	</div>
 </div>
 
@@ -964,6 +1002,23 @@ Pore pressure <span class='atb'>does not affect</span> deviatoric stresses.
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+<div class='defBox' name="Lode's angle" style='margin-top: 0px;margin-left: 0px;'>
+<div class='equationBox'>
+\( \sin \theta= \frac{J_3}{2} \left(\frac{3}{J_2} \right)^{3/2} \)
+</div> <br>
+\(J_2=0.5 \boldsymbol{\sigma}^q:\boldsymbol{\sigma}^q \) Second natural invariant <br>
+\(J_3= \det(\boldsymbol{\sigma}^q)= \frac{1}{3} tr(\boldsymbol{\sigma}^q \cdot \boldsymbol{\sigma}^q \cdot \boldsymbol{\sigma}^q)\) Third natural invariant
+</div>
+
+<div class='textBox' style='margin-top: 20px;margin-left: 0px;'>
+Note that invariants \(\sigma_1\), \(\sigma_2\), and \(\sigma_3\) are sufficient for reconstructing the tensor as well as \(J_1=tr(\boldsymbol{\sigma})\), \(J_2\), \(J_3\); and \(p\), \(q\), and \(\theta\).
+</div>
 
 </section>
 
