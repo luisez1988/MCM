@@ -238,7 +238,7 @@ We can differentiate scalar, vector, and tensor fields with respect to time foll
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <p> We can denote the rate of change of any intensive property of a material point as: <br>
 \(\dot{\alpha}= \frac{D \alpha}{Dt}, \ \ \dot{\boldsymbol{a}}=\frac{D \boldsymbol{a}}{Dt}, \ \ \dot{\boldsymbol{S}}=\frac{D \boldsymbol{S}}{Dt}\) <br>
-To achieve this we <strong style='color:#7abbe6'>fixe</strong> position <strong style='color:#7abbe6'>\(\boldsymbol{X}\)</strong>.
+To achieve this we <strong style='color:#7abbe6'>fix</strong> position <strong style='color:#7abbe6'>\(\boldsymbol{X}\)</strong>.
 </p>
 
 <div class="fragment">
@@ -1081,8 +1081,92 @@ The <strong style='color:#7abbe6'>linear momentum balance equation</strong> in l
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 	<h1>Mass balance equation</h1>
-	
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	The mass conservation <span class='atb'>postulate</span> is: <br>
+	\(\cfrac{D }{D t} \mathcal{M}(\Omega)=0 \)
+	</div>
+
+	<div class='container'>
+	<div class='col'>
+	<figure class="fragment">
+	<img src='FiguresGeneral/mass_conservation.svg' width='100%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+	</div>
+	<div class='col'>
+	<p class="fragment">\( \begin{align}
+	\int_{\Omega_0} \rho(\boldsymbol{X} ) dV&= \int_{\Omega_t} \rho(\boldsymbol{x}, t ) dv\\
+	&= \int_{\Omega_0} \rho(\chi(\boldsymbol{X}, t) ) J dV
+	\end{align} \) </p>
+	</div>
+	</div>
+
+	<div class="fragment">
+		<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+			This is the <strong style='color:#7abbe6'>mass balance equation</strong> in <span class='atb'>Lagrangian</span> configuration: <br>
+			<div class='equationBox' style="margin-left: 450px;">
+			\( \rho_0= \rho J= \rho \det(\boldsymbol{F}) \)
+			</div> 
+		</div>
+		
+</div>
 </section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+From the previous equations one can show that incompressible materials implies \(\dot{J}=0\). It can also be shown that \(\dot{J}=\nabla \cdot \boldsymbol{v}=0\)
+</div>
+
+<p class="fragment"> In <span class='atb'>Eulerian</span> description we might express mass conservation using the <strong style='color:#7abbe6'>current configuration</strong>.</p>
+
+<p class="fragment"> \( \begin{align}
+\frac{D }{Dt } \int_{\Omega} \rho( \boldsymbol{x}, t) dv&= 0\\
+\int_{\Omega} \frac{D \rho( \boldsymbol{x}, t) }{Dt } dv&= 0\\
+\int_{\Omega} \frac{\partial \rho( \boldsymbol{x}, t) }{\partial t} dv + \int_{\Omega} \rho( \boldsymbol{x}, t) \nabla \cdot \boldsymbol{v} dv&= 0\\
+\end{align} \)</p>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The <strong style='color:#7abbe6'>mass balance equation</strong> in <span class='atb'>Eulerian</span> configuration is: <br>
+<div class='equationBox' style="margin-left: 400px;">
+\( \rho' + \rho \nabla \cdot \boldsymbol{v}=0 \)
+</div>
+</div>
+
+<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+Note that for both <strong style='color:#7abbe6'>Lagrangian</strong> and <strong style='color:#7abbe6'>Eulerian</strong> motion, \(\nabla \cdot \boldsymbol{v}= \dot{ \varepsilon}_v=0\) implies incompressibility. This is a common employed condition in incompressible fluid mechanics.
+</div>
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Specific and density functions</h1>
+<div class='defBox' name='Specific value of a property' style='margin-top: 0px;margin-left: 0px;'>
+Is the ratio of the <strong style='color:#7abbe6'>extensive</strong> property <strong style='color:green'>\(\mathcal{A}\)</strong> per unit of <span class='atb'>mass</span>. <br>
+<div class='equationBox'>
+\( \Psi(\boldsymbol{x}, t)= \cfrac{\partial \mathcal{A}}{\partial m} \)
+</div>
+</div>
+
+<div class="fragment">
+<div class='defBox' name='Density function' style='margin-top: 10px;margin-left: 0px;'>
+Is the ratio of the <strong style='color:#7abbe6'>extensive</strong> property <strong style='color:green'>\(\mathcal{A}\)</strong> per unit of <span class='atb'>volume</span>. <br>
+<div class='equationBox'>
+\( \Theta( \boldsymbol{x}, t)= \frac{\partial \mathcal{A}}{\partial V}= \frac{\partial A}{\partial m} \frac{\partial m}{\partial V}= \Psi \rho \)
+</div>
+</div>
+
+</div>
+
+</section>
+
+
 
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
