@@ -656,7 +656,7 @@ Is the symmetric part of \(\boldsymbol{L}\):
 
 <div class='col'>
 	<h4>Spin tensor</h4>
-	<div class='defBox' name='Strain rate tensor:' style='margin-top: 0px;margin-left: 5px;'>
+	<div class='defBox' name='Spin rate tensor:' style='margin-top: 0px;margin-left: 5px;'>
 	Is the skew part of \(\boldsymbol{L}\):
 	<div class='equationBox' style="font-size: 0.9em;">
 	\(\boldsymbol{W}= skw(L)= \frac{1}{2}(\nabla_x \boldsymbol{v}^s - \nabla_x \boldsymbol{v}^{sT})\)
@@ -997,40 +997,92 @@ Pore pressure <span class='atb'>does not affect</span> deviatoric stresses.
 <h1>Octahedral stresses</h1>
 <div class='textBox' style='margin-top: 0px;font-size: 1em;'>Recall that any stress tensor can be reconstructed as a 	<strong style='color:#7abbe6'>linear combination</strong> of the <span class='atb'> principal stresses and directions </span>. </div>
 
-<figure>
+
 <img src='FiguresGeneral/octahedral.svg' width='100%'/>
-<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
-</figure>
+
+
+	<div class='equationBox' style="position: absolute; margin-top: 370px; margin-left: -300px;">
+		\( \sin \theta= \frac{J_3}{2} \left(\frac{3}{J_2} \right)^{3/2} \)
+	</div>
+
+
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.9</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find Lode's angle for the triaxial test in example 2.8.
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Linear momentum balance equation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+To compute the momentum balance in a body we will use Newton's second law of motion: <br>
+\(\sum \boldsymbol{F}= \frac{D p}{D t}= m \frac{D \boldsymbol{v} }{D t}= m \boldsymbol{a}  \)
+</div>
+
+<p class="fragment"> Recall we have surface tractions: \(\boldsymbol{F}^s= \int_{\partial \Omega} \boldsymbol{t}  dS \)</p>
+<p class="fragment">Body forces: \(\boldsymbol{F}^b= \int_{\Omega} \rho \boldsymbol{b} dV\) </p>
+<p class="fragment">And inertia: \(\int_{\Omega} \rho \boldsymbol{a} dV \)</p>
+<p class="fragment">\( \begin{align}
+\int_{\Omega} \rho \boldsymbol{a} dV &= \int_{\Omega} \rho \boldsymbol{b} dV + \int_{\partial \Omega} \boldsymbol{t} dS \\
+\end{align} \) </p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class="theorem2" name="Gauss Theorem">
+	For a vector field \(\boldsymbol{f}\) defined in a domain \(\Omega\) with boundary \(\partial \Omega\), the integral of the divergence of \(\boldsymbol{f}\) over \(\Omega\) is equal to the integral of \(\boldsymbol{f}\) over the boundary of \(\Omega\):
+	<div class='equationBox'>
+	\(  \int_{\partial \Omega} \boldsymbol{f} \cdot \boldsymbol{n} dS= \int_{\Omega} \nabla \cdot \boldsymbol{f} dV \)
+	</div>
+</div>
+
+<p class="fragment">\( \begin{align}
+	\int_{\Omega} \rho \boldsymbol{a} dV &= \int_{\Omega} \rho \boldsymbol{b} dV + \int_{\partial \Omega} \boldsymbol{t} dS \\
+	\int_{\Omega} \rho \boldsymbol{a} dV &= \int_{\Omega} \rho \boldsymbol{b} dV + \int_{\partial \Omega} \boldsymbol{\sigma}\cdot \boldsymbol{n} dS  \\
+	\int_{\Omega} \rho \boldsymbol{a} dV &= \int_{\Omega} \rho \boldsymbol{b} dV + \int_{\Omega} \nabla \cdot \boldsymbol{\sigma} dV
+	\end{align} \)  </p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The <strong style='color:#7abbe6'>linear momentum balance equation</strong> in local form is: <br>
+<div class='equationBox' style="margin-left: 400px;">
+\( \nabla \cdot \boldsymbol{\sigma}^T + \rho \boldsymbol{b}= \rho \boldsymbol{a} \)
+</div>
+</div>
+
+<p class="fragment">\(\rho a_i= \frac{\partial \sigma_{ji}}{\partial x_j} +\rho b_i\) <br> 
+\( \begin{align}
+\rho a_1&= \frac{\partial \sigma_{11}}{\partial x_1} + \frac{\partial \sigma_{21}}{\partial x_2} + \frac{\partial \sigma_{31}}{\partial x_3} +\rho b_1 \\
+\rho a_2&= \frac{\partial \sigma_{12}}{\partial x_1} + \frac{\partial \sigma_{22}}{\partial x_2} + \frac{\partial \sigma_{32}}{\partial x_3} +\rho b_2 \\
+\rho a_3&= \frac{\partial \sigma_{13}}{\partial x_1} + \frac{\partial \sigma_{23}}{\partial x_2} + \frac{\partial \sigma_{33}}{\partial x_3} +\rho b_3 \\
+\end{align} \)  </p>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note the components of the equation represent the <span class='atb'>balance of force per unit volume</span> in the three directions.
+		</div>
+
+</div>
+
+
 
 
 
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-
-<div class='defBox' name="Lode's angle" style='margin-top: 0px;margin-left: 0px;'>
-<div class='equationBox'>
-\( \sin \theta= \frac{J_3}{2} \left(\frac{3}{J_2} \right)^{3/2} \)
-</div> <br>
-\(J_2=0.5 \boldsymbol{\sigma}^q:\boldsymbol{\sigma}^q \) Second natural invariant <br>
-\(J_3= \det(\boldsymbol{\sigma}^q)= \frac{1}{3} tr(\boldsymbol{\sigma}^q \cdot \boldsymbol{\sigma}^q \cdot \boldsymbol{\sigma}^q)\) Third natural invariant
-</div>
-
-<div class='textBox' style='margin-top: 20px;margin-left: 0px;'>
-Note that invariants \(\sigma_1\), \(\sigma_2\), and \(\sigma_3\) are sufficient for reconstructing the tensor as well as \(J_1=tr(\boldsymbol{\sigma})\), \(J_2\), \(J_3\); and \(p\), \(q\), and \(\theta\).
-</div>
-
+	<h1>Mass balance equation</h1>
+	
 </section>
-
-
-
-
-
-
-
-
-
-
 
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
