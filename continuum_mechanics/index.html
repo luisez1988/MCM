@@ -1140,31 +1140,346 @@ The <strong style='color:#7abbe6'>mass balance equation</strong> in <span class=
 Note that for both <strong style='color:#7abbe6'>Lagrangian</strong> and <strong style='color:#7abbe6'>Eulerian</strong> motion, \(\nabla \cdot \boldsymbol{v}= \dot{ \varepsilon}_v=0\) implies incompressibility. This is a common employed condition in incompressible fluid mechanics.
 </div>
 
+<div class="fragment">
+<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+For incompressible flows the <strong style='color:#7abbe6'>mass balance equation</strong>, a.k.a. <span class='atb'>continuity equation</span> in <span class='atb'>Eulerian</span> configuration is: <br>
+<div class='equationBox' style="margin-left: 300px ;">
+\( \nabla \cdot \boldsymbol{v}= 0 \)
+</div>
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<h1>Specific and density functions</h1>
+	<div class='defBox' name='Specific value of a property' style='margin-top: 0px;margin-left: 0px;'>
+	Is the ratio of the <strong style='color:#7abbe6'>extensive</strong> property <strong style='color:green'>\(\mathcal{A}\)</strong> per unit of <span class='atb'>mass</span>. <br>
+	<div class='equationBox'>
+	\( \Psi(\boldsymbol{x}, t)= \cfrac{\partial \mathcal{A}}{\partial m} \)
+	</div>
+	</div>
+	
+	<div class="fragment">
+	<div class='defBox' name='Density function' style='margin-top: 10px;margin-left: 0px;'>
+	Is the ratio of the <strong style='color:#7abbe6'>extensive</strong> property <strong style='color:green'>\(\mathcal{A}\)</strong> per unit of <span class='atb'>volume</span>. <br>
+	<div class='equationBox'>
+	\( \Theta( \boldsymbol{x}, t)= \frac{\partial \mathcal{A}}{\partial V}= \frac{\partial A}{\partial m} \frac{\partial m}{\partial V}= \Psi \rho \)
+	</div>
+	</div>
+	
+	</div>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Convective flow</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Let's answer the following question: <strong style='color:#7abbe6'>How much \(\mathcal{A}\)</strong> passes trough a surface \( \boldsymbol{n} dS\) per unit of time? <br>
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/convective flow.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p class="fragment">
+	\( \begin{align}
+	d \mathcal{A}&= \Psi \rho dV \\
+	&= \Psi \rho h dS \\
+	&= \Psi \rho (\boldsymbol{v} \cdot \boldsymbol{n}) \Delta t dS \\
+	\mathcal{A}(t+\Delta t)&= \int_{S} \Psi \rho (\boldsymbol{v} \cdot \boldsymbol{n}) \Delta t dS \\
+	\end{align} \)
+</p>
+
+
+</div>
+</div>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	the <span class='atb'>unit flux of \(\mathcal{A}\)</span> over a surface <strong style='color:#7abbe6'>S</strong> can be calculated as: <br>
+	<div class='equationBox' style="margin-left: 550px ;">
+	\( \mathcal{a}= \frac{d \mathcal{A}}{d t}= \int_S	\Psi \rho (\boldsymbol{v} \cdot \boldsymbol{n}) dS \)
+	</div>
+	</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.10</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Define the unit flux of heat in terms of units of energy. Analyze the units of the flux.
+</div>
+<p class="fragment">Solution: <br>
+	Define the specific heat as: \( r= \frac{\partial \mathcal{Q}}{\partial m} \) <br>
+\( \begin{align}
+\frac{d \mathcal{Q}}{d t} &= \int_S	r \rho (\boldsymbol{v} \cdot \boldsymbol{n}) dS \\
+&= \int_S	q dS \\
+\end{align} \) <br>
+\(q=\) heat flux per unit area
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that the flux over an enclosed surface is zero is the <span class='atb'>net flow</span> (i.e., flow in minus flow out).
+</div>
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/net_flow.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+<div class='findingBox' style='margin-top: 40px;margin-left: 0px;'>
+The <strong style='color:#7abbe6'>net flux</strong> of quantity \(\mathcal{A}\) in a finite continuum body is: <br>
+<div class='equationBox' style="margin-left: 500px ;">
+\( \mathcal{a}= \int_{\partial \Omega}	\Psi \rho (\boldsymbol{v} \cdot \boldsymbol{n}) dS \) 
+</div>
+</div>
+
+<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+For a conservative property \(\Psi\) field the net flux is zero.
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Energy balance</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The <span class='atb'>first law of thermodynamics</span> states that the <strong style='color:#7abbe6'>change</strong> in <strong style='color:#7abbe6'>internal energy</strong> of a system is equal to the sum of the <strong style='color:#7abbe6'>heat added</strong> to the system and the <strong style='color:#7abbe6'>mechanical work done</strong> on the system. <br>
+</div>
+
+<ul>
+<li class='fragment'>Rate of work done by external forces: \(\dot{W}^s= \int_{\partial \Omega} \boldsymbol{t} \cdot \boldsymbol{v} dS\)</li>
+
+<li class='fragment'>Rate of work done by body forces: \(\dot{W}^b= \int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV\)</li>
+
+<li class='fragment'>Rate of kinetic energy: \(\dot{K}= \dot{\overline{\int_{\Omega} \frac{1}{2} \rho |\boldsymbol{v}|^2  dV}} \)</li>
+
+<li class='fragment'>Heat flux trough surface: \(\dot{Q}^s= \int_{\partial \Omega} q dS\) </li>
+
+<li class='fragment'>Internal heat sources: \(\dot{Q}^b= \int_{\Omega} r \rho dV\)</li>
+
+
+</ul>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Mechanical energy balance</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+When a body is in motion, the external and body forces do work on the body. These are called <span class='atb'>mechanical work-energy</span>
+</div>
+
+<p class="fragment">
+\( \begin{align}
+\dot{W}= \dot{W}^s+ \dot{W}^b&= \int_{\partial \Omega} \boldsymbol{t} \cdot \boldsymbol{v} dS + \int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV \\
+\end{align} \)	<br>
+
+We now make use of the <strong style='color:#7abbe6'>momentum balance equation</strong> to find <br>
+\( \begin{align}
+\int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV &= \int_{\Omega} \dot{\boldsymbol{v} } \cdot \boldsymbol{v} \rho dV - \int_{\Omega} (\nabla \cdot \boldsymbol{\sigma}) \cdot \boldsymbol{v} dV\\
+\end{align} \) <br>
+
+Also: <br>
+\( \begin{align}
+\nabla \cdot ( \boldsymbol{v} \cdot \boldsymbol{\sigma})&= \boldsymbol{v} \cdot (\nabla \cdot \boldsymbol{\sigma}) + \boldsymbol{\sigma} : \nabla \boldsymbol{v} \\
+&= \boldsymbol{v} \cdot (\nabla \cdot \boldsymbol{\sigma}) + \boldsymbol{\sigma} : \boldsymbol{L} \\
+\end{align} \)
+
+
+
+</p>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>\( \begin{align}
+\boldsymbol{\sigma} : \boldsymbol{L}&= \sigma_{ij} L_{ij}=0.5\sigma_{ij} L_{ij}+ 0.5 \sigma_{ij} L_{ij}  \\
+&= 0.5\sigma_{ij} L_{ij}+ 0.5 \sigma_{ji} L_{ji}\\
+&= \sigma_{ij} \frac{1}{2}( L_{ij}+ L_{ij})\\
+&= \sigma_{ij} \dot{\varepsilon}_{ij}\\ 
+\end{align} \) </p>
+
+<p class="fragment">\( \begin{align}
+	\nabla \cdot ( \boldsymbol{v} \cdot \boldsymbol{\sigma})&=\boldsymbol{v} \cdot (\nabla \cdot \boldsymbol{\sigma}) + \boldsymbol{\sigma} : \dot{\boldsymbol{\varepsilon}}
+\end{align} \)  </p>
+
+<p class="fragment"> Thus: <br>
+	\( \begin{align}
+	\int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV &= \int_{\Omega} \dot{\boldsymbol{v} } \cdot \boldsymbol{v} \rho dV - \int_{\Omega} \nabla \cdot ( \boldsymbol{v} \cdot \boldsymbol{\sigma}) dV\\
+&= \int_{\Omega} \dot{\boldsymbol{v} } \cdot \boldsymbol{v} \rho dV - \int_{\partial \Omega} \boldsymbol{v} \cdot \boldsymbol{\sigma} \cdot \boldsymbol{n} dS + \int_{\Omega} \boldsymbol{\sigma} : \dot{\boldsymbol{\varepsilon}} dV\\
+
+	\end{align} \)
+</p>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>\( \begin{align}
+\dot{W}&= \int_{\partial \Omega} \boldsymbol{t} \cdot \boldsymbol{v} dS + \int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV \\
+\int_{\partial \Omega} \boldsymbol{t} \cdot \boldsymbol{v} dS + \int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV& = \int_{\Omega} \dot{\boldsymbol{v} } \cdot \boldsymbol{v} \rho dV  + \int_{\Omega} \boldsymbol{\sigma} : \dot{\boldsymbol{\varepsilon}} dV \\
+\end{align} \)  </p>
+
+<p class="fragment">Recall that the rate of kinetic energy is: <br>
+\( \begin{align}
+\dot{K}&= \dot{\overline{\int_{\Omega} \frac{1}{2} \rho |\boldsymbol{v}|^2  dV}} \\
+&= \int_{\Omega} \frac{1}{2} \frac{d }{d t} (\rho \boldsymbol{v} \cdot \boldsymbol{v} ) dV= \int_{\Omega} \rho \frac{1}{2} \frac{d }{d t} ( v_{i}^2 ) \\
+&= \int_{\Omega} \dot{\boldsymbol{v} } \cdot \boldsymbol{v} \rho dV
+\end{align} \)
+</p>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The work done per unit of time by the <span class='atb'>external forces</span> on a body is equal to the <span class='atb'>rate of change of kinetic energy</span> plus the <span class='atb'>stress power</span> due to internal forces. <br>
+<div class='equationBox'>
+\( \begin{align}
+\underbrace{\int_{\partial \Omega} \boldsymbol{t} \cdot \boldsymbol{v} dS }_{\substack{\text{Work done by} \\ \text{external forces}}}
++ \underbrace{\textcolor{red}{\int_{\Omega} \rho \boldsymbol{b} \cdot \boldsymbol{v} dV}}_{\substack{\text{Work done by} \\ \text{body forces}}}& 
+= \underbrace{\textcolor{blue}{\int_{\Omega} \dot{\boldsymbol{v} } \cdot \boldsymbol{v} \rho dV }}_{\substack{\text{Rate of } \\ \text{kinetic energy}}}
++ \underbrace{\textcolor{green}{\int_{\Omega} \boldsymbol{\sigma} : \dot{\boldsymbol{\varepsilon}} dV}}_{\substack{\text{Stress power} }} \\
+
+\end{align} \)
+</div>
+
+</div>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+	Note that the <strong style='color:#7abbe6'>stress tensor</strong> and the <strong style='color:#7abbe6'>strain rate tensor</strong> are <span class='atb'>energy conjugates</span>.
+	</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Principle of virtual work</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that the rate of kinetic energy can be regarded as <span class='atb'>interial force</span>. If rearranged the previous equation can be written as: <br>
+</div>
+
+<p class="fragment">
+	\( 
+	\int_{\partial \Omega} \boldsymbol{t} \cdot \boldsymbol{v} dS + \int_{\Omega} \rho (\boldsymbol{b}+ \dot{\boldsymbol{v}}) \cdot \boldsymbol{v} dV=  \int_{\Omega} \boldsymbol{\sigma} : \dot{\boldsymbol{\varepsilon}} dV  \)
+</p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		The external virtual mechanical work supplied by forces acting on the body when <strong style='color:#7abbe6'>subjected to a kinematically permissible velocity field</strong>, is equal to the <strong style='color:#7abbe6'>internal virtual mechanical power</strong> due to a dynamically <span class='atb'>permissible stress field</span> <br>
+		<div class='equationBox' style="margin-left: 350px;">
+		\( d\dot{W}^i= \boldsymbol{\sigma} : \dot{\boldsymbol{\varepsilon}} \)
+		</div>
+	</div>
+</div>
+
+
 
 
 </section>
 
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Specific and density functions</h1>
-<div class='defBox' name='Specific value of a property' style='margin-top: 0px;margin-left: 0px;'>
-Is the ratio of the <strong style='color:#7abbe6'>extensive</strong> property <strong style='color:green'>\(\mathcal{A}\)</strong> per unit of <span class='atb'>mass</span>. <br>
-<div class='equationBox'>
-\( \Psi(\boldsymbol{x}, t)= \cfrac{\partial \mathcal{A}}{\partial m} \)
+<h1>Thermal energy balance equation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The sum of the mechanical power and the heat power supplied to a body is equal tot he sum of the time rate of change of the internal energy and the ime rate of change of the kinetic energy of the body. The local form of the equation is given without proof.
+
+<div class='equationBox' style="margin-left: 450px;">
+\( \rho \dot{\xi}= - \nabla \cdot \boldsymbol{h} + \boldsymbol{\sigma}: \dot{ \boldsymbol{\varepsilon}  }  \)
 </div>
 </div>
 
+<ul>
+	<li>\(\dot{\xi}=\) rate of change of specific energy of a material point </li>
+	<li> \(q= -\boldsymbol{h} \cdot \boldsymbol{n} \implies \boldsymbol{h}=\) heat flux vector </li>
+</ul>
+
 <div class="fragment">
-<div class='defBox' name='Density function' style='margin-top: 10px;margin-left: 0px;'>
-Is the ratio of the <strong style='color:#7abbe6'>extensive</strong> property <strong style='color:green'>\(\mathcal{A}\)</strong> per unit of <span class='atb'>volume</span>. <br>
-<div class='equationBox'>
-\( \Theta( \boldsymbol{x}, t)= \frac{\partial \mathcal{A}}{\partial V}= \frac{\partial A}{\partial m} \frac{\partial m}{\partial V}= \Psi \rho \)
-</div>
+<div class='textBox' style='margin-top: 10px;margin-left: 0px;'>
+Note that for a <strong style='color:#7abbe6'>adiabatic</strong> process, the energy density \(\rho \dot{\xi}\) is equal to the stress power \(\boldsymbol{\sigma}: \dot{ \boldsymbol{\varepsilon}  }\)
 </div>
 
 </div>
 
 </section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 2.11</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the energy density of an adiabatic process in terms of strain and stress invariants.
+</div>
+
+<p class="fragment">\( \begin{align}
+\rho \dot{\xi}&= \boldsymbol{\sigma}: \dot{ \boldsymbol{\varepsilon}  } \\
+&= \boldsymbol{\sigma}^q: \dot{\boldsymbol{\varepsilon}} + p \boldsymbol{I}: \dot{\boldsymbol{\varepsilon}}  \\
+&= \boldsymbol{\sigma}^q: \dot{\boldsymbol{\epsilon}}^q + \boldsymbol{\sigma}^q: \dot{\varepsilon}_v \boldsymbol{I}+  p \boldsymbol{I}: \dot{\boldsymbol{\epsilon}}^q + p \boldsymbol{I}: \dot{\varepsilon}_v \boldsymbol{I}     \\
+&= \sigma^q_{ij} \dot{\varepsilon}^q_{ij} + \sigma^q_{ij} \dot{\varepsilon}_v \delta_{ij}+  p \dot{\epsilon}^q_{ij} \delta_{ij} + p \dot{\varepsilon}_v \delta_{ij} \delta_{ij}     \\
+&= \sigma^q_{ij} \dot{\varepsilon}^q_{ij} + \sigma^q_{ii} \dot{\varepsilon}_v + p \dot{\epsilon}^q_{ii} + 3 p \dot{\varepsilon}_v     \\
+&= \sigma^q_{ij} \dot{\varepsilon}^q_{ij} + p (\dot{\varepsilon}_{ii}- \dot{\varepsilon}_v \delta_{ii}) + (\sigma_{ii}-p\delta_{ii}) \dot{\varepsilon}_v + 3 p \dot{\varepsilon}_v     \\
+&= \sigma^q_{ij} \dot{\varepsilon}^q_{ij} + p \dot{\varepsilon}_v- 3 p \dot{\varepsilon}_v + 3p \dot{\varepsilon}_v - 3p \dot{\varepsilon}_v + 3p \dot{\varepsilon}_v     \\
+\end{align} \) </p>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>\( \begin{align}
+\boldsymbol{\sigma}: \dot{ \boldsymbol{\varepsilon} }= \boldsymbol{\sigma}^q: \dot{ \boldsymbol{\epsilon} }^q + p \dot{\varepsilon}_v
+\end{align} \)   </p>
+
+<p class="fragment"> 
+	\( \begin{align}
+	(\boldsymbol{\sigma}^q: \dot{ \boldsymbol{\epsilon} }^q)^2&= (\sigma^q_{ij} )^2 (\dot{\varepsilon}^q_{ij})^2 \\ 
+	&=  (\frac{3}{2} \sigma^q_{ij} \sigma^q_{ij} )(\frac{2}{3}\dot{\varepsilon}^q_{lm} \dot{\varepsilon}^q_{lm}) \\
+	&= q^2 \dot{\varepsilon}_q^2 \\
+
+	\end{align} \)
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The stress power can also be expressed in terms of stress invariants as: <br>
+<div class='equationBox' style="margin-left: 350px;">
+\(\boldsymbol{\sigma}: \dot{ \boldsymbol{\varepsilon} }= q \dot{\varepsilon}_q+ p \dot{\varepsilon}_v\)
+</div><br>
+
+Then the <strong style='color:#7abbe6'>deviatoric stress \(q\)</strong> is energy conjugate of <strong style='color:#7abbe6'>the deviatoric strain \(\dot{\varepsilon}_q\)</strong>, and the <strong style='color:#7abbe6'>mean stress \(p\)</strong> is energy conjugate of <strong style='color:#7abbe6'>the volumetric strain \(\dot{\varepsilon}_v\)</strong>.
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
 
 
 
