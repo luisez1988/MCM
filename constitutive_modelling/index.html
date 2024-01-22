@@ -226,14 +226,106 @@ For instance, the norm of the stress vector is not \(\sqrt{ \boldsymbol{\sigma} 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Linear elasticity</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-For linear elasticity the elements of the constitutive matrix are constant. Only <strong style='color:#7abbe6'>two</strong> parameters are required owning to the fact that the energy density is expressed with two invariants. These parameters are known as the Lame's constants: \( \lambda \) and \( \mu \).
+For linear elasticity the elements of the constitutive matrix are constant. Only <strong style='color:#7abbe6'>two</strong> parameters are required owning to the fact that the energy density is expressed with two invariants. These parameters are known as the Lame's constants: \( \lambda \) and \( G \).
 </div>
 
 <div class='equationBox'>
-\(  \)
+\( \begin{Bmatrix}
+d\sigma_{11} \\
+d\sigma_{22} \\
+d\sigma_{33} \\
+d\tau_{12} \\
+d\tau_{13} \\
+d\tau_{23} \\
+\end{Bmatrix}= \begin{bmatrix}
+\lambda + 2G & \lambda & \lambda & 0 & 0 & 0 \\
+\lambda & \lambda + 2G & \lambda & 0 & 0 & 0 \\
+\lambda & \lambda & \lambda + 2G & 0 & 0 & 0 \\
+0 & 0 & 0 & G & 0 & 0 \\
+0 & 0 & 0 & 0 & G & 0 \\
+0 & 0 & 0 & 0 & 0 & G
+\end{bmatrix} \begin{Bmatrix}
+d\varepsilon_{11} \\
+d\varepsilon_{22} \\
+d\varepsilon_{33} \\
+d\gamma_{12} \\
+d\gamma_{13} \\
+d\gamma_{23} \\
+
+\end{Bmatrix}\)
 </div>
 </section>
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that \(G\) is the shear modulus, which relates shear stress and shear strain. On the other hand, \( \lambda \) is the <span class='atb'>Lame's first parameter</span>, which relates volumetric stress and volumetric strain.
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/shear_mod.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/shear_mod2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+<div class="fragment">
+<div class='equationBox' style="position: absolute;  margin-top: -30px; margin-left: 10px;">
+\( G= \frac{d \tau}{d \gamma}= \frac{1}{3} \frac{d q}{d \varepsilon_q} \)
+</div>	
+
+</div>
+</div>
+<div class='col'>
+<div class="fragment">
+	<div class='stickynote' style='margin-top: 10px;margin-left: 75px;'>
+		Note that \(G\) <strong style='color:#7abbe6'>does not</strong> if using <strong style='color:#7abbe6'>effective</strong> or <strong style='color:#7abbe6'>total</strong> stresses. <br>
+		<br>
+		This is an important attribute in modeling of soils, as we will see later.
+		</div>
+
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+<div class="fragment">
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+However, we are more familiar with other elastic parameters such as Young's modulus \(E\) and Poisson's ratio \(\nu\). All elastic parameters are related.
+</div>	
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Young's modules and Poisson's ratio are usually obtained from <strong style='color:#7abbe6'>triaxial tests</strong>.
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/triaxial_youngs.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+</div>
+</div>
+
+</section>
 
 
 
