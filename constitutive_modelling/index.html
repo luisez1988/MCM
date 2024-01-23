@@ -276,33 +276,71 @@ Note that \(G\) is the shear modulus, which relates shear stress and shear strai
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 
-<div class="fragment">
-<div class='equationBox' style="position: absolute;  margin-top: -30px; margin-left: 10px;">
-\( G= \frac{d \tau}{d \gamma}= \frac{1}{3} \frac{d q}{d \varepsilon_q} \)
-</div>	
 
-</div>
 </div>
 <div class='col'>
-<div class="fragment">
-	<div class='stickynote' style='margin-top: 10px;margin-left: 75px;'>
-		Note that \(G\) <strong style='color:#7abbe6'>does not</strong> if using <strong style='color:#7abbe6'>effective</strong> or <strong style='color:#7abbe6'>total</strong> stresses. <br>
+	<div class="fragment">
+		<div class='equationBox' style="margin-top: 50px;">
+		\( G= \frac{d \tau}{d \gamma}\) <br>
 		<br>
-		This is an important attribute in modeling of soils, as we will see later.
+		
+		\(G= \frac{1}{3} \frac{d q}{d \varepsilon_q} \)
+		</div>	
+		
 		</div>
-
-</div>
 </div>
 </div>
 
 
 </div>
 </div>
+
+<div>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ul>
+	<li class='fragment'>Because shear and deviatoric stresses are <strong style='color:#7abbe6'>not affected by pore pressure</strong>, \(G\) is also <span class='atb'>not affected</span>.</li>
+</ul>
+</div>	
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Drained and undrained analysis</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+In soil mechanics it is important to consider the effect of <strong style='color:#7abbe6'>pore water pressure</strong>. This is because deformations of soils <strong style='color:#7abbe6'> are always</strong> function of <span class='atb'>effective stresses</span>.
+</div>
+
+<p class="fragment">When loaded, <strong style='color:#7abbe6'>excess pore water pressure is generated</strong> \(\Delta u\) causing changes in effective stresses. <br>
+\(\boldsymbol{\sigma}'= \boldsymbol{\sigma} - (u_0 + \Delta u) \boldsymbol{I}\)
+</p>
 
 <div class="fragment">
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-However, we are more familiar with other elastic parameters such as Young's modulus \(E\) and Poisson's ratio \(\nu\). All elastic parameters are related.
-</div>	
+Calculating \(\Delta u\) <span class='atb'>requires</span> solving a <strong style='color:#7abbe6'>hydromechanical coupled process</strong> 
+</div>
+
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ol>
+	<li class='fragment'><strong style='color:#7abbe6'>Drained analysis</strong>: <span class='atb'>Assume</span> water drains <span class='atb'>instantaneously</span> \(\implies \Delta u=0\). </li>
+
+	<li class='fragment'><strong style='color:#7abbe6'>Undrained analysis</strong>: <strong style='color:#7abbe6'>Assume</strong> water <span class='atb'>never drains</span>: 
+	<ol>
+		<li class='fragment'><strong style='color:#7abbe6'>Undrained-effective stress analysis</strong> \(\Delta u= f(\dot{\varepsilon}_v)\). </li>
+		<li class='fragment'><strong style='color:#7abbe6'>Undrained-total stress analysis</strong>: We compute deformations as function of <strong style='color:#7abbe6'>total stresses</strong>.</li>
+	</ol>
+	
+	</li>
+
+	<li class='fragment'><strong style='color:#7abbe6'>Fully coupled analysis:</strong> Simulate the consolidation process and find \(\Delta u\). We will talk more about this later.</li>
+</ol>
 </div>
 
 </section>
@@ -315,14 +353,43 @@ Young's modules and Poisson's ratio are usually obtained from <strong style='col
 
 <div class='container'>
 <div class='col'>
-<figure>
+<figure class="fragment">
 <img src='FiguresGeneral/triaxial_youngs.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
 <div class='col'>
-
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/triaxial_youngs2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
 </div>
+<div class='col'>
+<div class="fragment">
+	<div class='equationBox' style="margin-top: 50px;">
+		\( E= \frac{d q}{d \varepsilon_{11}} \) <br>
+		<br>
+		
+		\(\nu= \frac{d \varepsilon_{33}}{d \varepsilon_{11}}\)
+		</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="fragment">
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ul>
+	<li class='fragment'>\(E\) is <span class='atb'>different</span> for <strong style='color:#7abbe6'>effective stresses</strong> \(E'\) than for <strong style='color:#7abbe6'>undrained conditions</strong> \(E_u\) </li>
+
+	<li class='fragment'>Poisson's ratio is also different for <strong style='color:#7abbe6'>effective</strong> \(\nu'\) and <strong style='color:#7abbe6'>undrained conditions</strong> \(\nu_u \approx 0.5 \)</li>
+</ul>
+</div>
+
 </div>
 
 </section>
