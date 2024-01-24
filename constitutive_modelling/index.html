@@ -223,6 +223,60 @@ For instance, the norm of the stress vector is not \(\sqrt{ \boldsymbol{\sigma} 
 
 </section>
 
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<h1>Drained and undrained analysis</h1>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	In soil mechanics it is important to consider the effect of <strong style='color:#7abbe6'>pore water pressure</strong>. This is because deformations of soils <strong style='color:#7abbe6'> are always</strong> function of <span class='atb'>effective stresses</span>.
+	</div>
+	
+	<p class="fragment">When loaded, <strong style='color:#7abbe6'>excess pore water pressure is generated</strong> \(\Delta u\) causing changes in effective stresses. <br>
+	\(\boldsymbol{\sigma}'= \boldsymbol{\sigma} - (u_0 + \Delta u) \boldsymbol{I}\)
+	</p>
+	
+	<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Calculating \(\Delta u\) <span class='atb'>requires</span> solving a <strong style='color:#7abbe6'>hydromechanical coupled process</strong> 
+	</div>
+	
+	</div>
+	
+	</section>
+	
+	
+	<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	<ol>
+		<li class='fragment'><strong style='color:#7abbe6'>Drained analysis</strong>: <span class='atb'>Assume</span> water drains <span class='atb'>instantaneously</span> \(\implies \Delta u=0\). <br>
+		<div class='equationBox'>
+		\( d \boldsymbol{\sigma}= d \boldsymbol{\sigma}'= \boldsymbol{D}' d \boldsymbol{\varepsilon} \)
+		</div>
+		</li>
+	
+		<li class='fragment'><strong style='color:#7abbe6'>Undrained analysis</strong>: <strong style='color:#7abbe6'>Assume</strong> water <span class='atb'>never drains</span> (\(\dot{\varepsilon}_v=0\)): 
+		<ol>
+			<li class='fragment'><strong style='color:#7abbe6'>Undrained-effective stress analysis</strong> \(\Delta u= f(\dot{\varepsilon}_v)\). <br>
+			<div class='equationBox'>
+			\( d \boldsymbol{\sigma} \neq d \boldsymbol{\sigma} | \ d \boldsymbol{\sigma}'=  \boldsymbol{D}' d \boldsymbol{\varepsilon} \)
+			</div>
+			
+			</li>
+			<li class='fragment'><strong style='color:#7abbe6'>Undrained-total stress analysis</strong>: We compute deformations as function of <strong style='color:#7abbe6'>total stresses</strong>. <br>
+			<div class='equationBox'>
+			\( d \boldsymbol{\sigma}= \boldsymbol{D} d \boldsymbol{\varepsilon} \)
+			</div>
+			</li>
+		</ol>
+		
+		</li>
+	
+		<li class='fragment'><strong style='color:#7abbe6'>Fully coupled analysis:</strong> Simulate the consolidation process and find \(\Delta u\). We will talk more about this later.</li>
+	</ol>
+	</div>
+	
+	</section>
+
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Linear elasticity</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
@@ -306,49 +360,12 @@ Note that \(G\) is the shear modulus, which relates shear stress and shear strai
 </section>
 
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Drained and undrained analysis</h1>
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-In soil mechanics it is important to consider the effect of <strong style='color:#7abbe6'>pore water pressure</strong>. This is because deformations of soils <strong style='color:#7abbe6'> are always</strong> function of <span class='atb'>effective stresses</span>.
-</div>
 
-<p class="fragment">When loaded, <strong style='color:#7abbe6'>excess pore water pressure is generated</strong> \(\Delta u\) causing changes in effective stresses. <br>
-\(\boldsymbol{\sigma}'= \boldsymbol{\sigma} - (u_0 + \Delta u) \boldsymbol{I}\)
-</p>
-
-<div class="fragment">
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-Calculating \(\Delta u\) <span class='atb'>requires</span> solving a <strong style='color:#7abbe6'>hydromechanical coupled process</strong> 
-</div>
-
-</div>
-
-</section>
 
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-<ol>
-	<li class='fragment'><strong style='color:#7abbe6'>Drained analysis</strong>: <span class='atb'>Assume</span> water drains <span class='atb'>instantaneously</span> \(\implies \Delta u=0\). </li>
-
-	<li class='fragment'><strong style='color:#7abbe6'>Undrained analysis</strong>: <strong style='color:#7abbe6'>Assume</strong> water <span class='atb'>never drains</span>: 
-	<ol>
-		<li class='fragment'><strong style='color:#7abbe6'>Undrained-effective stress analysis</strong> \(\Delta u= f(\dot{\varepsilon}_v)\). </li>
-		<li class='fragment'><strong style='color:#7abbe6'>Undrained-total stress analysis</strong>: We compute deformations as function of <strong style='color:#7abbe6'>total stresses</strong>.</li>
-	</ol>
-	
-	</li>
-
-	<li class='fragment'><strong style='color:#7abbe6'>Fully coupled analysis:</strong> Simulate the consolidation process and find \(\Delta u\). We will talk more about this later.</li>
-</ol>
-</div>
-
-</section>
-
-
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-Young's modules and Poisson's ratio are usually obtained from <strong style='color:#7abbe6'>triaxial tests</strong>.
+Young's module and Poisson's ratio are usually obtained from <strong style='color:#7abbe6'>triaxial tests</strong>.
 </div>
 
 <div class='container'>
@@ -391,6 +408,77 @@ Young's modules and Poisson's ratio are usually obtained from <strong style='col
 </div>
 
 </div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+<h4>Eodometric modulus</h4>
+<figure class="fragment">
+<img src='FiguresGeneral/consolidation.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+<div class="fragment">
+	<div class='equationBox'>
+	\( E_{eod}=M=\frac{d q}{d \varepsilon_{11}}  \) <br>
+	with \( d\varepsilon_{22} = d\varepsilon_{33} = 0 \)
+	</div>
+</div>
+
+</div>
+<div class='col'>
+<h4 class="fragment"> Bulk modulus </h4>
+<figure class="fragment">
+<img src='FiguresGeneral/volumetric.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+<div class="fragment">
+	<div class='equationBox'>
+	\(K=\frac{d q}{d \varepsilon_{v}}  \) 
+	</div>
+</div>
+
+<div class="fragment">
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note: For granular materials, both of these moduli (\(K\) and \(M\)) are affected by drainage conditions.
+</div>
+
+</div>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<table>
+<tr>
+<td>Parameter</td>
+<td>\(K\)</td>
+<td>\(E\)</td>
+<td>\(\lambda\)</td>
+<td>\(G\)</td>	
+<td>\(\nu\)</td>
+<td>\(M\)</td>
+</tr>
+
+
+<tr>
+	<td>\((K,\,E)\)</td>
+	<td>-</td>
+	<td>-</td>
+	<td>\({\tfrac {3K(3K-E)}{9K-E}}\)</td>
+	<td>\({\tfrac {3KE}{9K-E}}\)</td>	
+	<td>\({\tfrac {3K-E}{6K}}\)</td>
+	<td>\({\tfrac {3K(3K+E)}{9K-E}}\)</td>
+	</tr>
+
+</table>
+
+
 
 </section>
 
