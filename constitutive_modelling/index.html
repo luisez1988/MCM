@@ -604,14 +604,65 @@ Note: For granular materials, both of these moduli (\(K\) and \(M\)) are affecte
 </section>
 
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<figure>
+		<img src='https://itasca-int.objects.frb.io/assets/img/site/software/shearstrainchart.jpg' width='79%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+		</figure>
+</section>
+
+
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Chang and Duncan elastic model</h1>
-define the model
+<h1>Hyperbolic elastic model</h1>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> Hyperbolic elastic models help to linearize non-linear behavior in incremental fashion. Kondner (1963) suggested an hyperbolic functional fit to triaxial data. </div>
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/hyperbolic.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+	
+
+
+
+<p class="fragment"> \(\frac{d q}{d \varepsilon_a }= \frac{a}{(a+b\varepsilon_a)^2 } \) <br>
+if \( \varepsilon_a=0 \implies E_i= 1/a \)
+</p>
+
+<p class="fragment"> \(\lim_{\varepsilon_a \rightarrow \infty} \frac{\varepsilon_a}{1+ b \varepsilon_a}= q_{ult}= 1/b \)  </p>
+
+<div class="fragment">
+	<div class='equationBox'> 
+		\(q= \cfrac{\varepsilon_a}{\frac{1}{E_i}+ \frac{1}{q_{ult}} \varepsilon_a} \)	
+	</div>
+
+</div>
+
+
+</div>
+</div>
+
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-Plots of the model
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> If the hyperbolic model is calibrated with data, provides a way to find the 	<strong style='color:#7abbe6'>initial tangent stiffness</strong>.</div>
+
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/hyperbolic2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+</div>
+</div>
+
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
