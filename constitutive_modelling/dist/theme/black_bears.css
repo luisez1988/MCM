@@ -265,6 +265,20 @@ li.l1:nth-child(even){
 
 }
 
+.reveal .bordered {
+  border-right: 2px dashed navy; /* Adjust color and thickness as needed */
+  border-top: 2px dashed navy; /* Adjust color and thickness as needed */
+  padding-right: 10px; /* Adjust as needed */
+  padding-top: 10px; /* Adjust as needed */
+  margin-right: 10px; /* Adjust as needed */
+  margin-top: 10px; /* Adjust as needed */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.reveal .bordered:last-child {
+  border-right: none;
+}
+
 .reveal ul.iClicker,
 .reveal ol.iClicker{
   /* list-style-type: upper-alpha; */

@@ -737,18 +737,130 @@ Note that the previous relationship is valid for some constant initial void rati
 </div>
 </div>
 
+
+
+
+
+</section>
+
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Example 3.1</h1>
+<h1>Incremental drivers</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+A driver, is a <strong style='color:#7abbe6'>computational program</strong> that <span class='atb'>integrates</span> a constitutive model to <strong style='color:#7abbe6'>predict</strong> the <span class='atb'>response</span> of a material to a given <strong style='color:#7abbe6'>loading path</strong> at <span class='atb'>elemental</span> scale.
+</div>
+
+<div class='container'>
+<div class='col bordered'>
+
+<div class="fragment">
+
+<h4>Loading conditions </h4>
+	<p>Could be given in terms of <strong style='color:#7abbe6'>strain increment</strong> when \(\dot{ \boldsymbol{\varepsilon} }\) is prescribed, or <strong style='color:#7abbe6'>stress increments</strong> when \(\dot{ \boldsymbol{\sigma}  }\) is prescribed. </p>
 
 </div>
-</section>
+
+</div>
+<div class='col bordered'>
+<div class="fragment">
+	<h4>Constrains </h4>
+
+	<p>Are given to preserve any <strong style='color:#7abbe6'>boundary condition</strong> needed. Eg. maintaining a cell pressure constant. </p>
+
+</div>
 
 
+
+
+</div>
+</div>
 
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+An <span class='atb'>elemental test</span> is considered <span class='atb'>weightless</span>. Thus we have the following <strong style='color:#7abbe6'>governing equations</strong>.
+</div>
+
+<table>
+<tr>
+	<td>Linear momentum balance equation</td>
+	<td> <div class='equationBox'>
+		\( \nabla \cdot \boldsymbol{\sigma}= \boldsymbol{0} \)
+	   </div></td>
+</tr>
+<tr>
+	<td>Prescribed stresses:</td>
+	<td> \( d\boldsymbol{\sigma}^p\)  </td>
+</tr>
+<tr>
+	<td>Prescribed deformations:</td>
+	<td>\( d \boldsymbol{\varepsilon}^p\)</td>
+</tr>
+<tr>
+	<td>Constitutive equation:</td>
+	<td><div class='equationBox'>
+		\( d\boldsymbol{\sigma}= \boldsymbol{D}  d \boldsymbol{\varepsilon}\)
+	   </div></td>
+</tr>
+</table>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The prescribed stresses and strains are applied in <span class='atb'>increments</span> and the total values are recovered by <strong style='color:#7abbe6'>accumulating the increments</strong>. <br>
+<div class='equationBox'>
+\( \boldsymbol{\sigma}^{k+1}= \boldsymbol{\sigma}^k + d \boldsymbol{\sigma}^k \ \text{and} \  \boldsymbol{\varepsilon}^{k+1}= \boldsymbol{\varepsilon}^k + d \boldsymbol{\varepsilon}^k\)
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that after updating the stress tensor, the momentum balance equation must be evaluated. It is worth noting, that an <strong style='color:#7abbe6'>unbalanced force</strong> will result, which will require iteration to find the correct stress increment.
+</div>
+
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+A common decompositions results in the following <strong style='color:#7abbe6'>system of equations</strong> (Bardet & Choucair, 1991):
+
+<table>
+	<tr>
+		<td> <div class='equationBox'>
+		\( (\boldsymbol{S} \cdot \boldsymbol{D} + \boldsymbol{E}) \Delta \boldsymbol{\varepsilon}= \Delta \boldsymbol{\varepsilon}^p \)
+		</div> </td>
+		<td>For <strong style='color:#7abbe6'>strain</strong> driven analysis</td>
+	</tr>
+	<tr>
+		<td><div class='equationBox'>
+		\( \Delta \boldsymbol{\sigma}= \boldsymbol{D} \Delta \boldsymbol{\varepsilon}\)
+		</div></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td> <div class='equationBox'>
+		\( (\boldsymbol{S} + \boldsymbol{E} \cdot \boldsymbol{D}^{-1}) \Delta \boldsymbol{\sigma}= \Delta \boldsymbol{\sigma}^p \)
+		</div> </td>
+		<td>For <strong style='color:#7abbe6'>stress</strong> driven analysis</td>
+	</tr>
+	<tr>
+		<td><div class='equationBox'>
+		\( \Delta \boldsymbol{\varepsilon}= \boldsymbol{D}^{-1} \Delta \boldsymbol{\sigma}\)
+		</div></td>
+		<td> \(S\) and \(E\) coefficient matrices</td>
+	</tr>
+</table>
+
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<h1>Example 3.1</h1>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Program a driver to perform an isotropically consolidated drained triaxial test over a hyperbolic elastic material. The test is performed at a constant confining pressure of 100 kPa. The initial void ratio is 0.8 and the ultimate deviatoric stress is 120 kPa. Use constant parameters \(C= 250\), \(n= 0.5\), and \(e_g=2.97\). The test is performed at a constant strain rate of 0.01 %/s. The test is performed until the axial strain reaches 20 %.
+	</div>
+</section>
+
+<!-- <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Plasticity</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 Plasticity is the branch of mechanics that studies the <strong style='color:#7abbe6'>deformation</strong> of <strong style='color:#7abbe6'>materials</strong> that <strong style='color:#7abbe6'>undergo</strong> <span class='atb'>irreversible</span> changes of shape or size when subjected to <strong style='color:#7abbe6'>sufficiently large</strong> forces.
@@ -849,7 +961,7 @@ Plasticity is a <strong style='color:#7abbe6'>microscopic</strong> phenomenon. I
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Numerical integration of models</h1>
 
-</section>
+</section> -->
 
 
 
