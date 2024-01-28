@@ -78,7 +78,7 @@
 							<div class="qrCode" name="https://drive.google.com/file/d/1XRC5-Q5ld2i-6gmVXMI5om-BgQ9FRdC_/view?usp=sharing"> </div>
 						</div>
 			
-						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 3: Constitutive modelling">
+						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 3: Elasticity">
 							<p style="color:#faffff; font-size:35px">Luis Zambrano-Cruzatty, Ph.D.</p>
 							<p style="color:#faffff; font-size:35px">Spring 2024</p>
 							<!-- <p style="color:#faffff; font-size:35px"> February 8, 2023</p> -->
@@ -93,10 +93,11 @@
 					<div class='container'>
 					<div class='col'>
 						<ul class="contentStyle">
-							<li class="l1">Linear elasticity</li>							
-							<li class='l1'>Elasto-plasticity</li>
-							<li class='l1'>Strain hardening/softening</li>
-							<li class="l1">Viscoplasticity </li>	
+							<li class="l1">Voight notation</li>							
+							<li class='l1'>Linear elasticity</li>
+							<li class='l1'>Elastic parameters</li>
+							<li class="l1">Tangent and secant moduli </li>	
+							<li class='l1'>Hyperbolic model</li>
 							<li class='l1'>numerical integration of models</li>
 												
 						</ul>
@@ -116,9 +117,8 @@
 								<p style="margin-top: -20px;">After this lecture we will able to:</p>
 								<ul style="margin-top: -15px;">
 									<li>Describe and use linear elasticity.</li>
-									<li>Describe the main equations of a elasto-plastic model.</li>					
-									<li>Program and use elasto-plastic models.</li>
-									<li>Describe viscoplasticity principles. </li>									
+									<li>Calculate tangent and secant moduli.</li>					
+									<li>Program and use elastic models.</li>											
 								</ul>
 							</div>
 							</div>
@@ -437,7 +437,7 @@ Young's module and Poisson's ratio are usually obtained from <strong style='colo
 </figure>
 <div class="fragment">
 	<div class='equationBox'>
-	\(K=\frac{d q}{d \varepsilon_{v}}  \) 
+	\(K=\frac{d p}{d \varepsilon_{v}}  \) 
 	</div>
 </div>
 
