@@ -202,45 +202,238 @@ Plasticity is the branch of mechanics that studies the <strong style='color:#7ab
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>A microscopic problem</h1>
+<h1>Yield surface and flow rule</h1>
+<div class='container'>
+<div class='col'>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-Plasticity is a <strong style='color:#7abbe6'>microscopic</strong> phenomenon. It is caused by <strong style='color:#7abbe6'>dislocations</strong> in the <strong style='color:#7abbe6'>crystal lattice</strong> or <strong style='color:#7abbe6'>soil fabric</strong> of the material.
+Consider the block in the figure. Based on <strong style='color:#7abbe6'>equilibrium</strong> if the force applied to block <strong style='color:#7abbe6'>exceeds</strong> the friction resistance between the block and the surface, the block will <strong style='color:#7abbe6'>slide</strong>. 
 </div>
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/sliding_block.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+<p class="fragment">That condition can be written as: <br>
+\(\sqrt{f_x^2+ f_y^2}= W\mu \implies f_x^2+ f_y^2= W^2\mu^2\) <br>
+\(W=\) weight of the block </p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Yield Surface</h1>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/block_yield.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The circle represents all the possible values of the forces that can be applied to the block without causing sliding. This is called the <span class='atb'>yield surface</span>.
+</div>
+
+</div>
+</div>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	We can express this condition generating a set function of the form: <br>
+	\(F= W^2\mu^2 - f_x^2 -f_y^2 \) <br>
+	\(F\) is the so called <span class='atb'>yield function</span>
+	</div>
+</div>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Normality</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that if the block <strong style='color:#7abbe6'>slides</strong> and the force is suddenly <strong style='color:#7abbe6'>removed</strong>, the block will <strong style='color:#7abbe6'>remain</strong> in the same position. The particle has attained a <span class='atb'>irreversible deformation</span>.
+</div>
+<p class="fragment"> What is the velocity direction of the block when it slides?</p>
 
 <div class='container'>
 <div class='col'>
 <figure class="fragment">
-<img src='FiguresGeneral/dislocations.svg' width='100%'/>
+<img src='FiguresGeneral/block_yield_2.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
 <div class='col'>
-<figure class="fragment">
-<img src='FiguresGeneral/sliding.svg' width='100%'/>
+
+<p class="fragment"> Let's use the most fundamental principle in the universe: <br>
+<strong style='color:#7abbe6'>Nature always seeks the minimum energy state</strong> </p>
+	
+
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>Let's us write the rate of work of the system: <br>
+
+\( \begin{align}
+\dot{W}= \boldsymbol{f} \cdot \boldsymbol{v}
+\end{align} \) <br>
+This is subjected to the condition that the block is sliding. Thus we must use Lagrangian multipliers: <br>
+\( \begin{align}
+G= \boldsymbol{f} \cdot \boldsymbol{v} - \lambda F
+\end{align} \)	
+
+</p>
+
+<p class="fragment"> Now let's take the derivative with respect to \(f_x\) and \(f_y\) and equate both to zero <br>
+\( \begin{align}
+\frac{\partial G}{\partial f_i} = v_i - 2\lambda f_i =0 \implies v_i=2\lambda f_i \\
+\end{align} \)
+</p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	This result implies that the velocity is parallel to the force. Therefore, the force is <strong style='color:#7abbe6'>normal</strong> to the yield surface.
+	</div>
+</div>
+
+<p class="fragment"></p>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: -5px;margin-left: 0px;'>
+The concepts we used at the microscale, can now be extended to the continuum by first generalizing the concept of yield surface.
+
+
+</div>
+
+
+
+<div class='container'>
+<div class='col'>
+	<div class="fragment">
+		<div class='defBox' name='Yield function' style='margin-top: 5px;margin-left: 0px;'>
+		A yield function has a geometry defined by a set of state parameters \( \boldsymbol{X}_s= \{X_{s1}, X_{s2}, X_{s3}..., X_{sn} \} \), and the stress tensor \( \boldsymbol{\sigma} \), such that: <br>
+		\( \begin{align}
+		F(\boldsymbol{X}_s, \boldsymbol{\sigma})< 0 & \implies \text{elastic state} \\
+		F(\boldsymbol{X}_s, \boldsymbol{\sigma})= 0 & \implies \text{yield/plastic state} \\
+		F(\boldsymbol{X}_s, \boldsymbol{\sigma})> 0 & \implies \text{impossible stress state} \\
+		\end{align} \)
+		</div>
+	</div>
+</div>
+<div class='col'>
+<figure class="fragment" style="margin-top: -20px;">
+<img src='FiguresGeneral/principal_yield.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
 </div>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: -25px;margin-left: 0px;'>
+	During plastic loading we prevent \(F>0\) by imposing the <span class='atb'>consistency condition</span>: <br>
+	<div class='equationBox' style="margin-left: 160px;">
+	\( dF=0 \)
+	</div>
+	</div>
+</div>
+
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Yield surface and normality</h1>
+<div class='container'>
+<div class='col'>
+	<p> Analogous to the previous example we must ask ourselves the question: What is the direction of the strain rate tensor? </p>
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/principal_yield_2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+<p class="fragment">In an analogous fashion we will optimize the plastic work density of a material point: <br>
+\( \begin{align}
+\frac{\partial G}{\partial \boldsymbol{\sigma}}= \frac{\partial }{\partial  \boldsymbol{\sigma}  } ( \boldsymbol{\sigma}: \dot{\boldsymbol{\varepsilon}}^p  )- \lambda \frac{\partial  F( \boldsymbol{X}_s, \boldsymbol{\sigma}  )}{\partial  \boldsymbol{\sigma}  }=0 
+\end{align} \) <br>
 
-</section>
+\( \begin{align}
+\frac{\partial }{\partial  \boldsymbol{\sigma}  } ( \boldsymbol{\sigma}: \dot{\boldsymbol{\varepsilon}^p}  ) &= \lambda \frac{\partial  F}{\partial  \boldsymbol{\sigma}  } \\
+\frac{\partial (\sigma_{ij}\dot{\varepsilon}^p_{ij} )}{\partial \sigma_{ij}} &= \lambda \frac{\partial  F}{\partial \sigma_{ij}  } \\
+\end{align} \)
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-	<h1>Yield surface and normality</h1>
+
+
+ </p>
+
 	
 </section>
 
+
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Yield surface and normality</h1>
-	
+<h1>Flow rule</h1>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The previous result demonstrate that the plastic strain rate tensor is <strong style='color:#7abbe6'>normal</strong> to the yield surface. This is called the <span class='atb'>flow rule</span>. <br>
+<div class='equationBox' style="margin-left: 300px;">
+\( \dot{ \boldsymbol{\varepsilon}  }^p= \lambda \frac{\partial F^*}{\partial  \boldsymbol{\sigma} } \) 
+</div> <br>
+\(\lambda\) is called the <span class='atb'>plastic multiplier</span>. <br>
+The * will let us understand an important concept later. Pretend it is not there for now.
+</div>
+
+<p class="fragment">We now have defined the existence of a yield function, the consistency condition, and the relation of the yield function with plastic strain increments. But how do we relate stress and plastic strains? </p>
+
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Consistency condition</h1>
-	
+<h1>Stress-strain relationship</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Consider a loading-unloading cycle in the figure. It is clear that the total strain at point A is of a <strong style='color:#7abbe6'>recoverable or elastic</strong> deformation and a <strong style='color:#7abbe6'>irreversible or plastic</strong> deformation. This principle applies to any strain increment, therefore:
+</div>
+
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/stress_strain_relationship.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<p class="fragment"> \( \begin{align}
+\dot{   \boldsymbol{\varepsilon}} & = \dot{ \boldsymbol{\varepsilon} }^{el} + \dot{ \boldsymbol{\varepsilon} }^p\\
+d\dot{   \boldsymbol{\varepsilon}} & = d\dot{ \boldsymbol{\varepsilon} }^{el} + d\dot{ \boldsymbol{\varepsilon} }^p
+\end{align} \) </p>
+
+<p class="fragment"> \( \begin{align}
+d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^{el} 
+\end{align} \)</p>
+
+<div class="fragment">
+
+	<div class='equationBox'>
+		\( d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot( d \boldsymbol{\varepsilon} - d \boldsymbol{\varepsilon}^{p})\)
+		</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Elasto-plastic constitutive matrix</h1>
+
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
