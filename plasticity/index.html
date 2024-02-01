@@ -408,8 +408,8 @@ Consider a loading-unloading cycle in the figure. It is clear that the total str
 <div class='col'>
 
 <p class="fragment"> \( \begin{align}
-\dot{   \boldsymbol{\varepsilon}} & = \dot{ \boldsymbol{\varepsilon} }^{el} + \dot{ \boldsymbol{\varepsilon} }^p\\
-d\dot{   \boldsymbol{\varepsilon}} & = d\dot{ \boldsymbol{\varepsilon} }^{el} + d\dot{ \boldsymbol{\varepsilon} }^p
+\ \boldsymbol{\varepsilon} & =  \boldsymbol{\varepsilon} ^{el} + \boldsymbol{\varepsilon} ^p\\
+d   \boldsymbol{\varepsilon} & = d \boldsymbol{\varepsilon} ^{el} + d\boldsymbol{\varepsilon} ^p
 \end{align} \) </p>
 
 <p class="fragment"> \( \begin{align}
@@ -433,7 +433,111 @@ d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^{el}
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Elasto-plastic constitutive matrix</h1>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> We need to integrate the 	<strong style='color:#7abbe6'>stress-strain</strong> relationship, 	<strong style='color:#7abbe6'>flow rule</strong>, and 	<strong style='color:#7abbe6'>consistency condition</strong> to find the elasto-plastic constitutive matrix.</div>
+<p class="fragment">\begin{align*}
+	dF &= \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot d\boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot d\boldsymbol{X}_s = 0 \\
+\end{align*}	
+</p>
 
+<p class="fragment">\begin{align*}
+d \boldsymbol{X}_s&= \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p
+
+	\end{align*}
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p> \begin{align*} 
+	dF &= \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot (d \boldsymbol{\varepsilon}-d \boldsymbol{\varepsilon}^p ) + \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p = 0
+\end{align*}
+</p>
+
+<p class="fragment"> 
+
+\begin{align*}
+\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^p - \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p = \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} 
+\end{align*}
+</p>
+
+<p class="fragment"> Now use flow rule: <br>
+
+	\begin{align*}
+	\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot \lambda \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} - \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot \lambda \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} = \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} 
+	\end{align*}
+
+</p>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> 
+Note that the term \( \cfrac{\partial \boldsymbol{X}_s}{\partial \boldsymbol{\varepsilon}^p}\) represents a <span class='atb'> hardening/softening rule </span>, as it tells us how the state parameters change with plastic strain increments. A functional form to this parameter is often adopted empirically or based on physical interpretations.
+</div>
+
+<div class="fragment">
+
+	<div class='defBox' name='Hardening modulus:' style='margin-top: 10px;font-size: 1em;'>  
+		<strong style='color:green'> \(H\):</strong> Is a measure of state parameter change related to hardening and softening processes.
+	
+		<div class='equationBox'> 
+		\begin{align*}
+		H= -\cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}}
+		\end{align*}	
+		</div>
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'>   
+Therefore, we can now find the value of the 	<strong style='color:#7abbe6'>plastic multiplier</strong>:
+<div class='equationBox'> 
+\begin{align*}
+\lambda = \cfrac{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} }{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} + H}
+\end{align*}	
+</div>
+
+</div>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that: <br>
+		<ul>
+			<li class='fragment'>\(H>0 \ \implies\)  <span class='atb'> Hardening </span></li>
+			<li class='fragment'>\(H=0 \ \implies\)  <span class='atb'> perfect plasticity </span></li>
+			<li class='fragment'>\(H<0 \ \implies\)  <span class='atb'> softening </span></li>
+		</ul>
+	</div>
+
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> 
+Finally, replacing the value of the plastic multiplier in the stress-strain relationship we find the <span class='atb'>elasto-plastic constitutive matrix</span>:
+
+<div class='equationBox'>
+\begin{align*}
+d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} - \boldsymbol{D}^{el} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} \cdot \cfrac{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} }{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} + H}
+\end{align*}
+</div>
+
+</div>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+		Don't worry about the complexity of this equation. We will use it in a numerical integration algorithm that will make it easy to use.
+	</div>
+
+</div>
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
