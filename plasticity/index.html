@@ -701,9 +701,9 @@ Constitutive models are integrated in incremental fashion. There are several met
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-The table shows the most common methods used to integrate constitutive models and a brief description of their attributes.
+The table shows the some common methods used to integrate constitutive models and a brief description of their attributes.
 </div>
-<table>
+<table style="background-color: antiquewhite;">
 <tr>
 	<td>Method</td>
 	<td>Accuracy</td>
@@ -713,19 +713,27 @@ The table shows the most common methods used to integrate constitutive models an
 </tr>
 
 <tr>
-	<td>Elastic predictor-Plastic corrector (ortiz and Simo 1986)</td>
+	<td>Elastic predictor-Plastic corrector (Ortiz and Simo 1986)</td>
 	<td>  \(f(\Delta \varepsilon)\)  </td>
 	<td>\(f(\Delta \varepsilon)\)</td>
-	<td>Very efficient</td>
-	<td>Very good</td>	
+	<td>✅</td>
+	<td>✅</td>	
 </tr>
 
 <tr>
-	<td>Elastic predictor-Plastic corrector (ortiz and Simo 1986)</td>
+	<td>Explicit Euler</td>
 	<td>  \(f(\Delta \varepsilon)\)  </td>
 	<td>\(f(\Delta \varepsilon)\)</td>
-	<td>Very efficient</td>
-	<td>Very good</td>	
+	<td>\(f(\Delta \varepsilon)\)</td>
+	<td>❌ </td>	
+</tr>
+
+<tr>
+	<td>Refined explicit Euler with autocorrection (Sloan et al. 2001)</td>
+	<td> ✅ </td>
+	<td>✅</td>
+	<td>\(f(TOL)\)</td>
+	<td>❌</td>	
 </tr>
 
 </table>
@@ -734,11 +742,60 @@ The table shows the most common methods used to integrate constitutive models an
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>EP-PC Method</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+This is a two-step method that consist in first <strong style='color:#7abbe6'>predicting the elastic response</strong> and then <strong style='color:#7abbe6'>correcting the stress drift</strong>.
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/EP-PC.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<ol>
+	<li class='fragment'><strong style='color:#7abbe6'>Assume</strong> increment of stress if purely elastic.</li>
+	<li class='fragment'> <strong style='color:#7abbe6'>Evaluate</strong>  the yield surface at initial stress plus increment. </li>
+	<li class='fragment'> If \(F \leq 0\) then the increment is purely elastic, and <strong style='color:#7abbe6'>prediction was correct</strong>. </li>
+	<li class='fragment'>Otherwise \(F>0\), <span class='atb'>plasticity is attained</span>.</li>
+</ol>
+</div>
+</div>
 
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: -10px;margin-left: 0px;'>
+We can divide the equations into two <strong style='color:#7abbe6'>superimposed</strong> systems: 
+</div>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;font-size: 0.9em;'>
+	First. The <strong style='color:#7abbe6'>elastic</strong> prediction: <br>
+	\( \begin{align}
+	d \boldsymbol{\varepsilon} &= d \boldsymbol{\varepsilon}^{el} + d \boldsymbol{\varepsilon}^p \\
+	d \boldsymbol{\sigma} &= \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}\\
+	d \boldsymbol{\varepsilon}^p&= \boldsymbol{0}\\
+	d \boldsymbol{X}_s &= \boldsymbol{0}
+	\end{align} \)
+	</div>
 
+<p class="fragment" style="background-color: antiquewhite; font-size: 0.9em;">  Second: The <strong style='color:#7abbe6'>plastic correction</strong>: <br>
+\( \begin{align}
+d \boldsymbol{\varepsilon} &= \boldsymbol{0} \\
+d \boldsymbol{\sigma} &= -\boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^p \\
+d \boldsymbol{\varepsilon}^p&= \lambda \frac{\partial F^*}{\partial \boldsymbol{\sigma}} \\
+d \boldsymbol{X}_s &= \frac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p
+\end{align} \)
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We will use a <strong style='color:#7abbe6'>first order approximation</strong> for the yield surface. 
+</div>
+
+<p>\( \begin{align}
+F(\boldsymbol{X}_s, \boldsymbol{\sigma}) = F(\boldsymbol{X}_s^0, \boldsymbol{\sigma}^{0}) + \cfrac{\partial F}{\partial \boldsymbol{\sigma}}  \cdot d \boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s}  \cdot d \boldsymbol{X}_s + \mathcal{O}^{n}
+\end{align} \) </p>
 
 </section>
 
