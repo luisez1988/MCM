@@ -789,13 +789,55 @@ d \boldsymbol{X}_s &= \frac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\va
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<div class='textBox' style='margin-top: -10px;margin-left: 0px;'>
 We will use a <strong style='color:#7abbe6'>first order approximation</strong> for the yield surface. 
 </div>
 
 <p>\( \begin{align}
 F(\boldsymbol{X}_s, \boldsymbol{\sigma}) = F(\boldsymbol{X}_s^0, \boldsymbol{\sigma}^{0}) + \cfrac{\partial F}{\partial \boldsymbol{\sigma}}  \cdot d \boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s}  \cdot d \boldsymbol{X}_s + \mathcal{O}^{n}
 \end{align} \) </p>
+
+<p class="fragment" style="font-size: 0.8em;"> \( \begin{align}
+0 & \approx F(\boldsymbol{X}_s^{k+1,i}, \boldsymbol{\sigma}^{k+1,i}) + \cfrac{\partial F}{\partial \boldsymbol{\sigma}}(\boldsymbol{X}_s^{k+1,i}, \boldsymbol{\sigma}^{k+1,i})  \cdot d \boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s}(\boldsymbol{X}_s^{k+1,i}, \boldsymbol{\sigma}^{k+1,i})  \cdot d \boldsymbol{X}_s \\
+& \equiv F^{k+1}_i+ \frac{\partial F}{\partial \boldsymbol{\sigma} }^{k+1}_i \cdot \Delta \boldsymbol{\sigma}^{k+1}_i + \frac{\partial F}{\partial  \boldsymbol{X}_s }^{k+1}_i \cdot \Delta \boldsymbol{X}_{si}^{k+1}\\
+& \equiv F^{k+1}_i+ \boldsymbol{n} ^{k+1}_i  \cdot \Delta \boldsymbol{\sigma}^{k+1}_i +  \boldsymbol{ \mathcal{L}} ^{k+1}_i \cdot \Delta \boldsymbol{X}_{si}^{k+1}
+\end{align} \) </p>
+
+<div class="fragment"> 
+	<div class='equationBox'>
+	\( \boldsymbol{n} ^{k+1}_i= \frac{\partial F}{\partial \boldsymbol{\sigma} }^{k+1}_i \) and \(\boldsymbol{ \mathcal{L}} ^{k+1}_i = \frac{\partial F}{\partial  \boldsymbol{X}_s }^{k+1}_i\)
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>From superposition principle: <br>
+	\(\Delta \boldsymbol{\sigma}^{k+1}_i= -\Delta \lambda \boldsymbol{D}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i  \)  <br>
+\( \Delta \boldsymbol{X}_{si}^{k+1}= \Delta \lambda \boldsymbol{a}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i\)
+</p>
+<div class="fragment">
+<div class='equationBox' style="margin-left: 400px;">
+	\( \boldsymbol{a}^{k+1}_i= \cfrac{\partial  \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p   }^{k+1}_i \)
+</div>
+
+	
+</div>
+
+<div class="fragment">
+
+<div class='findingBox' style='margin-top: 10px;margin-left: 0px;'>
+	Thus we can obtain an incremental formulation for the plastic multiplier: <br>
+
+	<div class='equationBox'>
+	\( \begin{align}
+	\Delta \lambda = \cfrac{F^{k+1}_i}{\boldsymbol{n}^{k+1}_i \cdot \boldsymbol{D}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i - \boldsymbol{\mathcal{L}}^{k+1}_i \cdot \boldsymbol{a}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i}
+	\end{align} \)
+	</div>
+</div>
+
+
+</div>
 
 </section>
 
