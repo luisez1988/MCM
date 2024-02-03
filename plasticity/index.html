@@ -669,12 +669,66 @@ Tresca is based on imposing a limiting condition on the <span class='atb'>deviat
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Numerical integration of CMs</h1>
+<div class='textBox' style='margin-top: -20px;margin-left: 0px;'>
+Constitutive models are integrated in incremental fashion. There are several methods to perform this integration that span different levels of <strong style='color:#7abbe6'>accuracy</strong>, <strong style='color:#7abbe6'>stability</strong>, <strong style='color:#7abbe6'>efficiency</strong>, and <strong style='color:#7abbe6'>robustness</strong>.
 
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Accuracy:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how close the numerical solution is to the exact solution.
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Stability:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how well the numerical solution behaves over time.
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Efficiency:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how well the numerical solution is obtained with the least computational resources.
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Robustness:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how well the numerical solution behaves under different conditions.
+</div>
 
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The table shows the most common methods used to integrate constitutive models and a brief description of their attributes.
+</div>
+<table>
+<tr>
+	<td>Method</td>
+	<td>Accuracy</td>
+	<td>Stability</td>
+	<td>Efficiency</td>
+	<td>Robustness</td>	
+</tr>
 
+<tr>
+	<td>Elastic predictor-Plastic corrector (ortiz and Simo 1986)</td>
+	<td>  \(f(\Delta \varepsilon)\)  </td>
+	<td>\(f(\Delta \varepsilon)\)</td>
+	<td>Very efficient</td>
+	<td>Very good</td>	
+</tr>
+
+<tr>
+	<td>Elastic predictor-Plastic corrector (ortiz and Simo 1986)</td>
+	<td>  \(f(\Delta \varepsilon)\)  </td>
+	<td>\(f(\Delta \varepsilon)\)</td>
+	<td>Very efficient</td>
+	<td>Very good</td>	
+</tr>
+
+</table>
 
 </section>
 
