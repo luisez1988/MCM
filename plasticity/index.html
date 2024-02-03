@@ -575,14 +575,151 @@ For <strong style='color:#7abbe6'>undrained soil behavior</strong> the limiting 
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Tresca model</h1>
+<div class='container'>
+<div class='col bordered'>
+<h4>Strengths </h4>
+<ul>
+<li class='fragment'>Good for isotropic, homogenous solid materials</li>
+<li class='fragment'>Sometimes adequate for <strong style='color:#7abbe6'>undrained total stress analysis</strong>.</li>
+<li class='fragment'>Simple and easy to calibrate.</li>
+<li class='fragment'>Simple implementation</li>
+<li class='fragment'>Runs fast</li>
+<li class='fragment'>Smooth yield surface makes a stable model</li>
+
+</ul>
+</div>
+<div class='col bordered'>
+<h4>Limitations</h4>
+<ul>
+	<li class='fragment'>Does not consider stress path dependency.</li>
+	<li class='fragment'>Not useful for <strong style='color:#7abbe6'>effective stress analysis</strong>.</li>
 	
+	<li class='fragment'>As presented, not useful for materials with hardening/softening behavior.</li>
+	<li class='fragment'>As presented, not able to incorporate confinement effects. </li>
+	<li class='fragment'>Not useful for pure volumetric stress paths</li>
+</ul>
+</div>
+</div>
+
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Hardening and softening</h1>
+<h1>Tresca model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Tresca is based on imposing a limiting condition on the <span class='atb'>deviator stress</span> \(\sigma_d\), defined as the difference between the maximum and minimum principal stresses. It is used for <strong style='color:#7abbe6'>ductile materials</strong> and <strong style='color:#7abbe6'>soils</strong>.
+</div>
+<p class="fragment"> \(\sigma_{d, max}= \sigma_i- \sigma_j\) with \(i \neq j \in \{1,2,3\}\) and \(\sigma_i \geq \sigma_j \) </p>
+
+
+
+<div class="fragment">
+	<div class='equationBox' style="margin-left: 400px;">
+	\( F= 2S_u - \sigma_i + \sigma_j \)
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that there are <span class='atb'>six possible combinations</span> of minor and major principal stresses. <br>
+		This models needs two elastic and one state parameter.
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<figure>
+<img src='FiguresGeneral/Tresca_paths.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
 
 </section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+<figure>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Yield_surfaces.svg/400px-Yield_surfaces.svg.png' width='60%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<div class='container'>
+	<div class='col bordered'>
+	<h4>Strengths </h4>
+	<ul>
+	<li class='fragment'>Good homogenous solid materials with some stress path dependency.</li>
+	<li class='fragment'>Sometimes adequate for <strong style='color:#7abbe6'>undrained total stress analysis</strong>.</li>
+	<li class='fragment'>Simple and easy to calibrate.</li>	
+	<li class='fragment'>Runs fast.</li>	
+	</ul>
+	</div>
+	<div class='col bordered'>
+	<h4>Limitations</h4>
+	<ul>
+		<li class='fragment'>Not useful for <strong style='color:#7abbe6'>effective stress analysis</strong>.</li>	
+		<li class='fragment'> Surface is non differentiable, and instable at corners.</li>	
+		<li class='fragment'>As presented, not useful for materials with hardening/softening behavior.</li>
+		<li class='fragment'>As presented, not able to incorporate confinement effects. </li>
+		<li class='fragment'>Not useful for pure volumetric stress paths.</li>
+	</ul>
+	</div>
+	</div>
+	
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Numerical integration of CMs</h1>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>EP-PC Method</h1>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Hardening and softening</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The previous models have a <span class='atb'>constant yield surface</span>. This produces the observed <strong style='color:#7abbe6'>perfect plasticity</strong> behavior. <strong style='color:#7abbe6'>How</strong> can we incorporate <strong style='color:#7abbe6'>hardening</strong> and <strong style='color:#7abbe6'>softening</strong> behavior?
+</div>
+
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/hardening.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<p class="fragment">We can <strong style='color:#7abbe6'>impose</strong> a <strong style='color:#7abbe6'>change</strong> of the <strong style='color:#7abbe6'>state</strong> parameter as a function of the <strong style='color:#7abbe6'>plastic strain</strong> increment. This is called a <span class='atb'>hardening/softening rule</span>. </p>	
+
+<div class="fragment">
+	<div class='equationBox'>
+		\( \begin{align}
+		\boldsymbol{X}_s= f( \boldsymbol{\varepsilon}^p )
+		\end{align} \)
+		</div>
+</div>
+</div>
+</div>
+</section>
+
+
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Elasto-plastic strain decomposition</h1>
