@@ -1040,6 +1040,110 @@ Strain softening produces <span class='atb'>progressive failure</span>
 </section>
 
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/softening_finer.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class="fragment">
+<div class='findingBox' style='margin-top: 50px;margin-left: 0px;'>
+	In order to get the same result than the model with coarser mesh, the rate of softening <strong style='color:#7abbe6'>must be smaller</strong>.
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class='container'>
+<div class='col'>
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		In the presence of <strong style='color:#7abbe6'>localization effects</strong> like <strong style='color:#7abbe6'>shear banding</strong>, the energy per unit of area dissipated at the sear band is the same for both elements. 
+	</div>
+</div>
+
+
+
+
+
+</div>
+<div class='col'>
+<figure class="fragment"> 
+<img src='FiguresGeneral/elements.svg' width='100%' style="margin-top: -120px;"/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The consequence is that elements with larger size require a larger amount of energy to be dissipated, which implies <strong style='color:#7abbe6'>a larger rate of softening</strong> than smaller elements.
+</div>
+
+<figure class="fragment">
+<img src='FiguresGeneral/smear_crack.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+To calibrate the softening parameter <strong style='color:#7abbe6'>equate the area below the two curves</strong>. This is called the <span class='atb'>smear crack approach</span>
+</div>
+
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.3</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Add an exponential softening rule to the von Mises model with rate \(\beta\) and calibrate it to generate equal energy density as the data displayed below, obtained from constant thickness simple shear test with \(H=\) 1 in. Find the rate that you must use for a finite element model with uniform mesh grid of size is 1 m.
+</div>
+
+<figure>
+	<img src='FiguresGeneral/Test_Example43.svg' width='50%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Dilation</h1>
+<div class='defBox' name='Plastic dilation ' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\(D^p\):</strong> is the ratio of <strong style='color:#7abbe6'>volumetric</strong> to <strong style='color:#7abbe6'>deviatoric</strong> plastic strain rates. <br>
+
+<div class='equationBox'>
+\( D^p= \cfrac{\dot{\varepsilon}^p_v}{\dot{\varepsilon}^p_q} \)
+</div>
+</div>
+</section>
+
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Drucker-Prager model </h1>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We will now add confinement effects to the model. This is done by adding dependency of the yield surface on the <strong style='color:#7abbe6'>mean stress</strong> and the <strong style='color:#7abbe6'>deviatoric stress</strong>.
+</div>
+
+
+</section>
+
+
+
+
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
 
