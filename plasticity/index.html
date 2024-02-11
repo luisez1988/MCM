@@ -1136,15 +1136,242 @@ Add an exponential softening rule to the von Mises model with rate \(\beta\) and
 
 
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <h1>Drucker-Prager model </h1>
 
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 We will now add confinement effects to the model. This is done by adding dependency of the yield surface on the <strong style='color:#7abbe6'>mean stress</strong> and the <strong style='color:#7abbe6'>deviatoric stress</strong>.
 </div>
 
+<p class="fragment">If the limiting condition takes the form \(q_{max}= Mp + 2c \), where \(M= f(\phi)\), with \(\phi=\) friction angle, and \(c= \) cohesion. Then: </p>
+
+<div class="fragment">
+	<div class='equationBox' style="margin-left: 400px;">
+		\( F= q-Mp-2c \)
+		</div>
+</div>
+
+<p class="fragment">The slope \(M\) can be calculated using:  </p>
+
+<div class="fragment">
+<div class='equationBox' style="margin-left: 350px;">
+\( M= \cfrac{6 \sin \phi}{ 3 - \sin \phi} \)
+</div>
+
+</div>
 
 </section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<figure>
+<img src='FiguresGeneral/Drucker_paths.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+<div class='textBox' style='margin-top: -50px;margin-left: 0px;'>
+Normality confinement dependent models produce <strong style='color:#7abbe6'>unreal dilation</strong>.
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+	<figure>
+	<img src='FiguresGeneral/Drucker_paths_correct.svg' width='100%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+
+	
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	The plastic potential function \(F^*\) controls dilation. 
+	</div>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Associative and non-associative models</h1>
+<div class='defBox' name='Associative flow rule:' style='margin-top: 0px;margin-left: 0px;'>
+A model has an <span class='atb'>associative flow rule</span> when \(F^*=F\).
+</div>
+
+<p class="fragment"> Eg. Tresca and von Mises are <span class='atb'>associative</span> models.</p>
+
+<div class="fragment">
+	<div class='defBox' name='Non-associative flow rule:' style='margin-top: 0px;margin-left: 0px;'>
+		A model has a <span class='atb'>non-associative flow rule</span> when \(F^*\neq F\).
+	</div>
+</div>
+
+<p class="fragment"> Eg. Drucker-Prager is a <span class='atb'>non-associative</span> model.</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+
+<h1>Example 4.5</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Program a Drucker-Prager model using the EP-PC method. Evaluate the effect of the friction angle, cohesion, and dilation angle in the response of the model.
+</div>	
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that Drucker-Prager models needs 2 elastic parameters and 3 plastic parameters ( \(\phi, c, \beta \)).
+</div>
+
+<div class="fragment"> 
+<div class='findingBox' style='margin-top: 5px;margin-left: 0px;'>
+von Mises is a <strong style='color:#7abbe6'> special case of Drucker-Prager</strong>  with \(\phi=0\) and \(\beta=0\).
+</div>	
+</div>
+
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col bordered'>
+<h4>Strengths</h4>
+<ul>
+<li class='fragment'>Simple implementation</li>
+<li class='fragment'>Simple usage. Few parameters needed.</li>
+<li class='fragment'>For <strong style='color:#7abbe6'>undrained- total stress</strong> analysis can be used as a von-Mises model. </li>
+<li class='fragment'>Use with caution for <strong style='color:#7abbe6'>undrained-effective stress</strong> analysis</li>
+<li class='fragment'>Can be used for <strong style='color:#7abbe6'>drained-effective stress</strong> analysis. </li>
+
+</ul>
+</div>
+<div class='col bordered'>
+<h4>Limitations</h4>
+<ul>
+	<li class='fragment'>As presented, it can not reproduce hardening/softening. </li>
+	<li class='fragment'>Path independent. Unrealistic for granular materials.</li>
+	<li class='fragment'>For large deformations it will produce <strong style='color:#7abbe6'>infinite</strong> dilation/compression.</li>
+	<li class='fragment'> Can not reproduce plastic deformations under pure volumetric strains.</li>
+</ul>
+
+</div>
+</div>
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Mohr-Coulomb model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The limiting surface of Mohr-Coulomb is based on the well known Mohr-Coulomb criterion. <br>
+\(\tau= c + \sigma_n \tan \phi \) <br>
+
+The yield surface is expressed in terms of principal stresses, leading to six intersecting surfaces.
+</div>
+
+<div class="fragment">
+<div class='equationBox'>
+
+\( F= (\sigma_i - \sigma_j) + (\sigma_i+\sigma_j) \sin \phi - 2c \cos \phi \)
+
+
+</div>
+<p> For \(i \neq j \ \in \{1, 2, 3\} \) and \(\sigma_i>\sigma_j\)</p>
+</div>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Mohr-Coulomb is a <strong style='color:#7abbe6'>non-associative</strong> model that needs 2 elastic parameters and 3 plastic parameters ( \(\phi, c, \beta \)).
+	</div>
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	Tresca is a particular case of MC with \(\phi=0\) and \(\beta=0\)
+	</div>
+</div>
+
+
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<figure>
+<img src='FiguresGeneral/MC_paths.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+<div class='textBox' style='position: absolute; margin-top: -200px;margin-left: 700px;'>
+TxC= Triaxial compression, TxE= Triaxial extension, PS= pure shear
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<img src="https://soilmodels.com/wp-content/uploads/2020/12/MC-nu.gif" width="100%">
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<div class='container'>
+		<div class='col bordered'>
+		<h4>Strengths</h4>
+		<ul>
+		<li class='fragment'>Simple usage. Few parameters needed.</li>
+		<li class='fragment'>For <strong style='color:#7abbe6'>undrained- total stress</strong> analysis can be used as a Tresca model. </li>
+		<li class='fragment'>Use with caution for <strong style='color:#7abbe6'>undrained-effective stress</strong> analysis</li>
+		<li class='fragment'>Can be used for <strong style='color:#7abbe6'>drained-effective stress</strong> analysis. </li>
+		<li class='fragment'>Path dependent model</li>
+		</ul>
+		</div>
+		<div class='col bordered'>
+		<h4>Limitations</h4>
+		<ul>
+			<li class='fragment'>As presented, it can not reproduce hardening/softening. </li>
+			
+			<li class='fragment'>For large deformations it will produce <strong style='color:#7abbe6'>infinite</strong> dilation/compression.</li>
+			<li class='fragment'> Can not reproduce plastic deformations under pure volumetric strains.</li>
+			<li class='fragment'> Instable at corners and apex of cone. Need smoothening of surface (Abo and Sloan 1995) </li>
+		</ul>
+		
+		</div>
+		</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Other path-dependent surfaces</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+There are other path-dependent surfaces that can be used to model the behavior of soils. One popular surface is the Matsuoka Nakai, Lade-Duncan, and Jeffries model. They can be easily implemented to constitutive models using the <strong style='color:#7abbe6'>Lode's angle</strong>.
+
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/MN_paths.svg' width='100%'/>
+<footer style='margin-top: -30px;font-size: 0.8em;'> <em>Modified from Jeffries (2015)</em> </footer>
+</figure>
+</div>
+<div class='col'>
+Based on experimental data Jeffries (2015) proposed the following relationship: <br>
+
+<div class='equationBox' style=" font-size: 0.8em;">
+\( M(\theta)=  M_{tc} - \cfrac{M_{tc}^2 }{3+ M_{tc} } \cos \left(3\theta/2 + \pi/4 \right)\)
+</div>
+
+<p>\(M_{tc}=\) friction ratio for triaxial compression</p>
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Example 4.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Implement the Jeffries surface to the Drucker-Prager model. Compare the results with the Mohr-Coulomb model for triaxial extension.
+</div>
+
+</section>
+
+
 
 
 
