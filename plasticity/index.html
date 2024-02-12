@@ -78,7 +78,7 @@
 							<div class="qrCode" name="https://drive.google.com/file/d/1TJ9J7QaH14I5C0BVJjtZDcbOf1OAk4B2/view?usp=sharing"> </div>
 						</div>
 			
-						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 4: Critical state plasticity">
+						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 4: Plasticity">
 							<p style="color:#faffff; font-size:35px">Luis Zambrano-Cruzatty, Ph.D.</p>
 							<p style="color:#faffff; font-size:35px">Spring 2024</p>
 							<!-- <p style="color:#faffff; font-size:35px"> February 8, 2023</p> -->
@@ -93,12 +93,13 @@
 					<div class='container'>
 					<div class='col'>
 						<ul class="contentStyle" style="margin-top: -50px;">
-							<li class='l1'>Critical state axioms</li>
-							<li class="l1">Critical state line</li>
-							<li class="l1">Stress-dilation rel. </li>								
-							<li class='l1'>OCC yield surface</li>
-							<li class='l1'>NorSand model</li>
-							<li class="l1">Examples </li>								
+							<li class='l1'>Elasto-plastic stress-strain relationship</li>
+							<li class="l1">Flow rule</li>
+							<li class="l1">Consistency condition </li>								
+							<li class='l1'>Plastic potential</li>
+							<li class='l1'>Hardening/softening</li>
+							<li class="l1">Elasto-plastic constitutive stiffness </li>	
+							<li class='l1'>numerical integration of models</li>
 												
 						</ul>
 					</div>
@@ -116,9 +117,9 @@
 							<div class='stickynote' style='margin-top: 100px;margin-left: 75px;'>
 								<p style="margin-top: -20px;">After this lecture we will able to:</p>
 								<ul style="margin-top: -15px;">
-									<li>Describe critical state theory</li>
-									<li>Understand the NorSand model</li>					
-									<li>Run drained and undrained elemental tests</li>											
+									<li>Describe the theory of plasticity.</li>
+									<li>Understand the strengths and limitations of the Tresca, von Mises, Drucker-Prager, Mohr-Coulomb, and NorSand models .</li>					
+									<li>Program and use elasto-plastic models.</li>											
 								</ul>
 							</div>
 							</div>
@@ -136,6 +137,1245 @@
 #     # #     # #    ##    #    #       #    ##    #    #     #
  #####  ####### #     #    #    ####### #     #    #     #####
 -->
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Plasticity</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Plasticity is the branch of mechanics that studies the <strong style='color:#7abbe6'>deformation</strong> of <strong style='color:#7abbe6'>materials</strong> that <strong style='color:#7abbe6'>undergo</strong> <span class='atb'>irreversible</span> changes of shape or size when subjected to <strong style='color:#7abbe6'>sufficiently large</strong> forces.
+</div>
+
+<div class='container'>
+<div class='col bordered'>
+<h4>Solids  </h4>
+<figure>
+	<img src='https://imechanica.org/files/1_Dislocation_slip.gif' width='100%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+</div>
+<div class='col bordered'>
+<h4>Granular matter</h4>
+<figure>
+	<img src='https://web.physics.ucsb.edu/~complex/research/images/movie1.gif' width='%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+</div>
+</div>
+</section>
+<!-- <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<ul style="margin-top: 30px;">
+	<li class='fragment'> Plastic behavior is a macroscopic effect resulting from microscopic damage at the particle or molecular level.</li>
+	<li class='fragment'> In <strong style='color:#7abbe6'>solids</strong> like metal it results after the dislocation of atomic bounds between molecules.</li>
+	<li class='fragment'>In <strong style='color:#7abbe6'>granular materials</strong> it results after the <strong style='color:#7abbe6'>sliding or crushing</strong> of individual particles.</li>
+</ul>
+</section> -->
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Basic plastic stress strain curves</h1>
+<div class='container' >
+<div class='col bordered' >
+<figure>
+<img src='FiguresGeneral/stress_strain_curves.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <span class='atb'></span> <em></em> </footer>
+</figure>
+<p  style="position: absolute; margin-top: -440px; margin-left: 50px;"> <span class='atb'>Linear elasticity</span></p>
+<p  style="position: absolute; margin-top: -150px; margin-left: 50px;"> <span class='atb'>Elasto-plasticity</span></p>
+
+</div>
+<div class='col bordered'>
+<figure>
+<img src='FiguresGeneral/stress_strain_curves 2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+<p  style="position: absolute; margin-top: -400px; margin-left: 20px;"> <span class='atb'>non-linear elasticity</span></p>
+<p  style="position: absolute; margin-top: -110px; margin-left: 40px;"> <span class='atb'>Plastic hardening</span></p>
+</div>
+<div class='col bordered'>
+<figure>
+<img src='FiguresGeneral/stress_strain_curves 3.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+<p  style="position: absolute; margin-top: -400px; margin-left: 30px;"> <span class='atb'>Perfect plasticity</span></p>
+<p  style="position: absolute; margin-top: -110px; margin-left: 40px;"> <span class='atb'>Plastic softening</span></p>
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Yield surface and flow rule</h1>
+<div class='container'>
+<div class='col'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Consider the block in the figure. Based on <strong style='color:#7abbe6'>equilibrium</strong> if the force applied to block <strong style='color:#7abbe6'>exceeds</strong> the friction resistance between the block and the surface, the block will <strong style='color:#7abbe6'>slide</strong>. 
+</div>
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/sliding_block.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+<p class="fragment">That condition can be written as: <br>
+\(\sqrt{f_x^2+ f_y^2}= W\mu \implies f_x^2+ f_y^2= W^2\mu^2\) <br>
+\(W=\) weight of the block </p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Yield Surface</h1>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/block_yield.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The circle represents all the possible values of the forces that can be applied to the block without causing sliding. This is called the <span class='atb'>yield surface</span>.
+</div>
+
+</div>
+</div>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	We can express this condition generating a set function of the form: <br>
+	\(F=   f_x^2  + f_y^2 -W^2\mu^2 \) <br>
+	\(F\) is the so called <span class='atb'>yield function</span>
+	</div>
+</div>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Normality</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that if the block <strong style='color:#7abbe6'>slides</strong> and the force is suddenly <strong style='color:#7abbe6'>removed</strong>, the block will <strong style='color:#7abbe6'>remain</strong> in the same position. The particle has attained a <span class='atb'>irreversible deformation</span>.
+</div>
+<p class="fragment"> What is the velocity direction of the block when it slides?</p>
+
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/block_yield_2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<p class="fragment"> Let's use the most fundamental principle in the universe: <br>
+<strong style='color:#7abbe6'>Nature always seeks the minimum energy state</strong> </p>
+	
+
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>Let's us write the rate of work of the system: <br>
+
+\( \begin{align}
+\dot{W}= \boldsymbol{f} \cdot \boldsymbol{v}
+\end{align} \) <br>
+This is subjected to the condition that the block is sliding. Thus we must use Lagrangian multipliers: <br>
+\( \begin{align}
+G= \boldsymbol{f} \cdot \boldsymbol{v} - \lambda F
+\end{align} \)	
+
+</p>
+
+<p class="fragment"> Now let's take the derivative with respect to \(f_x\) and \(f_y\) and equate both to zero <br>
+\( \begin{align}
+\frac{\partial G}{\partial f_i} = v_i - 2\lambda f_i =0 \implies v_i=2\lambda f_i \\
+\end{align} \)
+</p>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	This result implies that the velocity is parallel to the force. Therefore, the force is <strong style='color:#7abbe6'>normal</strong> to the yield surface.
+	</div>
+</div>
+
+<p class="fragment"></p>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: -5px;margin-left: 0px;'>
+The concepts we used at the microscale, can now be extended to the continuum by first generalizing the concept of yield surface.
+
+
+</div>
+
+
+
+<div class='container'>
+<div class='col'>
+	<div class="fragment">
+		<div class='defBox' name='Yield function' style='margin-top: 5px;margin-left: 0px;'>
+		A yield function has a geometry defined by a set of state parameters \( \boldsymbol{X}_s= \{X_{s1}, X_{s2}, X_{s3}..., X_{sn} \} \), and the stress tensor \( \boldsymbol{\sigma} \), such that: <br>
+		\( \begin{align}
+		F(\boldsymbol{X}_s, \boldsymbol{\sigma})< 0 & \implies \text{elastic state} \\
+		F(\boldsymbol{X}_s, \boldsymbol{\sigma})= 0 & \implies \text{yield/plastic state} \\
+		F(\boldsymbol{X}_s, \boldsymbol{\sigma})> 0 & \implies \text{impossible stress state} \\
+		\end{align} \)
+		</div>
+	</div>
+</div>
+<div class='col'>
+<figure class="fragment" style="margin-top: -20px;">
+<img src='FiguresGeneral/principal_yield.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: -25px;margin-left: 0px;'>
+	During plastic loading we prevent \(F>0\) by imposing the <span class='atb'>consistency condition</span>: <br>
+	<div class='equationBox' style="margin-left: 160px;">
+	\( dF=0 \)
+	</div>
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+	<p> Analogous to the previous example we must ask ourselves the question: What is the direction of the strain rate tensor? </p>
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/principal_yield_2.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+<p class="fragment">In an analogous fashion we will optimize the plastic work density of a material point: <br>
+\( \begin{align}
+\frac{\partial G}{\partial \boldsymbol{\sigma}}= \frac{\partial }{\partial  \boldsymbol{\sigma}  } ( \boldsymbol{\sigma}: \dot{\boldsymbol{\varepsilon}}^p  )- \lambda \frac{\partial  F( \boldsymbol{X}_s, \boldsymbol{\sigma}  )}{\partial  \boldsymbol{\sigma}  }=0 
+\end{align} \) <br>
+
+\( \begin{align}
+\frac{\partial }{\partial  \boldsymbol{\sigma}  } ( \boldsymbol{\sigma}: \dot{\boldsymbol{\varepsilon}^p}  ) &= \lambda \frac{\partial  F}{\partial  \boldsymbol{\sigma}  } \\
+\frac{\partial (\sigma_{ij}\dot{\varepsilon}^p_{ij} )}{\partial \sigma_{ij}} &= \lambda \frac{\partial  F}{\partial \sigma_{ij}  } \\
+\end{align} \)
+
+
+
+ </p>
+
+	
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Flow rule</h1>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The previous result demonstrate that the plastic strain rate tensor is <strong style='color:#7abbe6'>normal</strong> to the yield surface. This is called the <span class='atb'>flow rule</span>. <br>
+<div class='equationBox' style="margin-left: 300px;">
+\( \dot{ \boldsymbol{\varepsilon}  }^p= \lambda \frac{\partial F^*}{\partial  \boldsymbol{\sigma} } \) 
+</div> <br>
+\(\lambda\) is called the <span class='atb'>plastic multiplier</span>. <br>
+The * will let us understand an important concept later. Pretend it is not there for now.
+</div>
+
+<p class="fragment">We now have defined the existence of a yield function, the consistency condition, and the relation of the yield function with plastic strain increments. But how do we relate stress and plastic strains? </p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Stress-strain relationship</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Consider a loading-unloading cycle in the figure. It is clear that the total strain at point A is of a <strong style='color:#7abbe6'>recoverable or elastic</strong> deformation and a <strong style='color:#7abbe6'>irreversible or plastic</strong> deformation. This principle applies to any strain increment, therefore:
+</div>
+
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/stress_strain_relationship.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<p class="fragment"> \( \begin{align}
+\ \boldsymbol{\varepsilon} & =  \boldsymbol{\varepsilon} ^{el} + \boldsymbol{\varepsilon} ^p\\
+d   \boldsymbol{\varepsilon} & = d \boldsymbol{\varepsilon} ^{el} + d\boldsymbol{\varepsilon} ^p
+\end{align} \) </p>
+
+<p class="fragment"> \( \begin{align}
+d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^{el} 
+\end{align} \)</p>
+
+<div class="fragment">
+
+	<div class='equationBox'>
+		\( d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot( d \boldsymbol{\varepsilon} - d \boldsymbol{\varepsilon}^{p})\)
+		</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Elasto-plastic constitutive matrix</h1>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> We need to integrate the 	<strong style='color:#7abbe6'>stress-strain</strong> relationship, 	<strong style='color:#7abbe6'>flow rule</strong>, and 	<strong style='color:#7abbe6'>consistency condition</strong> to find the elasto-plastic constitutive matrix.</div>
+<p class="fragment">\begin{align*}
+	dF &= \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot d\boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot d\boldsymbol{X}_s = 0 \\
+\end{align*}	
+</p>
+
+<p class="fragment">\begin{align*}
+d \boldsymbol{X}_s&= \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p
+
+	\end{align*}
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p> \begin{align*} 
+	dF &= \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot (d \boldsymbol{\varepsilon}-d \boldsymbol{\varepsilon}^p ) + \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p = 0
+\end{align*}
+</p>
+
+<p class="fragment"> 
+
+\begin{align*}
+\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^p - \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p = \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} 
+\end{align*}
+</p>
+
+<p class="fragment"> Now use flow rule: <br>
+
+	\begin{align*}
+	\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot \lambda \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} - \cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot \lambda \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} = \cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} 
+	\end{align*}
+
+</p>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> 
+Note that the term \( \cfrac{\partial \boldsymbol{X}_s}{\partial \boldsymbol{\varepsilon}^p}\) represents a <span class='atb'> hardening/softening rule </span>, as it tells us how the state parameters change with plastic strain increments. A functional form to this parameter is often adopted empirically or based on physical interpretations.
+</div>
+
+<div class="fragment">
+
+	<div class='defBox' name='Hardening modulus:' style='margin-top: 10px;font-size: 1em;'>  
+		<strong style='color:green'> \(H\):</strong> Is a measure of state parameter change related to hardening and softening processes.
+	
+		<div class='equationBox'> 
+		\begin{align*}
+		H= -\cfrac{\partial F}{\partial \boldsymbol{X}_s} \cdot \cfrac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}}
+		\end{align*}	
+		</div>
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'>   
+Therefore, we can now find the value of the 	<strong style='color:#7abbe6'>plastic multiplier</strong>:
+<div class='equationBox'> 
+\begin{align*}
+\lambda = \cfrac{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} }{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} + H}
+\end{align*}	
+</div>
+
+</div>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that: <br>
+		<ul>
+			<li class='fragment'>\(H>0 \ \implies\)  <span class='atb'> Hardening </span></li>
+			<li class='fragment'>\(H=0 \ \implies\)  <span class='atb'> perfect plasticity </span></li>
+			<li class='fragment'>\(H<0 \ \implies\)  <span class='atb'> softening </span></li>
+		</ul>
+	</div>
+
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> 
+Finally, replacing the value of the plastic multiplier in the stress-strain relationship we find the <span class='atb'>elasto-plastic constitutive matrix</span>:
+
+<div class='equationBox'>
+\begin{align*}
+d\boldsymbol{\sigma} = \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} - \boldsymbol{D}^{el} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} \cdot \cfrac{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon} }{\cfrac{\partial F}{\partial \boldsymbol{\sigma}} \cdot \boldsymbol{D}^{el} \cdot \cfrac{\partial F^*}{\partial \boldsymbol{\sigma}} + H}
+\end{align*}
+</div>
+
+</div>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+		Don't worry about the complexity of this equation. We will use it in a numerical integration algorithm that will make it easy to use.
+	</div>
+
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>von Mises model</h1>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> 
+ The 	<strong style='color:#7abbe6'>simplest</strong> of all elasto-plastic models. It is based in a limiting condition for the deviatoric strain. It is used for metals, 	<strong style='color:#7abbe6'>undrained soil behavior</strong>, rocks.
+ </div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/von_mises.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+For <strong style='color:#7abbe6'>undrained soil behavior</strong> the limiting capacity is the <span class='atb'> undrained shear strength </span> \(q=2S_u\). Thus <br>
+<div class='equationBox'> 
+\(F= q - 2 S_u\)	
+</div>
+
+<p>Parameters needed: 2 elastic and 1 state par.</p>
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<div class='textBox' style='margin-top: 0px;font-size: 1em;'> The response of the model is shown below</div>
+
+	<figure>
+		<img src='FiguresGeneral/von-mises_octa.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col bordered'>
+<h4>Strengths </h4>
+<ul>
+<li class='fragment'>Good for isotropic, homogenous solid materials</li>
+<li class='fragment'>Sometimes adequate for <strong style='color:#7abbe6'>undrained total stress analysis</strong>.</li>
+<li class='fragment'>Simple and easy to calibrate.</li>
+<li class='fragment'>Simple implementation</li>
+<li class='fragment'>Runs fast</li>
+<li class='fragment'>Smooth yield surface makes a stable model</li>
+
+</ul>
+</div>
+<div class='col bordered'>
+<h4>Limitations</h4>
+<ul>
+	<li class='fragment'>Does not consider stress path dependency.</li>
+	<li class='fragment'>Not useful for <strong style='color:#7abbe6'>effective stress analysis</strong>.</li>
+	
+	<li class='fragment'>As presented, not useful for materials with hardening/softening behavior.</li>
+	<li class='fragment'>As presented, not able to incorporate confinement effects. </li>
+	<li class='fragment'>Not useful for pure volumetric stress paths</li>
+</ul>
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Tresca model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Tresca is based on imposing a limiting condition on the <span class='atb'>deviator stress</span> \(\sigma_d\), defined as the difference between the maximum and minimum principal stresses. It is used for <strong style='color:#7abbe6'>ductile materials</strong> and <strong style='color:#7abbe6'>soils</strong>.
+</div>
+<p class="fragment"> \(\sigma_{d, max}= \sigma_i- \sigma_j\) with \(i \neq j \in \{1,2,3\}\) and \(\sigma_i \geq \sigma_j \) </p>
+
+
+
+<div class="fragment">
+	<div class='equationBox' style="margin-left: 400px;">
+	\( F= 2S_u - \sigma_i + \sigma_j \)
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Note that there are <span class='atb'>six possible combinations</span> of minor and major principal stresses. <br>
+		This models needs two elastic and one state parameter.
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<figure>
+<img src='FiguresGeneral/Tresca_paths.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+<figure>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Yield_surfaces.svg/400px-Yield_surfaces.svg.png' width='60%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<div class='container'>
+	<div class='col bordered'>
+	<h4>Strengths </h4>
+	<ul>
+	<li class='fragment'>Good homogenous solid materials with some stress path dependency.</li>
+	<li class='fragment'>Sometimes adequate for <strong style='color:#7abbe6'>undrained total stress analysis</strong>.</li>
+	<li class='fragment'>Simple and easy to calibrate.</li>	
+	<li class='fragment'>Runs fast.</li>	
+	</ul>
+	</div>
+	<div class='col bordered'>
+	<h4>Limitations</h4>
+	<ul>
+		<li class='fragment'>Not useful for <strong style='color:#7abbe6'>effective stress analysis</strong>.</li>	
+		<li class='fragment'> Surface is non differentiable, and instable at corners.</li>	
+		<li class='fragment'>As presented, not useful for materials with hardening/softening behavior.</li>
+		<li class='fragment'>As presented, not able to incorporate confinement effects. </li>
+		<li class='fragment'>Not useful for pure volumetric stress paths.</li>
+	</ul>
+	</div>
+	</div>
+	
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Numerical integration of CMs</h1>
+<div class='textBox' style='margin-top: -20px;margin-left: 0px;'>
+Constitutive models are integrated in incremental fashion. There are several methods to perform this integration that span different levels of <strong style='color:#7abbe6'>accuracy</strong>, <strong style='color:#7abbe6'>stability</strong>, <strong style='color:#7abbe6'>efficiency</strong>, and <strong style='color:#7abbe6'>robustness</strong>.
+
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Accuracy:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how close the numerical solution is to the exact solution.
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Stability:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how well the numerical solution behaves over time.
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Efficiency:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how well the numerical solution is obtained with the least computational resources.
+	</div>
+</div>
+
+<div class="fragment">
+	<div class='defBox' name='Robustness:' style='margin-top: 5px;margin-left: 0px;'>
+	Is a measure of how well the numerical solution behaves under different conditions.
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The table shows the some common methods used to integrate constitutive models and a brief description of their attributes.
+</div>
+<table style="background-color: antiquewhite;">
+<tr>
+	<td>Method</td>
+	<td>Accuracy</td>
+	<td>Stability</td>
+	<td>Efficiency</td>
+	<td>Robustness</td>	
+</tr>
+
+<tr>
+	<td>Elastic predictor-Plastic corrector (Ortiz and Simo 1986)</td>
+	<td>  \(f(\Delta \varepsilon)\)  </td>
+	<td>\(f(\Delta \varepsilon)\)</td>
+	<td>✅</td>
+	<td>✅</td>	
+</tr>
+
+<tr>
+	<td>Explicit Euler</td>
+	<td>  \(f(\Delta \varepsilon)\)  </td>
+	<td>\(f(\Delta \varepsilon)\)</td>
+	<td>\(f(\Delta \varepsilon)\)</td>
+	<td>❌ </td>	
+</tr>
+
+<tr>
+	<td>Refined explicit Euler with autocorrection (Sloan et al. 2001)</td>
+	<td> ✅ </td>
+	<td>✅</td>
+	<td>\(f(TOL)\)</td>
+	<td>❌</td>	
+</tr>
+
+</table>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>EP-PC Method</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+This is a two-step method that consist in first <strong style='color:#7abbe6'>predicting the elastic response</strong> and then <strong style='color:#7abbe6'>correcting the stress drift</strong>.
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/EP-PC.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<ol>
+	<li class='fragment'><strong style='color:#7abbe6'>Assume</strong> increment of stress if purely elastic.</li>
+	<li class='fragment'> <strong style='color:#7abbe6'>Evaluate</strong>  the yield surface at initial stress plus increment. </li>
+	<li class='fragment'> If \(F \leq 0\) then the increment is purely elastic, and <strong style='color:#7abbe6'>prediction was correct</strong>. </li>
+	<li class='fragment'>Otherwise \(F>0\), <span class='atb'>plasticity is attained</span>.</li>
+</ol>
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: -10px;margin-left: 0px;'>
+We can divide the equations into two <strong style='color:#7abbe6'>superimposed</strong> systems: 
+</div>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;font-size: 0.9em;'>
+	First. The <strong style='color:#7abbe6'>elastic</strong> prediction: <br>
+	\( \begin{align}
+	d \boldsymbol{\varepsilon} &= d \boldsymbol{\varepsilon}^{el} + d \boldsymbol{\varepsilon}^p \\
+	d \boldsymbol{\sigma} &= \boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}\\
+	d \boldsymbol{\varepsilon}^p&= \boldsymbol{0}\\
+	d \boldsymbol{X}_s &= \boldsymbol{0}
+	\end{align} \)
+	</div>
+
+<p class="fragment" style="background-color: antiquewhite; font-size: 0.9em;">  Second: The <strong style='color:#7abbe6'>plastic correction</strong>: <br>
+\( \begin{align}
+d \boldsymbol{\varepsilon} &= \boldsymbol{0} \\
+d \boldsymbol{\sigma} &= -\boldsymbol{D}^{el} \cdot d \boldsymbol{\varepsilon}^p \\
+d \boldsymbol{\varepsilon}^p&= \lambda \frac{\partial F^*}{\partial \boldsymbol{\sigma}} \\
+d \boldsymbol{X}_s &= \frac{\partial \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p} \cdot d\boldsymbol{\varepsilon}^p
+\end{align} \)
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: -10px;margin-left: 0px;'>
+We will use a <strong style='color:#7abbe6'>first order approximation</strong> for the yield surface. 
+</div>
+
+<p>\( \begin{align}
+F(\boldsymbol{X}_s, \boldsymbol{\sigma}) = F(\boldsymbol{X}_s^0, \boldsymbol{\sigma}^{0}) + \cfrac{\partial F}{\partial \boldsymbol{\sigma}}  \cdot d \boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s}  \cdot d \boldsymbol{X}_s + \mathcal{O}^{n}
+\end{align} \) </p>
+
+<p class="fragment" style="font-size: 0.8em;"> \( \begin{align}
+0 & \approx F(\boldsymbol{X}_s^{k+1,i}, \boldsymbol{\sigma}^{k+1,i}) + \cfrac{\partial F}{\partial \boldsymbol{\sigma}}(\boldsymbol{X}_s^{k+1,i}, \boldsymbol{\sigma}^{k+1,i})  \cdot d \boldsymbol{\sigma} + \cfrac{\partial F}{\partial \boldsymbol{X}_s}(\boldsymbol{X}_s^{k+1,i}, \boldsymbol{\sigma}^{k+1,i})  \cdot d \boldsymbol{X}_s \\
+& \equiv F^{k+1}_i+ \frac{\partial F}{\partial \boldsymbol{\sigma} }^{k+1}_i \cdot \Delta \boldsymbol{\sigma}^{k+1}_i + \frac{\partial F}{\partial  \boldsymbol{X}_s }^{k+1}_i \cdot \Delta \boldsymbol{X}_{si}^{k+1}\\
+& \equiv F^{k+1}_i+ \boldsymbol{n} ^{k+1}_i  \cdot \Delta \boldsymbol{\sigma}^{k+1}_i +  \boldsymbol{ \mathcal{L}} ^{k+1}_i \cdot \Delta \boldsymbol{X}_{si}^{k+1}
+\end{align} \) </p>
+
+<div class="fragment"> 
+	<div class='equationBox'>
+	\( \boldsymbol{n} ^{k+1}_i= \frac{\partial F}{\partial \boldsymbol{\sigma} }^{k+1}_i \) and \(\boldsymbol{ \mathcal{L}} ^{k+1}_i = \frac{\partial F}{\partial  \boldsymbol{X}_s }^{k+1}_i\)
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>From superposition principle: <br>
+	\(\Delta \boldsymbol{\sigma}^{k+1}_i= -\Delta \lambda \boldsymbol{D}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i  \)  <br>
+\( \Delta \boldsymbol{X}_{si}^{k+1}= \Delta \lambda \boldsymbol{a}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i\)
+</p>
+<div class="fragment">
+<div class='equationBox' style="margin-left: 400px;">
+	\( \boldsymbol{a}^{k+1}_i= \cfrac{\partial  \boldsymbol{X}_s }{\partial \boldsymbol{\varepsilon}^p   }^{k+1}_i \)
+</div>
+
+	
+</div>
+
+<div class="fragment">
+
+<div class='findingBox' style='margin-top: 10px;margin-left: 0px;'>
+	Thus we can obtain an incremental formulation for the plastic multiplier: <br>
+
+	<div class='equationBox'>
+	\( \begin{align}
+	\Delta \lambda = \cfrac{F^{k+1}_i}{\boldsymbol{n}^{k+1}_i \cdot \boldsymbol{D}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i \underbrace{- \boldsymbol{\mathcal{L}}^{k+1}_i \cdot \boldsymbol{a}^{k+1}_i \cdot \boldsymbol{n}^{*k+1}_i}}_{H^{k+1}_i}
+	\end{align} \)
+	</div>
+</div>
+
+
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Computational cycle</h1>
+<table>
+	<tr style="background-color: antiquewhite;">
+		<td>Initialization:</td>
+		<td>1. <strong style='color:#7abbe6'>Start</strong> with initial \( \boldsymbol{\sigma}^k  \), \(\boldsymbol{\varepsilon}^k  \), \( \boldsymbol{\varepsilon}^{pk} \), \( \boldsymbol{X}_s^k \), and \( \Delta  \boldsymbol{\varepsilon}  \)</td>
+	</tr>
+	<tr class="fragment" style="background-color:rgb(243, 189, 170);">
+		<td>Elastic predictor:</td>
+		<td>2. <strong style='color:#7abbe6'>Update</strong> elastic tangent stiffness \( \boldsymbol{D}^{el \ k}( \boldsymbol{\varepsilon}^{k} )  \)</td>
+	</tr>
+	<tr class="fragment" style="background-color:rgb(243, 189, 170);">
+		<td></td>
+		<td>3. <strong style='color:#7abbe6'>Calculate</strong> elastic increment of stress using: \( \Delta  \boldsymbol{\sigma}^{el \ k}= \boldsymbol{D}^{el \ k} \cdot \Delta  \boldsymbol{\varepsilon}  \)</td>
+	</tr>
+	<tr class="fragment" style="background-color:rgb(243, 189, 170);">
+		<td></td>
+		<td>4. <strong style='color:#7abbe6'>Update</strong> the stress tensor: \( \boldsymbol{\sigma}^{k+1}=  \boldsymbol{\sigma}^{k} + \Delta  \boldsymbol{\sigma}^{el \ k} \)</td>
+	</tr>
+	<tr class="fragment" style="background-color:rgb(170, 243, 194);">
+		<td>Evaluate yield surface</td>
+		<td>5. <strong style='color:#7abbe6'>If</strong> \( F(\boldsymbol{\sigma}^{k+1},\boldsymbol{X}_s^{k+1}    ) \leq TOL \) <strong style='color:#7abbe6'>then</strong> go to step 6; <strong style='color:#7abbe6'>Otherwise</strong> go to step 7</td>
+	</tr>
+	<tr class="fragment" style="background-color:rgb(242, 243, 170);">
+		<td>Exit</td>
+		<td>6. <strong style='color:#7abbe6'>Exit</strong> with <strong style='color:#7abbe6'>updated</strong> \( \boldsymbol{\sigma}^{k+1}  \), \(\boldsymbol{\varepsilon}^{k+1}= \boldsymbol{\varepsilon}^{k}+ \Delta  \boldsymbol{\varepsilon}  \), and \( \boldsymbol{X}_s^{k+1} \)   </td>
+	</tr>
+</table>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<table style="font-size: 0.7em;">
+		<tr style="background-color: antiquewhite;">
+			<td>Plastic corrector:</td>
+			<td>7. <strong style='color:#7abbe6'>Set</strong>  \( F_i^{k+1} \leftarrow F(\boldsymbol{\sigma}^{k+1}, \boldsymbol{X}_s^{k+1})    \), \(\boldsymbol{\varepsilon}^{p \ k+1}_i \leftarrow \boldsymbol{\varepsilon}^{p \ k}\), and \( \boldsymbol{X}_{s \ i}^{k+1} \leftarrow  \boldsymbol{X}_{s}^{k+1} \)</td>
+		</tr>
+		<tr class="fragment" style="background-color:rgb(235, 199, 224);">
+			<td></td>
+			<td>8. <strong style='color:#7abbe6'>While</strong> \(F^{k+1}_i > TOL \) <strong style='color:#7abbe6'>do</strong>:</td>
+		</tr>
+		<tr class="fragment" style="background-color:rgb(235, 199, 224);">
+			<td></td>
+			<td>8.1. <strong style='color:#7abbe6'>Calculate</strong> partial derivatives at current stress and state variables: \( \boldsymbol{n}^{k+1}_i \), \( \boldsymbol{n}^{* \ k+1}_i \), \( \boldsymbol{\mathcal{L}}^{k+1}_i \), and \( \boldsymbol{a}^{k+1}_i \)    </td>
+		
+		</tr>
+		<tr class="fragment" style="background-color:rgb(235, 199, 224);">
+			<td></td>
+			<td>8.2. <strong style='color:#7abbe6'>Calculate</strong> \(  \Delta \lambda\) </td>
+		
+		</tr>
+		<tr class="fragment" style="background-color:rgb(235, 199, 224);">
+			<td></td>
+			<td>8.3. <strong style='color:#7abbe6'>Calculate</strong> increments of plastic strain, stress, and state variables using: <br>	
+				 \( \Delta \boldsymbol{\varepsilon}^{p \ k+1}_i= \Delta \lambda \cdot  \boldsymbol{n}^{* \ k+1}_i \), 
+			 \(\Delta  \boldsymbol{\sigma}^{k+1}_i= - \Delta \lambda \boldsymbol{D}^{k+1}_i \cdot  \boldsymbol{n}^{* \ k+1}_i  \), 
+			 \( \Delta \boldsymbol{X}_{s \ i}^{k+1}= \Delta \lambda  \boldsymbol{a}^{k+1}_i \cdot \boldsymbol{n}^{* \ k+1}_i   \)
+			
+			</td>
+		
+		</tr>
+		<tr class="fragment" style="background-color:rgb(235, 199, 224);">
+			<td></td>
+			<td>8.4. <strong style='color:#7abbe6'>Update</strong> increments of plastic strain, stress, and state variables using: <br>	
+				 \(\boldsymbol{\varepsilon}^{p \ k+1}_i \leftarrow \boldsymbol{\varepsilon}^{p \ k+1}_i+  \Delta \boldsymbol{\varepsilon}^{p \ k+1}_i \), 
+			 \(\boldsymbol{\sigma}^{k+1}_i \leftarrow \boldsymbol{\sigma}^{k+1}_i + \Delta  \boldsymbol{\sigma}^{k+1}_i \), 
+			 \( \boldsymbol{X}_{s \ i}^{k+1} \leftarrow\boldsymbol{X}_{s \ i}^{k+1} +  \Delta \boldsymbol{X}_{s \ i}^{k+1}   \)
+			
+			</td>
+		
+		</tr>
+		<tr class="fragment" style="background-color:rgb(235, 199, 224);">
+			<td></td>
+			<td>8.5. <strong style='color:#7abbe6'>Evaluate</strong> yield surface at updated stress and state variables \( F_i^{k+1} \leftarrow F(\boldsymbol{\sigma}^{k+1}_i, \boldsymbol{X}_{s \ i}^{k+1}) \)
+			
+			</td>
+		
+		</tr>
+
+		<tr class="fragment" style="background-color:rgb(199, 235, 207);">
+			<td>Exit</td>
+			<td>9. <strong style='color:#7abbe6'>Exit</strong> with updated \( \boldsymbol{\sigma}^{k+1}  \), \(\boldsymbol{\varepsilon}^{k+1}= \boldsymbol{\varepsilon}^{k}+ \Delta  \boldsymbol{\varepsilon}  \),  \(\boldsymbol{\varepsilon}^{p \ k+1}\), and \( \boldsymbol{X}_s^{k+1} \)   </td>
+		
+		</tr>
+
+	</table>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.1</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Program a simple elasto-plastic model using the von Mises yield criterion and the EP-PC method. Evaluate the effect of the tolerance, and the size of the increment of strain in the response of the model. Use the parameters in the table below.
+</div>
+
+<table>
+
+<tr>
+	<td>Parameter</td>
+	<td>Value</td>
+</tr>
+
+<tr>
+	<td>Young's modulus</td>
+	<td>50 MPa</td>	
+</tr>
+
+<tr>
+	<td>Poisson's ratio</td>
+	<td>0.49</td>
+</tr>
+
+<tr>
+	<td>\(S_u\)</td>
+	<td> 100 kPa </td>
+</tr>
+
+</table>
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Hardening and softening</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The previous models have a <span class='atb'>constant yield surface</span>. This produces the observed <strong style='color:#7abbe6'>perfect plasticity</strong> behavior. <strong style='color:#7abbe6'>How</strong> can we incorporate <strong style='color:#7abbe6'>hardening</strong> and <strong style='color:#7abbe6'>softening</strong> behavior?
+</div>
+
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/hardening.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<p class="fragment">We can <strong style='color:#7abbe6'>impose</strong> a <strong style='color:#7abbe6'>change</strong> of the <strong style='color:#7abbe6'>state</strong> parameter as a function of the <strong style='color:#7abbe6'>plastic strain</strong> increment. This is called a <span class='atb'>hardening/softening rule</span>. </p>	
+
+<div class="fragment">
+	<div class='equationBox'>
+		\( \begin{align}
+		\boldsymbol{X}_s= f( \boldsymbol{\varepsilon}^p )
+		\end{align} \)
+		</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.2</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Add a hardening rule to the previous model using the hyperbolic functional shape. Then calibrate the hardening parameter and the yield stress to reproduce the behavior of the stress-strain curves shown below.
+</div>
+
+<div class='container'>
+	<div class='col'>
+	<figure>
+	<img src='FiguresGeneral/q_vs_eps_a.svg' width='60%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+	</div>
+	<div class='col'>
+	
+	</div>
+	</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Problems associated with softening</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Strain softening is known for producing <strong style='color:#7abbe6'>mesh dependency</strong>, <strong style='color:#7abbe6'>convergence issues</strong>, and <strong style='color:#7abbe6'>localization</strong>. Its use requires <span class='atb'>careful calibration</span>. 
+</div>
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/softening.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 50px;margin-left: 0px;'>
+Strain softening produces <span class='atb'>progressive failure</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/softening_finer.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class="fragment">
+<div class='findingBox' style='margin-top: 50px;margin-left: 0px;'>
+	In order to get the same result than the model with coarser mesh, the rate of softening <strong style='color:#7abbe6'>must be smaller</strong>.
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class='container'>
+<div class='col'>
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		In the presence of <strong style='color:#7abbe6'>localization effects</strong> like <strong style='color:#7abbe6'>shear banding</strong>, the energy per unit of area dissipated at the sear band is the same for both elements. 
+	</div>
+</div>
+
+
+
+
+
+</div>
+<div class='col'>
+<figure class="fragment"> 
+<img src='FiguresGeneral/elements.svg' width='100%' style="margin-top: -120px;"/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+The consequence is that elements with larger size require a larger amount of energy to be dissipated, which implies <strong style='color:#7abbe6'>a larger rate of softening</strong> than smaller elements.
+</div>
+
+<figure class="fragment">
+<img src='FiguresGeneral/smear_crack.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+To calibrate the softening parameter <strong style='color:#7abbe6'>equate the area below the two curves</strong>. This is called the <span class='atb'>smear crack approach</span>
+</div>
+
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.3</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Add an exponential softening rule to the von Mises model with rate \(\beta\) and calibrate it to generate equal energy density as the data displayed below, obtained from constant thickness simple shear test with \(H=\) 1 in. Find the rate that you must use for a finite element model with uniform mesh grid of size is 1 m.
+</div>
+
+<figure>
+	<img src='FiguresGeneral/Test_Example43.svg' width='50%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Dilation</h1>
+<div class='defBox' name='Plastic dilation ' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\(D^p\):</strong> is the ratio of <strong style='color:#7abbe6'>volumetric</strong> to <strong style='color:#7abbe6'>deviatoric</strong> plastic strain rates. <br>
+
+<div class='equationBox'>
+\( D^p= \cfrac{\dot{\varepsilon}^p_v}{\dot{\varepsilon}^p_q} \)
+</div>
+</div>
+
+<figure>
+<img src='FiguresGeneral/dilation.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</section>
+
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Drucker-Prager model </h1>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We will now add confinement effects to the model. This is done by adding dependency of the yield surface on the <strong style='color:#7abbe6'>mean stress</strong> and the <strong style='color:#7abbe6'>deviatoric stress</strong>.
+</div>
+
+<p class="fragment">If the limiting condition takes the form \(q_{max}= Mp + 2c \), where \(M= f(\phi)\), with \(\phi=\) friction angle, and \(c= \) cohesion. Then: </p>
+
+<div class="fragment">
+	<div class='equationBox' style="margin-left: 400px;">
+		\( F= q-Mp-2c \)
+		</div>
+</div>
+
+<p class="fragment">The slope \(M\) can be calculated using:  </p>
+
+<div class="fragment">
+<div class='equationBox' style="margin-left: 350px;">
+\( M= \cfrac{6 \sin \phi}{ 3 - \sin \phi} \)
+</div>
+
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<figure>
+<img src='FiguresGeneral/Drucker_paths.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+<div class='textBox' style='margin-top: -50px;margin-left: 0px;'>
+Normality confinement dependent models produce <strong style='color:#7abbe6'>unreal dilation</strong>.
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+	<figure>
+	<img src='FiguresGeneral/Drucker_paths_correct.svg' width='100%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+
+	
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	The plastic potential function \(F^*\) controls dilation. 
+	</div>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Associative and non-associative models</h1>
+<div class='defBox' name='Associative flow rule:' style='margin-top: 0px;margin-left: 0px;'>
+A model has an <span class='atb'>associative flow rule</span> when \(F^*=F\).
+</div>
+
+<p class="fragment"> Eg. Tresca and von Mises are <span class='atb'>associative</span> models.</p>
+
+<div class="fragment">
+	<div class='defBox' name='Non-associative flow rule:' style='margin-top: 0px;margin-left: 0px;'>
+		A model has a <span class='atb'>non-associative flow rule</span> when \(F^*\neq F\).
+	</div>
+</div>
+
+<p class="fragment"> Eg. Drucker-Prager is a <span class='atb'>non-associative</span> model.</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+
+<h1>Example 4.5</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Program a Drucker-Prager model using the EP-PC method. Evaluate the effect of the friction angle, cohesion, and dilation angle in the response of the model.
+</div>	
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Note that Drucker-Prager models needs 2 elastic parameters and 3 plastic parameters ( \(\phi, c, \beta \)).
+</div>
+
+<div class="fragment"> 
+<div class='findingBox' style='margin-top: 5px;margin-left: 0px;'>
+von Mises is a <strong style='color:#7abbe6'> special case of Drucker-Prager</strong>  with \(\phi=0\) and \(\beta=0\).
+</div>	
+</div>
+
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col bordered'>
+<h4>Strengths</h4>
+<ul>
+<li class='fragment'>Simple implementation</li>
+<li class='fragment'>Simple usage. Few parameters needed.</li>
+<li class='fragment'>For <strong style='color:#7abbe6'>undrained- total stress</strong> analysis can be used as a von-Mises model. </li>
+<li class='fragment'>Use with caution for <strong style='color:#7abbe6'>undrained-effective stress</strong> analysis</li>
+<li class='fragment'>Can be used for <strong style='color:#7abbe6'>drained-effective stress</strong> analysis. </li>
+
+</ul>
+</div>
+<div class='col bordered'>
+<h4>Limitations</h4>
+<ul>
+	<li class='fragment'>As presented, it can not reproduce hardening/softening. </li>
+	<li class='fragment'>Path independent. Unrealistic for granular materials.</li>
+	<li class='fragment'>For large deformations it will produce <strong style='color:#7abbe6'>infinite</strong> dilation/compression.</li>
+	<li class='fragment'> Can not reproduce plastic deformations under pure volumetric strains.</li>
+</ul>
+
+</div>
+</div>
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Mohr-Coulomb model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The limiting surface of Mohr-Coulomb is based on the well known Mohr-Coulomb criterion. <br>
+\(\tau= c + \sigma_n \tan \phi \) <br>
+
+The yield surface is expressed in terms of principal stresses, leading to six intersecting surfaces.
+</div>
+
+<div class="fragment">
+<div class='equationBox'>
+
+\( F= (\sigma_i - \sigma_j) + (\sigma_i+\sigma_j) \sin \phi - 2c \cos \phi \)
+
+
+</div>
+<p> For \(i \neq j \ \in \{1, 2, 3\} \) and \(\sigma_i>\sigma_j\)</p>
+</div>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		Mohr-Coulomb is a <strong style='color:#7abbe6'>non-associative</strong> model that needs 2 elastic parameters and 3 plastic parameters ( \(\phi, c, \beta \)).
+	</div>
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	Tresca is a particular case of MC with \(\phi=0\) and \(\beta=0\)
+	</div>
+</div>
+
+
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<figure>
+<img src='FiguresGeneral/MC_paths.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+<div class='textBox' style='position: absolute; margin-top: -200px;margin-left: 700px;'>
+TxC= Triaxial compression, TxE= Triaxial extension, PS= pure shear
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<img src="https://soilmodels.com/wp-content/uploads/2020/12/MC-nu.gif" width="100%">
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<div class='container'>
+		<div class='col bordered'>
+		<h4>Strengths</h4>
+		<ul>
+		<li class='fragment'>Simple usage. Few parameters needed.</li>
+		<li class='fragment'>For <strong style='color:#7abbe6'>undrained- total stress</strong> analysis can be used as a Tresca model. </li>
+		<li class='fragment'>Use with caution for <strong style='color:#7abbe6'>undrained-effective stress</strong> analysis</li>
+		<li class='fragment'>Can be used for <strong style='color:#7abbe6'>drained-effective stress</strong> analysis. </li>
+		<li class='fragment'>Path dependent model</li>
+		</ul>
+		</div>
+		<div class='col bordered'>
+		<h4>Limitations</h4>
+		<ul>
+			<li class='fragment'>As presented, it can not reproduce hardening/softening. </li>
+			
+			<li class='fragment'>For large deformations it will produce <strong style='color:#7abbe6'>infinite</strong> dilation/compression.</li>
+			<li class='fragment'> Can not reproduce plastic deformations under pure volumetric strains.</li>
+			<li class='fragment'> Instable at corners and apex of cone. Need smoothening of surface (Abo and Sloan 1995) </li>
+		</ul>
+		
+		</div>
+		</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Other path-dependent surfaces</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+There are other path-dependent surfaces that can be used to model the behavior of soils. One popular surface is the Matsuoka Nakai, Lade-Duncan, and Jeffries model. They can be easily implemented to constitutive models using the <strong style='color:#7abbe6'>Lode's angle</strong>.
+
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/MN_paths.svg' width='100%'/>
+<footer style='margin-top: -30px;font-size: 0.8em;'> <em>Modified from Jeffries (2015)</em> </footer>
+</figure>
+</div>
+<div class='col'>
+Based on experimental data Jeffries (2015) proposed the following relationship: <br>
+
+<div class='equationBox' style=" font-size: 0.8em;">
+\( M(\theta)=  M_{tc} - \cfrac{M_{tc}^2 }{3+ M_{tc} } \cos \left(3\theta/2 + \pi/4 \right)\)
+</div>
+
+<p>\(M_{tc}=\) friction ratio for triaxial compression</p>
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Example 4.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Implement the Jeffries surface to the Drucker-Prager model. Compare the results with the Mohr-Coulomb model for triaxial extension.
+</div>
+
+</section>
+
+
+
+
+
+
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
 
