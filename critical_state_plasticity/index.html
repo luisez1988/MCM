@@ -138,7 +138,7 @@
 -->
 
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <h1>critical state theory</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 Critical state theory is a <strong style='color:#7abbe6'>useful framework</strong> to describe the behavior of soils. It is based on the concept that at large strains, soils tend to evolve towards a <strong style='color:#7abbe6'>critical state</strong> that is independent of the initial conditions.
@@ -147,7 +147,7 @@ Critical state theory is a <strong style='color:#7abbe6'>useful framework</stron
 <div class='container'>
 <div class='col'>
 <figure>
-<img src='' width='%'/>
+<img src='FiguresGeneral/sameq_difmean.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
@@ -156,7 +156,7 @@ Critical state theory is a <strong style='color:#7abbe6'>useful framework</stron
 Idea #1: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> initial density have <strong style='color:#7abbe6'>equal ultimate strength</strong>. <br>
 
 <div class='equationBox' style="margin-left: 200px;">
-\( q= M_c p' \)
+\( q_c= M_c p'_c \)
 </div> <br>
 
 \(M_c=\) critical friction ratio
@@ -167,17 +167,17 @@ Idea #1: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials 
 </section>
 
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <div class='container'>
 <div class='col'>
 <figure>
-<img src='' width='%'/>
+<img src='FiguresGeneral/voids_critical.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
 <div class='col'>
 <div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
-Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> densities have <strong style='color:#7abbe6'>equal void ratio</strong> also called <span class='atb'>critical void ratio</span>. <br>
+Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> densities have <strong style='color:#7abbe6'>equal ultimate void ratio</strong> also called <span class='atb'>critical void ratio</span>. <br>
 
 <div class='equationBox'>
 \( e_{c}(p')= \Gamma - \lambda \ln (p') \)
@@ -195,7 +195,7 @@ Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials 
 </div>
 <div class='col'>
 <figure>
-<img src='' width='%'/>
+<img src='FiguresGeneral/CSL.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
@@ -204,19 +204,243 @@ Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials 
 
 </section>
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <h1>State parameter</h1>
+<div class='defBox' name='State parameter ' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\( \psi:\)</strong> Is the vertical distance between the <strong style='color:#7abbe6'>current</strong> void ratio and the <strong style='color:#7abbe6'>critical</strong> void ratio. <br>
+<div class='equationBox'>
+\( \psi= e- e_c \)
+</div>
+</div>
+
+<figure>
+<img src='FiguresGeneral/state_param.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
 
 </section>
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <h1>critical state axioms</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 Apart from establishing the critical state line, critical state theory also provides a set of axioms that are used to describe the behavior of soils.
 </div>
 
+<div class='theorem2' name='Axiom 1:' style='margin-top: 0px;margin-left: 0px;'>
+	At large deformation, the deviatoric stress is steady. <br>
+	<div class='equationBox'> 
+	\( \frac{\partial q}{\partial \varepsilon_q}=0 \)
+	</div>
+</div>
+<div class='theorem2' name='Axiom 2:' style='margin-top: 0px;margin-left: 0px;'>
+	At large deformation, the mean stress is steady. <br>
+	<div class='equationBox'> 
+	\( \frac{\partial p}{\partial \varepsilon_q}=0 \)
+	</div>
+</div>
+<div class='theorem2' name='Axiom 3:' style='margin-top: 0px;margin-left: 0px;'>
+	At large deformation, there is no volume change. <br>
+	<div class='equationBox'> 
+	\( \frac{\partial \varepsilon_v}{\partial \varepsilon_q}=D=0 \)
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Stress-dilation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Now, we will use the energy density equation to derive a theoretical relationship between stress and dilation.
+</div>
+
+<p class="fragment">
+	\( \begin{align}
+	\dot{W}^p&= q \dot{\varepsilon}^p_q + p' \dot{\varepsilon}^p_v \\
+	\cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= \cfrac{q}{p'} + \cfrac{\dot{\varepsilon}_v^p}{\dot{\varepsilon}_q^p} \\
+	\cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= \eta + D^p\\
+	\end{align} \)
+</p>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Where \( \eta \) is the <strong style='color:#7abbe6'>stress ratio</strong>. Now, take the limit when \( \dot{\varepsilon}_q^p \rightarrow \infty \).
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<p> 
+\( \begin{align}
+\lim_{\dot{\varepsilon}_q^p \rightarrow  \infty} \cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= \lim_{\dot{\varepsilon}_q^p \rightarrow  \infty} ( \eta + D^p ) \\
+\lim_{\dot{\varepsilon}_q^p \rightarrow  \infty} \cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= M_c
+\end{align} \)
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 50px;margin-left: 0px;'>
+At first Roscoe and Schofield proposed that \( M_c \) was a constant. This lead to the development of the <strong style='color:#7abbe6'>Camclay model</strong>. Using this proposition we obtain: <br>
+
+<div class='equationBox' style="margin-left: 300px;">
+\( M_c= \eta + D^p \)
+</div>
+</div>
+</div>
+
+</section>
 
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Original Camclay model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The original Camclay model was proposed by Roscoe and Schofield in 1958. It is a <strong style='color:#7abbe6'>critical state model</strong> with associative <strong style='color:#7abbe6'>capped yield surface</strong>.
+</div>
+
+<div class='container'>
+<div class='col bordered'>
+	<p class="fragment">
+		\( \begin{align}
+		q &= \eta p' \\
+		\dot{q} &= \dot{\eta} p' + \eta \dot{p}'  \\		
+		\end{align} \)
+	</p>
+	<p class="fragment"> By normality: <br>
+	\( \begin{align}
+	\frac{\dot{q}}{\dot{p}'} &= - D^p\\
+	\end{align} \)</p>
+</div>
+<div class='col bordered'>
+<p class="fragment">
+\( \begin{align}
+-D^p \dot{p}' &= \dot{\eta} p'+ \eta \dot{p}'  \\
+(-M_c+ \eta -\eta) \dot{p}' &= \dot{\eta} p' \\
+-\int  \cfrac{\dot{p}'}{p'} &= \int  \cfrac{ \dot{\eta}   }{M_c} \\
+\end{align} \)
+
+</p>
+<p class="fragment">
+	\(-\ln(p')+C= \eta/M_c\)
+</p>
+</div>
+</div>
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Now we evaluate the previous equation with condition: \( p'=p'_c \) and \( \eta=M_c\). Where \(p'_c\) is the critical mean effective stress.
+</div>
+
+<div class='container'>
+<div class='col'>
+<p class="fragment">
+	\begin{align}
+	-\ln(p'_c)+C&= 1 \\
+	C&= 1 + \ln(p'_c) \\
+	-\ln(p')+1+\ln(p'_c)&= \eta/M_c \\
+
+	\end{align}
+</p>
+
+<div class="fragment">
+
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+This is the OCC yield surface:
+<div class='equationBox'>
+\( q= M_cp' \left[1 - \ln \left(\cfrac{p'}{p'_c} \right) \right] \)
+</div>
+</div>
+
+</div>
+</div>
+<div class='col'>
+<figure>
+<img class="fragment"  src='FiguresGeneral/OCC.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>NorSand model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The NorSand model developed by Jefferies in 1993 is a <strong style='color:#7abbe6'>critical state model</strong> with <strong style='color:#7abbe6'>associative flow rule</strong>.
+</div>
+
+<p class="fragment">A big improvement of the model is the recognition that stress-dilation does not follows exactly the equation proposed by Roscoe and Schofield.  </p>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='' width='%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Jefferies et al. (2015) reworked the equation to include <strong style='color:#7abbe6'>volumetric coupling</strong> observed in data.
+</div>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	This version of NorSand led to the following modified stress-dilation equation: <br>
+	<div class='equationBox'>
+	\( M_i= \eta +D^p \)
+	</div> <br>
+	Where \( M_i \) is tough as a variable/image friction ratio.
+	</div>
+<p class="fragment"> Note that integration leads to a similar yield surface as for the OCC model <br>
+<div class='equationBox'>
+\( q= M_ip' \left[1- \ln \left(\cfrac{p'}{p'_i} \right) \right] \)
+</div> <br>
+Where \(p_i\) is the pressure corresponding to the image condition of \(M_i\) or image mean stress.
+</p>
+	
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+
+<h1>Minimum dilation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Further inspection of stress-dilation curves shows that dilation can not let pass of a minimum value.
+</div>
+
+	<div class='container'>
+		<div class='col'>
+		
+	<figure>
+	<img src='' width='%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+	 
+	
+		</div>
+		<div class='col'>
+			<div class="fragment">
+				<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+				This lead to the minimum dilation expression: <br>
+				<div class='equationBox'>
+				\( D_{min}= \chi_i \psi_i \)
+				</div> <br>
+				Further combination with the yield surface leads to the following expression: <br>
+
+				<div class='equationBox'>
+				\( p'_{i, \ max}= p' \exp \left(- \cfrac{\chi_i \psi_i }{M_{i, tc}} \right) \)
+				</div>
+				</div>
+				
+				 </div>
+		</div>
+		</div>
 </section>
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
