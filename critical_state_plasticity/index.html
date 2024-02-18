@@ -152,15 +152,20 @@ Critical state theory is a <strong style='color:#7abbe6'>useful framework</stron
 </figure>
 </div>
 <div class='col'>
-<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
-Idea #1: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> initial density have <strong style='color:#7abbe6'>equal ultimate strength</strong>. <br>
 
-<div class='equationBox' style="margin-left: 200px;">
-\( q_c= M_c p'_c \)
-</div> <br>
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+		Idea #1: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> initial density have <strong style='color:#7abbe6'>equal ultimate strength</strong>. <br>
+		
+		<div class='equationBox' style="margin-left: 200px;">
+		\( q_c= M_c p'_c \)
+		</div> <br>
+		
+		\(M_c=\) critical friction ratio
+		</div>
 
-\(M_c=\) critical friction ratio
 </div>
+
 </div>
 </div>
 
@@ -176,25 +181,36 @@ Idea #1: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials 
 </figure>
 </div>
 <div class='col'>
-<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
-Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> densities have <strong style='color:#7abbe6'>equal ultimate void ratio</strong> also called <span class='atb'>critical void ratio</span>. <br>
+<div class="fragment">
 
-<div class='equationBox'>
-\( e_{c}(p')= \Gamma - \lambda \ln (p') \)
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> densities have <strong style='color:#7abbe6'>equal ultimate void ratio</strong> also called <span class='atb'>critical void ratio</span>. <br>
+		
+		<div class='equationBox'>
+		\( e_{c}(p')= \Gamma - \lambda \ln (p') \)
+		</div>
+		</div>
+
 </div>
-</div>
+
+
 
 </div>
 </div>
 
 <div class='container'>
 <div class='col'>
+
+<div class="fragment">  
 	<div class='textBox' style='margin-top: 50px;margin-left: 0px;'>
 		The equations from ideas #1 and #2 are used to define the <span class='atb'>critical state line</span>.
 	</div>
+
+</div>	
+
 </div>
 <div class='col'>
-<figure>
+<figure class="fragment">
 <img src='FiguresGeneral/CSL.svg' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
@@ -261,9 +277,11 @@ Now, we will use the energy density equation to derive a theoretical relationshi
 	\end{align} \)
 </p>
 
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-Where \( \eta \) is the <strong style='color:#7abbe6'>stress ratio</strong>. Now, take the limit when \( \dot{\varepsilon}_q^p \rightarrow \infty \).
+<div class="fragment">
+	<div class='textBox' style='margin-top: 50px;margin-left: 0px;'>
+	Where \( \eta \) is the <strong style='color:#7abbe6'>stress ratio</strong>. Now, take the limit when \( \dot{\varepsilon}_q^p \rightarrow \infty \).
 </div>
+
 
 </section>
 
@@ -371,76 +389,265 @@ This is the OCC yield surface:
 The NorSand model developed by Jefferies in 1993 is a <strong style='color:#7abbe6'>critical state model</strong> with <strong style='color:#7abbe6'>associative flow rule</strong>.
 </div>
 
-<p class="fragment">A big improvement of the model is the recognition that stress-dilation does not follows exactly the equation proposed by Roscoe and Schofield.  </p>
+<p class="fragment"> The model uses the stress-path dependent model discussed in the previous section to generalize the model. </p>
 
+<div class='equationBox'>
+\( M(\theta)= M_{tc} - \cfrac{M_{tc}^2}{3+M_{tc}} \cos \left(\cfrac{3 \theta}{4} + \cfrac{\pi}{4}\right) \)
+</div>
+<p class="fragment" style="margin-top: 80px;">Where \(M_{tc}\) is the critical friction ratio for triaxial compression.</p>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+
+	<h1>Minimum dilation</h1>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Further inspection of stress-dilation curves shows that dilation can not let pass of a minimum value.
+	</div>
+	
 <div class='container'>
 <div class='col'>
+	<figure>
+		<img src='FiguresGeneral/Min_dil_path.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+		</figure>
+</div>
+<div class='col'>
 <figure>
-<img src='' width='%'/>
+<img src='FiguresGeneral/min_dil_jeff.PNG' width='100%'/>
 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
 </figure>
 </div>
-<div class='col'>
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-Jefferies et al. (2015) reworked the equation to include <strong style='color:#7abbe6'>volumetric coupling</strong> observed in data.
-</div>
-</div>
 </div>
 
+
+	</section>
+
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+From observations, the following relationship is proposed to regulate the minimum dilation in the model. <br>
+
+<div class='equationBox' style="margin-left: 450px;">
+\( D_{min}= \chi_{tc} \psi_{Dmin} = \chi_i \psi_i \)
+</div> <br>
+Where \( \chi_{tc} \) is the dilation coefficient for triaxial compression, \(\psi_{Dmin}\) is the state parameter at minimum dilation, \(\chi_i\) is the <strong style='color:#7abbe6'>state dilatancy</strong>, and \(\psi_i\) is the <strong style='color:#7abbe6'>image state parameter</strong>. We'll discuss the image condition in the next section.
+</div>
+
+<p class="fragment" style="margin-top: 100px;">Now let us define a better stress-dilation function and define the yield surface for NorSand.   </p>
+
+</section>	
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Jefferies recognized that the normalized dissipation of work was not constant. He instead let it change and called it \(M_i\) to distinguish from the critical friction ratio: <br>
+	<div class='equationBox' style="margin-left: 300px;">
+	\( M_i= \eta +D^p \)
+	</div> <br>
+	Where \( M_i \) is the image friction ratio.
+	</div>
+
+	<p class="fragment"> Furthermore, the slope at max stress ratio and min dilation is not 1:1. Thus they used Nova's volumetric coupling (\(N\)) to fix that problem using: <br>
+	\(D^p_{min}= \cfrac{M_{c}(\theta) - \eta_{max}}{(1-N)}\) <br>
+	Or: <br>
+	\(M_i= -D_{min}^p (1-N) + M(\theta) + D^p_{min}\)
+
+	</p>
+	
 </section>
 
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-	This version of NorSand led to the following modified stress-dilation equation: <br>
-	<div class='equationBox'>
-	\( M_i= \eta +D^p \)
-	</div> <br>
-	Where \( M_i \) is tough as a variable/image friction ratio.
+		<p>Recognizing that the minimum dilation needs 3D generalization, the following is proposed: <br>
+			<div class='equationBox' style="margin-left: 400px;">
+			\( D^p_{min}= \cfrac{M(\theta)}{M_{tc}} \chi_i \psi_i \)
+			</div>
+			</p>
 	</div>
-<p class="fragment"> Note that integration leads to a similar yield surface as for the OCC model <br>
-<div class='equationBox'>
-\( q= M_ip' \left[1- \ln \left(\cfrac{p'}{p'_i} \right) \right] \)
-</div> <br>
-Where \(p_i\) is the pressure corresponding to the image condition of \(M_i\) or image mean stress.
-</p>
-	
-</section>
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 
-<h1>Minimum dilation</h1>
-<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-Further inspection of stress-dilation curves shows that dilation can not let pass of a minimum value.
+<div class='container'>
+<div class='col'>
+	<p class="fragment">And then replacing in the previous equation: <br>
+		\( \begin{align}
+		
+		M_i&= M(\theta) + D^p_{min}N \\
+		M_i&= M(\theta) \left(1+ \cfrac{\chi_i \psi_i N }{M_{tc}} \right)
+		\end{align} \)</p>
+		
+</div>
+<div class='col'>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	It is observed that a symmetric version of this equation yields better fit with data: <br>
+	<div class='equationBox'>
+	\( M_i= M(\theta) \left(1- \cfrac{N \chi_i |\psi_i| }{M_{tc}} \right) \)
+	</div>
+	</div>
 </div>
 
-	<div class='container'>
-		<div class='col'>
-		
-	<figure>
-	<img src='' width='%'/>
-	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
-	</figure>
-	 
-	
-		</div>
-		<div class='col'>
-			<div class="fragment">
-				<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
-				This lead to the minimum dilation expression: <br>
-				<div class='equationBox'>
-				\( D_{min}= \chi_i \psi_i \)
-				</div> <br>
-				Further combination with the yield surface leads to the following expression: <br>
+</div>
+</div>
 
-				<div class='equationBox'>
-				\( p'_{i, \ max}= p' \exp \left(- \cfrac{\chi_i \psi_i }{M_{i, tc}} \right) \)
-				</div>
-				</div>
-				
-				 </div>
-		</div>
-		</div>
+
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>NorSand yield function</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	<p> Note that integration leads to a similar yield surface as for the OCC model <br>
+		<div class='equationBox'>
+		\( q= M_ip' \left[1- \ln \left(\cfrac{p'}{p'_i} \right) \right] \)
+		</div> <br>
+		Where \(p_i\) is the pressure corresponding to the image condition of \(M_i\) or image mean stress.
+	</p>
+</div>
+
+<p class="fragment">Note that \(\psi_i=e-e_{ci}\), with \(e_{ci}= \Gamma -\lambda \ln(p_i)\) or: <br>
+<div class="fragment">
+<div class='equationBox' style="margin-left: 500px;">
+\( \psi_i= \psi + \lambda \ln \left(\cfrac{p'_i}{p'}  \right) \)
+</div>
+
+</div>
+</p>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We still need to define an expression for \(\chi_i\) and define the maximum dilation condition in the yield surface.
+</div>
+<div class='container'>
+<div class='col bordered'>
+
+<p class="fragment" style="font-size: 0.9em;">Let's start writing the yield surface at minimum dilation: <br>
+	\( \begin{align}
+	\eta_{max}&= M_i \left[1- \ln \left(\cfrac{p'}{p'_i} \right)_{min} \right]   \\
+	\eta_{max} -M_i&=- M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
+D^p_{min} &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min}
+	\end{align} \)
+
+</p>	
+</div>
+<div class='col bordered'>
+<p class="fragment" style="font-size: 0.7em;">
+\( \begin{align}
+\cfrac{M(\theta)}{M_{tc}} \chi_i \psi_i &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
+\cfrac{p'_{min}}{p_i}&=  \exp \left(- \cfrac{M_{tc}}{M(\theta)M_i} \chi_i \psi_i \right) 
+\end{align} \)
+
+
+
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+This leads to the minimum dilation extra yield surface: <br>
+<div class='equationBox'>
+\( p'_{min}= p_i \exp \left(- \cfrac{\chi_i \psi_i}{M_{itc}}  \right)   \)
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<figure>
+<img src='FiguresGeneral/NorSand_yield.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We can now find an expression for \(\chi_i\).
+</div>
+<div class='container'>
+<div class='col'>
+	<p class="fragment" style="font-size: 0.8em;"> Start using the CSL equation to define:
+		\( \begin{align}
+		\psi_i&= \psi_{Dmin} + \lambda \ln \left(\cfrac{p'_i}{p'}  \right)_{min} \\
+		\psi_i &= \psi_{Dmin} - \lambda \frac{D^p_{min}}{M_i} \\
+		1&= \cfrac{\psi_{Dmin}}{\psi_i} - \lambda \frac{D^p_{min}}{M_i \psi_i} \\
+		1&= \cfrac{\chi_i}{\chi_{tc}} - \lambda \frac{M(\theta) \chi_i \psi_i}{M_{tc}M_i \psi_i} \\
+		1&= \chi_i \cfrac{M_{itc}- \lambda \chi_{tc}}{M_{itc}\chi_{tc}} \\
+		\end{align} \)
+		
+		</p>
+</div>
+<div class='col'>
+<p class="fragment"> Finally: <br>
+	\( \begin{align}
+	\chi_i&= \cfrac{M_{itc}\chi_{tc}}{M_{itc}- \lambda \chi_{tc}} \\
+	\end{align} \)
+	
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	Rearranging and particularizing for Tx compression: <br>
+	<div class='equationBox'>
+	\( \chi_i= \cfrac{\chi_{tc}}{1- \frac{\lambda \chi_{tc}}{M_{tc}}} \)
+	</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Hardening/softening rule</h1>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.x</h1>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.x</h1>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.</h1>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.</h1>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Advantages/disadvantages</h1>
+
 </section>
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
