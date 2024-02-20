@@ -1,0 +1,1070 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
+		<title>CIE-598: Constitutive modelling</title>
+	
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black_bears.css" id="theme">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="plugin/chalkboard/style.css">
+		<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+		<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+		<script type="text/javascript" src="https://flashphoner.com/downloads/builds/flashphoner_client/wcs_api-2.0/current/flashphoner.js"></script> 
+		<script type="text/javascript" src="./plugin/screen_sharing/screen-sharing-min.js"></script>
+		<!-- Shares the screen -->
+	
+	</head>
+	  <body onload="init_api()">
+	
+		<div class="reveal">
+	
+		  <div class="slides">
+					<style>
+					.container{
+							display: flex;
+					}
+					.col{
+							flex: 1;
+					}
+	
+					</style>
+	
+					<div class='footer'>
+						CIE-598
+						Spring 2024
+					</div>
+	
+					<style>
+					.reveal .slides section .fragment.fade-down {
+							opacity: 1;
+							visibility: visible;
+					}
+					.reveal .slides section .fragment.fade-down.visible,
+					.reveal .slides section .fragment.visible:not(.current-fragment) {
+							opacity: 1;
+							margin-top:0px;
+						}
+					.reveal .slides section .fragment.fade-down,
+					.reveal .slides section .fragment.current-fragment {
+							color: #000;
+							margin-top:0px;
+					}
+	
+	
+				</style>
+	
+				<style >
+	
+				.circle {
+			width: 80px;
+			line-height: 80px;
+			border-radius: 50%;
+			text-align: center;
+			font-size: 32px;
+			border: 10px solid #296B64;
+		  }
+		</style>
+				<!-- <section> -->
+					<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+						<div style="margin-top:300px;margin-left:0px" class="qrCode_cont" name="Get pdf">
+							<div class="qrCode" name="https://drive.google.com/file/d/1tabORAfEtP6aHj1GonZReDatCj7_W7Sg/view?usp=sharing"> </div>
+						</div>
+			
+						<div style="margin-top:-350px;margin-left: 600px;margin-right:0px" class="title_slide" name="Module 4: Critical state plasticity">
+							<p style="color:#faffff; font-size:35px">Luis Zambrano-Cruzatty, Ph.D.</p>
+							<p style="color:#faffff; font-size:35px">Spring 2024</p>
+							<!-- <p style="color:#faffff; font-size:35px"> February 8, 2023</p> -->
+							<span id="spanDate_text" style="color:#faffff; font-size:35px"></span>
+						</div>
+					</section>
+
+
+        <section data-background-image="FiguresGeneral/Normal_slide_Maine.svg">
+					<h1>Contents</h1>
+
+					<div class='container'>
+					<div class='col'>
+						<ul class="contentStyle" style="margin-top: -50px;">
+							<li class='l1'>Critical state axioms</li>
+							<li class="l1">Critical state line</li>
+							<li class="l1">Stress-dilation rel. </li>								
+							<li class='l1'>OCC yield surface</li>
+							<li class='l1'>NorSand model</li>
+							<li class="l1">Examples </li>								
+												
+						</ul>
+					</div>
+					<div class='col'>
+						<div class='container'>
+							<div class='col'>
+								<div class="stickynote" style="margin-top: 100px;margin-left: 75px;">
+									<p style="margin-top: -10px;"> Objectives covered in this lecture</p>
+									<ul>
+										<li>[O2]: Describe the fundamentals of elasticity, plasticity, and viscoplasticity and generate or successfully calibrate 					constitutive models for engineering applications.</li>
+									</ul>
+								</div>
+							</div>
+							<div class='col'>
+							<div class='stickynote' style='margin-top: 100px;margin-left: 75px;'>
+								<p style="margin-top: -20px;">After this lecture we will able to:</p>
+								<ul style="margin-top: -15px;">
+									<li>Describe critical state theory</li>
+									<li>Understand the NorSand model</li>					
+									<li>Run drained and undrained elemental tests</li>											
+								</ul>
+							</div>
+							</div>
+							</div>
+					</div>
+					</div>
+				</section>
+
+<!--
+ #####  ####### #     # ####### ####### #     # #######  #####
+#     # #     # ##    #    #    #       ##    #    #    #     #
+#       #     # # #   #    #    #       # #   #    #    #
+#       #     # #  #  #    #    #####   #  #  #    #     #####
+#       #     # #   # #    #    #       #   # #    #          #
+#     # #     # #    ##    #    #       #    ##    #    #     #
+ #####  ####### #     #    #    ####### #     #    #     #####
+-->
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>critical state theory</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Critical state theory is a <strong style='color:#7abbe6'>useful framework</strong> to describe the behavior of soils. It is based on the concept that at large strains, soils tend to evolve towards a <strong style='color:#7abbe6'>critical state</strong> that is independent of the initial conditions.
+</div>
+
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/sameq_difmean.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+
+<div class="fragment">
+	<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+		Idea #1: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> initial density have <strong style='color:#7abbe6'>equal ultimate strength</strong>. <br>
+		
+		<div class='equationBox' style="margin-left: 200px;">
+		\( q_c= M_c p'_c \)
+		</div> <br>
+		
+		\(M_c=\) critical friction ratio
+		</div>
+
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/voids_critical.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+		Idea #2: At <strong style='color:#7abbe6'>equal mean stress</strong>, materials with <strong style='color:#7abbe6'>different</strong> densities have <strong style='color:#7abbe6'>equal ultimate void ratio</strong> also called <span class='atb'>critical void ratio</span>. <br>
+		
+		<div class='equationBox'>
+		\( e_{c}(p')= \Gamma - \lambda \ln (p') \)
+		</div>
+		</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+<div class='container'>
+<div class='col'>
+
+<div class="fragment">  
+	<div class='textBox' style='margin-top: 50px;margin-left: 0px;'>
+		The equations from ideas #1 and #2 are used to define the <span class='atb'>critical state line</span>.
+	</div>
+
+</div>	
+
+</div>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/CSL.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>State parameter</h1>
+<div class='defBox' name='State parameter ' style='margin-top: 0px;margin-left: 0px;'>
+<strong style='color:green'>\( \psi:\)</strong> Is the vertical distance between the <strong style='color:#7abbe6'>current</strong> void ratio and the <strong style='color:#7abbe6'>critical</strong> void ratio. <br>
+<div class='equationBox'>
+\( \psi= e- e_c \)
+</div>
+</div>
+
+<figure>
+<img src='FiguresGeneral/state_param.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>critical state axioms</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Apart from establishing the critical state line, critical state theory also provides a set of axioms that are used to describe the behavior of soils.
+</div>
+
+<div class='theorem2' name='Axiom 1:' style='margin-top: 0px;margin-left: 0px;'>
+	At large deformation, the deviatoric stress is steady. <br>
+	<div class='equationBox'> 
+	\( \frac{\partial q}{\partial \varepsilon_q}=0 \)
+	</div>
+</div>
+<div class='theorem2' name='Axiom 2:' style='margin-top: 0px;margin-left: 0px;'>
+	At large deformation, the mean stress is steady. <br>
+	<div class='equationBox'> 
+	\( \frac{\partial p}{\partial \varepsilon_q}=0 \)
+	</div>
+</div>
+<div class='theorem2' name='Axiom 3:' style='margin-top: 0px;margin-left: 0px;'>
+	At large deformation, there is no volume change. <br>
+	<div class='equationBox'> 
+	\( \frac{\partial \varepsilon_v}{\partial \varepsilon_q}=D=0 \)
+	</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Stress-dilation</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Now, we will use the energy density equation to derive a theoretical relationship between stress and dilation.
+</div>
+
+<p class="fragment">
+	\( \begin{align}
+	\dot{W}^p&= q \dot{\varepsilon}^p_q + p' \dot{\varepsilon}^p_v \\
+	\cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= \cfrac{q}{p'} + \cfrac{\dot{\varepsilon}_v^p}{\dot{\varepsilon}_q^p} \\
+	\cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= \eta + D^p\\
+	\end{align} \)
+</p>
+
+<div class="fragment">
+	<div class='textBox' style='margin-top: 50px;margin-left: 0px;'>
+	Where \( \eta \) is the <strong style='color:#7abbe6'>stress ratio</strong>. Now, take the limit when \( \dot{\varepsilon}_q^p \rightarrow \infty \).
+</div>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<p> 
+\( \begin{align}
+\lim_{\dot{\varepsilon}_q^p \rightarrow  \infty} \cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= \lim_{\dot{\varepsilon}_q^p \rightarrow  \infty} ( \eta + D^p ) \\
+\lim_{\dot{\varepsilon}_q^p \rightarrow  \infty} \cfrac{\dot{W}^p}{p' \dot{\varepsilon}_q^p} &= M_c
+\end{align} \)
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 50px;margin-left: 0px;'>
+At first Roscoe and Schofield proposed that \( M_c \) was a constant. This lead to the development of the <strong style='color:#7abbe6'>Camclay model</strong>. Using this proposition we obtain: <br>
+
+<div class='equationBox' style="margin-left: 300px;">
+\( M_c= \eta + D^p \)
+</div>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Original Camclay model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The original Camclay model was proposed by Roscoe and Schofield in 1958. It is a <strong style='color:#7abbe6'>critical state model</strong> with associative <strong style='color:#7abbe6'>capped yield surface</strong>.
+</div>
+
+<div class='container'>
+<div class='col bordered'>
+	<p class="fragment">
+		\( \begin{align}
+		q &= \eta p' \\
+		\dot{q} &= \dot{\eta} p' + \eta \dot{p}'  \\		
+		\end{align} \)
+	</p>
+	<p class="fragment"> By normality: <br>
+	\( \begin{align}
+	\frac{\dot{q}}{\dot{p}'} &= - D^p\\
+	\end{align} \)</p>
+</div>
+<div class='col bordered'>
+<p class="fragment">
+\( \begin{align}
+-D^p \dot{p}' &= \dot{\eta} p'+ \eta \dot{p}'  \\
+(-M_c+ \eta -\eta) \dot{p}' &= \dot{\eta} p' \\
+-\int  \cfrac{\dot{p}'}{p'} &= \int  \cfrac{ \dot{\eta}   }{M_c} \\
+\end{align} \)
+
+</p>
+<p class="fragment">
+	\(-\ln(p')+C= \eta/M_c\)
+</p>
+</div>
+</div>
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Now we evaluate the previous equation with condition: \( p'=p'_c \) and \( \eta=M_c\). Where \(p'_c\) is the critical mean effective stress.
+</div>
+
+<div class='container'>
+<div class='col'>
+<p class="fragment">
+	\begin{align}
+	-\ln(p'_c)+C&= 1 \\
+	C&= 1 + \ln(p'_c) \\
+	-\ln(p')+1+\ln(p'_c)&= \eta/M_c \\
+
+	\end{align}
+</p>
+
+<div class="fragment">
+
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+This is the OCC yield surface:
+<div class='equationBox'>
+\( q= M_cp' \left[1 - \ln \left(\cfrac{p'}{p'_c} \right) \right] \)
+</div>
+</div>
+
+</div>
+</div>
+<div class='col'>
+<figure>
+<img class="fragment"  src='FiguresGeneral/OCC.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>NorSand model</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The NorSand model developed by Jefferies in 1993 is a <strong style='color:#7abbe6'>critical state model</strong> with <strong style='color:#7abbe6'>associative flow rule</strong>.
+</div>
+
+<p class="fragment"> The model uses the stress-path dependent model discussed in the previous section to generalize the model. </p>
+
+<div class='equationBox'>
+\( M(\theta)= M_{tc} - \cfrac{M_{tc}^2}{3+M_{tc}} \cos \left(\cfrac{3 \theta}{4} + \cfrac{\pi}{4}\right) \)
+</div>
+<p class="fragment" style="margin-top: 80px;">Where \(M_{tc}\) is the critical friction ratio for triaxial compression.</p>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+
+	<h1>Minimum dilation</h1>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Further inspection of stress-dilation curves shows that dilation can not let pass of a minimum value.
+	</div>
+	
+<div class='container'>
+<div class='col'>
+	<figure>
+		<img src='FiguresGeneral/Min_dil_path.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+		</figure>
+</div>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/min_dil_jeff.PNG' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+</div>
+
+
+	</section>
+
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+From observations, the following relationship is proposed to regulate the minimum dilation in the model. <br>
+
+<div class='equationBox' style="margin-left: 450px;">
+\( D_{min}= \chi_{tc} \psi_{Dmin} = \chi_i \psi_i \)
+</div> <br>
+Where \( \chi_{tc} \) is the dilation coefficient for triaxial compression, \(\psi_{Dmin}\) is the state parameter at minimum dilation, \(\chi_i\) is the <strong style='color:#7abbe6'>state dilatancy</strong>, and \(\psi_i\) is the <strong style='color:#7abbe6'>image state parameter</strong>. We'll discuss the image condition in the next section.
+</div>
+
+<p class="fragment" style="margin-top: 100px;">Now let us define a better stress-dilation function and define the yield surface for NorSand.   </p>
+
+</section>	
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Jefferies recognized that the normalized dissipation of work was not constant. He instead let it change and called it \(M_i\) to distinguish from the critical friction ratio: <br>
+	<div class='equationBox' style="margin-left: 300px;">
+	\( M_i= \eta +D^p \)
+	</div> <br>
+	Where \( M_i \) is the image friction ratio.
+	</div>
+
+	<p class="fragment"> Furthermore, the slope at max stress ratio and min dilation is not 1:1. Thus they used Nova's volumetric coupling (\(N\)) to fix that problem using: <br>
+	\(D^p_{min}= \cfrac{M_{c}(\theta) - \eta_{max}}{(1-N)}\) <br>
+	Or: <br>
+	\(M_i= -D_{min}^p (1-N) + M(\theta) + D^p_{min}\)
+
+	</p>
+	
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+		<p>Recognizing that the minimum dilation needs 3D generalization, the following is proposed: <br>
+			<div class='equationBox' style="margin-left: 400px;">
+			\( D^p_{min}= \cfrac{M(\theta)}{M_{tc}} \chi_i \psi_i \)
+			</div>
+			</p>
+	</div>
+
+
+<div class='container'>
+<div class='col'>
+	<p class="fragment">And then replacing in the previous equation: <br>
+		\( \begin{align}
+		
+		M_i&= M(\theta) + D^p_{min}N \\
+		M_i&= M(\theta) \left(1+ \cfrac{\chi_i \psi_i N }{M_{tc}} \right)
+		\end{align} \)</p>
+		
+</div>
+<div class='col'>
+
+<div class="fragment">
+
+	<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	It is observed that a symmetric version of this equation yields better fit with data: <br>
+	<div class='equationBox'>
+	\( M_i= M(\theta) \left(1- \cfrac{N \chi_i |\psi_i| }{M_{tc}} \right) \)
+	</div>
+	</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>NorSand yield function</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	<p> Note that integration leads to a similar yield surface as for the OCC model <br>
+		<div class='equationBox'>
+		\( q= M_ip' \left[1- \ln \left(\cfrac{p'}{p'_i} \right) \right] \)
+		</div> <br>
+		Where \(p_i\) is the pressure corresponding to the image condition of \(M_i\) or image mean stress.
+	</p>
+</div>
+
+<p class="fragment">Note that \(\psi_i=e-e_{ci}\), with \(e_{ci}= \Gamma -\lambda \ln(p_i)\) or: <br>
+<div class="fragment">
+<div class='equationBox' style="margin-left: 500px;">
+\( \psi_i= \psi + \lambda \ln \left(\cfrac{p'_i}{p'}  \right) \)
+</div>
+
+</div>
+</p>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We still need to define an expression for \(\chi_i\) and define the maximum dilation condition in the yield surface.
+</div>
+<div class='container'>
+<div class='col bordered'>
+
+<p class="fragment" style="font-size: 0.9em;">Let's start writing the yield surface at minimum dilation: <br>
+	\( \begin{align}
+	\eta_{max}&= M_i \left[1- \ln \left(\cfrac{p'}{p'_i} \right)_{min} \right]   \\
+	\eta_{max} -M_i&=- M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
+-D^p_{min} &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min}
+	\end{align} \)
+
+</p>	
+</div>
+<div class='col bordered'>
+<p class="fragment" style="font-size: 0.7em;">
+\( \begin{align}
+\cfrac{M(\theta)}{M_{tc}} \chi_i \psi_i &=  M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
+\cfrac{p'_{min}}{p_i}&=  \exp \left( \cfrac{M_{tc}}{M(\theta)M_i} \chi_i \psi_i \right) 
+\end{align} \)
+
+
+
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+This leads to the minimum dilation extra yield surface: <br>
+<div class='equationBox'>
+\( p'_{min}= p_i \exp \left( \cfrac{\chi_i \psi_i}{M_{itc}}  \right)   \)
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<figure>
+<img src='FiguresGeneral/NorSand_yield.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We can now find an expression for \(\chi_i\).
+</div>
+<div class='container'>
+<div class='col'>
+	<p class="fragment" style="font-size: 0.8em;"> Start using the CSL equation to define:
+		\( \begin{align}
+		\psi_i&= \psi_{Dmin} + \lambda \ln \left(\cfrac{p'_i}{p'}  \right)_{min} \\
+		\psi_i &= \psi_{Dmin} - \lambda \frac{D^p_{min}}{M_i} \\
+		1&= \cfrac{\psi_{Dmin}}{\psi_i} - \lambda \frac{D^p_{min}}{M_i \psi_i} \\
+		1&= \cfrac{\chi_i}{\chi_{tc}} - \lambda \frac{M(\theta) \chi_i \psi_i}{M_{tc}M_i \psi_i} \\
+		1&= \chi_i \cfrac{M_{itc}- \lambda \chi_{tc}}{M_{itc}\chi_{tc}} \\
+		\end{align} \)
+		
+		</p>
+</div>
+<div class='col'>
+<p class="fragment"> Finally: <br>
+	\( \begin{align}
+	\chi_i&= \cfrac{M_{itc}\chi_{tc}}{M_{itc}- \lambda \chi_{tc}} \\
+	\end{align} \)
+	
+</p>
+
+<div class="fragment">
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
+	Rearranging and particularizing for Tx compression: <br>
+	<div class='equationBox'>
+	\( \chi_i= \cfrac{\chi_{tc}}{1- \frac{\lambda \chi_{tc}}{M_{tc}}} \)
+	</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
+<h1>Hardening/softening rule</h1>
+
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The original harding/softening rule of NorSand is the following <br>
+ 
+\(\cfrac{\partial p_i}{\partial \varepsilon^q_p}= h (p'_{i \ min} - p'_i )\) <br>
+
+Where \(h\) is the hardening parameter, which can be related to the initial state parameter as: <br>
+
+<div class='equationBox' style="margin-left: 300px;" >
+\( h= h_0 + b \psi_0 \)
+</div>
+</div>
+
+<div class="fragment">
+	<p>Later <strong style='color:#7abbe6'>empirical developments</strong> lead to the current version of the hardening/softening law: <br>
+		<div class='equationBox'>
+		\( \cfrac{\partial p_i}{\partial \varepsilon^q_p}= h \left( \cfrac{p'}{p'_i} \right)^2 \left[\exp \left(\cfrac{-\chi_i \psi_i}{M_{itc}}\right) - \cfrac{p'_i}{p'} \right] p'_i\)
+		</div>		
+	</p>
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Summary of NorSand Equations</h1>
+<table style="font-size: 0.75em; background-color: antiquewhite;">
+<tr>
+	<th>Aspect of NorSand</th>
+	<th>Equations</th>	
+</tr>
+
+<tr>
+	<th>Internal model parameters</th>
+	<th> \(\psi_i= \psi - \lambda \ln (p'_i/p')\) where \(\psi=e-e_c\) <br>
+		\(\chi_i= \chi_{tc}/(1-\chi_{tc}\lambda/M_{tc})\) <br>
+		\(M_i= M(1- \chi_i N |\psi_i| /M_{tc})\)
+	</th>	
+</tr>
+
+<tr>
+	<th>Critical state</th>
+	<th> \(e_c= \Gamma - \lambda \ln(p')\) <br>
+		\(M= M_{tc}- (M_{tc}^2/(3+ M_{tc})) \cos(3\theta/2 + \pi/4) \)
+	</th>	
+</tr>
+
+<tr>
+	<th>Yield surface and internal cap</th>
+	<th> \(q= p'M_i[1- \ln (p'/p'_i)]  \) with \(p'_{min}= p'_i \exp (\chi_i \psi_i/ M_{itc}) \)
+	</th>	
+</tr>
+
+<tr>
+	<th>Hardening rule</th>
+	<th> \(\cfrac{\partial p_i}{\partial \varepsilon^q_p}= h \left( \cfrac{p'}{p'_i} \right)^2 \left[\exp \left(\cfrac{-\chi_i \psi_i}{M_{itc}}\right) - \cfrac{p'_i}{p'} \right] p'_i\)
+	</th>	
+</tr>
+
+<tr>
+
+	<th>Stress-dilatancy</th>
+	<th> \(D^p= M_i -\eta \)
+	</th>
+</tr>
+
+<tr>
+
+	<th>Elasticity</th>
+	<th>Usually depending on confinement and void ratio
+	</th>
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICD-Tx test using NorSand on a normally consolidated sample with the following parameters: <br>
+
+<div class='container'>
+<div class='col'>
+	<table style="font-size: 0.75em;"> 
+		<tr>
+			<th>Parameter</th>
+			<th>Value</th>
+		</tr>
+		<tr>
+			<td>Initial void ratio</td>
+			<td>0.4</td>
+		</tr>
+		<tr>
+			<td>Initial mean effective stress</td>
+			<td>140 kPa</td>
+		</tr>
+		<tr>
+			<td>\(M_{tc}\)</td>
+			<td>1.26</td>
+		</tr>
+		<tr>
+			<td>\(\lambda\)</td>
+			<td>0.15</td>
+		</tr>
+		<tr>
+			<td>\(\Gamma\)</td>
+			<td>1.2</td>
+		</tr>
+		<tr>
+			<td>\(h_0\)</td>
+			<td>150</td>
+		</tr>
+		<tr>
+			<td>\(b\)</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>\(N\)</td>
+			<td>0.4</td>
+		</tr>
+		<tr>
+			<td>\(\chi_{tc}\)</td>
+			<td>3.5</td>
+		</tr>
+	
+	
+	
+	
+	</table>
+</div>
+<div class='col'>
+	<table style="font-size: 0.75em;"> 
+		<tr>
+			<th>Parameter</th>
+			<th>Value</th>
+		</tr>
+		<tr>
+			<td>\(G_0\) @ \(p_{atm}\) </td>
+			<td>50000 kPa</td>
+		</tr>
+		<tr>
+			<td>\(n\)</td>
+			<td>0.5</td>
+		</tr>
+		<tr>
+			<td>\(\nu'\)</td>
+			<td>0.2</td>
+		</tr>
+
+	
+	
+	
+	
+	</table>
+</div>
+</div>
+
+
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.7</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICD-Tx test using NorSand on a normally consolidated sample with same parameters but \(e_0=0.85\): <br>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.8</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICU-Tx test using NorSand on a normally consolidated sample with same parameters as in 4.7 <br>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.9</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICU-Tx test using NorSand on a normally consolidated sample with same parameters as in 4.7 but \(e_0=0.85\) <br>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+<div class='container'>
+<div class='col bordered'>
+<h4>Strengths</h4>
+
+<ul style="font-size: 0.9em;">
+	<li class='fragment'>Critical state based model</li>
+	<li class='fragment'>Unique set of parameters can simulate a large range of soil behavior.</li>
+	<li class='fragment'>Capable of accurately capturing soil dilation</li>
+	<li class='fragment'>Can be used for <strong style='color:#7abbe6'>sands and clay</strong></li>
+	<li class='fragment'>Can reproduce eodometric loading</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Excellent</strong> for <strong style='color:#7abbe6'>static liquefaction</strong></li>
+	<li class='fragment'>Stress-path dependent</li>
+</ul>
+
+</div>
+<div class='col bordered'>
+<h4>Limitations</h4>
+<ul style="font-size: 0.9em;">
+	<li class='fragment'>As it is can not capture <strong style='color:#7abbe6'>liquefaction triggering</strong></li>
+	<li class='fragment'> Expensive to calibrate</li>
+	<li class='fragment'> Moderately difficult to implement</li>
+	<li class='fragment'> Non-linearity of model makes it slow compared to previous models.</li>
+	<li class='fragment'>Can not capture more advanced features such as particle breakage, cementation, viscosity, suction.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  SCRIIPTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+
+
+
+
+
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_text").innerHTML = months[today.getMonth()] + " " + today.getDate()+ ", " + today.getFullYear();
+</script>
+<script type="text/javascript">
+	var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+   var today = new Date();
+   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+<script type="text/javascript">
+		var months = ['January','February','March','April','May','June','July',
+'August','September','October','November','December'];
+	   var today = new Date();
+	   today.setTime(today.getTime());
+document.getElementById("spanDate_number").innerHTML = today.getMonth() + "." + today.getDate()+ "." + today.getFullYear();
+</script>
+
+
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/qrcode/qrcode.js"></script>
+<script src="plugin/complete_box/complete_box.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/fullscreen/plugin.js"></script>
+<script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+<script src="plugin/chalkboard/plugin.js"></script>
+<!-- <script src="plugin/audio-slideshow/plugin.js"></script>
+<script src="plugin/audio-slideshow/RecordRTC.js"></script>
+<script src="plugin/audio-slideshow/recorder.js"></script> -->
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/customcontrols/plugin.js"></script>
+<script>
+
+Reveal.configure({ pdfMaxPagesPerSlide: 1 ,
+								   pdfSeparateFragments: false});
+// Also available as an ES module, see:
+// https://revealjs.com/initialization/
+Reveal.initialize({
+   dependencies: [
+	   { src: 'plugin/mouse-pointer/mouse-pointer.js' } , { src: 'plugin/spotlight/spotlight.js' },   ],
+   controls: true,
+   progress: true,
+   center: false,
+   hash: true,
+   transition: 'fade',
+   slideNumber: 'c/t',
+   autoPlayMedia: true,
+   defaultTiming: 120,
+   width: 1280,
+   height: 720,
+   math: {
+	   mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+	   config: 'TeX-AMS_HTML-full',
+	   tex2jax: {
+		   inlineMath: [['\\(','\\)']],
+		   displayMath: [['\\[','\\]']],
+		   balanceBraces: true,
+		   processEscapes: false,
+		   processRefs: true,
+		   processEnvironments: true,
+		   preview: 'TeX',
+		   skipTags: ['script','noscript','style','textarea','pre','code'],
+		   ignoreClass: 'tex2jax_ignore',
+		   processClass: 'tex2jax_process'
+	   },
+   },
+
+   spotlight: {
+
+		   // size of the spotlight
+		   size: 100,
+
+		   // true: Locks the mouse pointer inside the presentation
+		   // there is by design (Pointer Lock API) no spotlightCursor and presentingCursor
+		   // displayed regardless of the configured values
+		   lockPointerInsideCanvas: false,
+
+		   // toggle spotlight by holding down the mouse key
+		   toggleSpotlightOnMouseDown: false,
+
+		   // the keyCode pressed and held to turn on spotlight, disabled when set to false
+		   // Problems with this config? Maybe your touchpad is disabled on keypress?
+		   spotlightOnKeyPressAndHold: true,
+
+		   // choose the cursor when spotlight is on. Maybe "crosshair"?
+		   spotlightCursor: 'default',
+
+		   // choose the cursor when spotlight is off and in presentation mode. Maybe "default"?
+		   presentingCursor: 'default',
+
+		   // true: initially in presentation mode, will also be ture if this is not set and toggleSpotlightOnMouseDown is true
+		   initialPresentationMode: true,
+
+		   // true: disable selecting in presentation mode
+		   disablingUserSelect: false,
+
+		   // set to a number as transition duration in ms to enable fade in and out, disabled when set to false
+		   fadeInAndOut: 100,
+
+		   // enable pointer mode
+		   useAsPointer: false,
+
+		   // pointer color (If pointer mode enabled)
+		   pointerColor: 'red'
+   },
+
+   keyboard: {
+		   // alternative to toggleSpotlightOnMouseDown:
+		   // toggle spotlight by pressing key 'c'
+		   32: function() { RevealSpotlight.toggleSpotlight() },
+
+		   // enter/leave presentation mode by pressing key 'p'
+		   80: function() {
+			   RevealSpotlight.togglePresentationMode();
+		   },
+   },
+
+   // Push each slide change to the browser history
+   history: true,
+
+   menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+	   themes: false,
+	   transitions: false,
+	   markers: true,
+	   hideMissingTitles: true,
+	   custom: [
+						   { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+						   { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				   ]
+   },
+//
+// 			audio: {
+// 					prefix: 'chalkboard/',
+// 					suffix: '.ogg',
+// 					defaultDuration: 5,
+// //					textToSpeechURL: "http://api.voicerss.org/?key=[YOUR_KEY]&hl=en-gb&c=ogg&src=",
+// 					advance: 500,
+// 					autoplay: false,
+// 					defaultText: true,
+// 					playerOpacity: 0.2,
+// 				},
+   // ...
+   chalkboard: {
+				   boardmarkerWidth: 3,
+				   chalkWidth: 5,
+				   chalkEffect: 0.05,
+				   src: "chalkboard.json",
+				   // storage: ,
+				   readOnly: false,
+				   transition: 800,
+				   theme: "chalkboard",
+				   background: [ 'rgba(127,127,127,.1)' , path + 'img/blackboard.png' ],
+				   grid: { color: 'rgb(50,50,10,0.5)', distance: 40, width: 2},
+				   eraser: { src: path + 'img/sponge.png', radius: 20},
+				   boardmarkers : [
+								   { color: 'rgba(0,0,0,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto'},
+								   { color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto'},
+								   { color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto'},
+								   { color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto'},
+								   { color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto'},
+								   { color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto'},
+								   { color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto'}
+				   ],
+				   chalks: [
+								   { color: 'rgba(255,255,255,0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto'},
+								   { color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto'},
+								   { color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto'},
+								   { color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
+								   { color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
+								   { color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
+								   { color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
+				   ]
+		   },
+		   customcontrols: {
+			   controls: [
+				   { icon: '<i class="fa fa-pen-square"></i>',
+					   title: 'Toggle chalkboard (B)',
+					   action: 'RevealChalkboard.toggleChalkboard();'
+				   },
+				   { icon: '<i class="fa fa-pen"></i>',
+					   title: 'Toggle notes canvas (C)',
+					   action: 'RevealChalkboard.toggleNotesCanvas();'
+				   }
+			   ]
+		   },
+
+	   // ...
+   //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   // Learn about plugins: https://revealjs.com/plugins/
+   plugins: [ RevealCustomControls, RevealMath,RevealFullscreen, RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealChalkboard, RevealMenu
+					   ],
+						   // RevealAudioSlideshow, RevealAudioRecorder, RevealMenu, RevealCustomControls],
+	   });
+
+</script>
+
+</html>
