@@ -536,7 +536,7 @@ We still need to define an expression for \(\chi_i\) and define the maximum dila
 	\( \begin{align}
 	\eta_{max}&= M_i \left[1- \ln \left(\cfrac{p'}{p'_i} \right)_{min} \right]   \\
 	\eta_{max} -M_i&=- M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
-D^p_{min} &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min}
+-D^p_{min} &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min}
 	\end{align} \)
 
 </p>	
@@ -544,8 +544,8 @@ D^p_{min} &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min}
 <div class='col bordered'>
 <p class="fragment" style="font-size: 0.7em;">
 \( \begin{align}
-\cfrac{M(\theta)}{M_{tc}} \chi_i \psi_i &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
-\cfrac{p'_{min}}{p_i}&=  \exp \left(- \cfrac{M_{tc}}{M(\theta)M_i} \chi_i \psi_i \right) 
+\cfrac{M(\theta)}{M_{tc}} \chi_i \psi_i &=  M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min} \\
+\cfrac{p'_{min}}{p_i}&=  \exp \left( \cfrac{M_{tc}}{M(\theta)M_i} \chi_i \psi_i \right) 
 \end{align} \)
 
 
@@ -556,7 +556,7 @@ D^p_{min} &= - M_i  \ln \left(\cfrac{p'}{p'_i} \right)_{min}
 <div class='findingBox' style='margin-top: 0px;margin-left: 0px;'>
 This leads to the minimum dilation extra yield surface: <br>
 <div class='equationBox'>
-\( p'_{min}= p_i \exp \left(- \cfrac{\chi_i \psi_i}{M_{itc}}  \right)   \)
+\( p'_{min}= p_i \exp \left( \cfrac{\chi_i \psi_i}{M_{itc}}  \right)   \)
 </div>
 </div>
 
@@ -577,7 +577,7 @@ This leads to the minimum dilation extra yield surface: <br>
 </section>
 
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 We can now find an expression for \(\chi_i\).
 </div>
@@ -619,35 +619,222 @@ We can now find an expression for \(\chi_i\).
 </section>
 
 
-<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine _compression_pos.svg'>
 <h1>Hardening/softening rule</h1>
 
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The original harding/softening rule of NorSand is the following <br>
+ 
+\(\cfrac{\partial p_i}{\partial \varepsilon^q_p}= h (p'_{i \ min} - p'_i )\) <br>
+
+Where \(h\) is the hardening parameter, which can be related to the initial state parameter as: <br>
+
+<div class='equationBox' style="margin-left: 300px;" >
+\( h= h_0 + b \psi_0 \)
+</div>
+</div>
+
+<div class="fragment">
+	<p>Later <strong style='color:#7abbe6'>empirical developments</strong> lead to the current version of the hardening/softening law: <br>
+		<div class='equationBox'>
+		\( \cfrac{\partial p_i}{\partial \varepsilon^q_p}= h \left( \cfrac{p'}{p'_i} \right)^2 \left[\exp \left(\cfrac{-\chi_i \psi_i}{M_{itc}}\right) - \cfrac{p'_i}{p'} \right] p'_i\)
+		</div>		
+	</p>
+</div>
 </section>
 
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Example 5.x</h1>
+<h1>Summary of NorSand Equations</h1>
+<table style="font-size: 0.75em; background-color: antiquewhite;">
+<tr>
+	<th>Aspect of NorSand</th>
+	<th>Equations</th>	
+</tr>
+
+<tr>
+	<th>Internal model parameters</th>
+	<th> \(\psi_i= \psi - \lambda \ln (p'_i/p')\) where \(\psi=e-e_c\) <br>
+		\(\chi_i= \chi_{tc}/(1-\chi_{tc}\lambda/M_{tc})\) <br>
+		\(M_i= M(1- \chi_i N |\psi_i| /M_{tc})\)
+	</th>	
+</tr>
+
+<tr>
+	<th>Critical state</th>
+	<th> \(e_c= \Gamma - \lambda \ln(p')\) <br>
+		\(M= M_{tc}- (M_{tc}^2/(3+ M_{tc})) \cos(3\theta/2 + \pi/4) \)
+	</th>	
+</tr>
+
+<tr>
+	<th>Yield surface and internal cap</th>
+	<th> \(q= p'M_i[1- \ln (p'/p'_i)]  \) with \(p'_{min}= p'_i \exp (\chi_i \psi_i/ M_{itc}) \)
+	</th>	
+</tr>
+
+<tr>
+	<th>Hardening rule</th>
+	<th> \(\cfrac{\partial p_i}{\partial \varepsilon^q_p}= h \left( \cfrac{p'}{p'_i} \right)^2 \left[\exp \left(\cfrac{-\chi_i \psi_i}{M_{itc}}\right) - \cfrac{p'_i}{p'} \right] p'_i\)
+	</th>	
+</tr>
+
+<tr>
+
+	<th>Stress-dilatancy</th>
+	<th> \(D^p= M_i -\eta \)
+	</th>
+</tr>
+
+<tr>
+
+	<th>Elasticity</th>
+	<th>Usually depending on confinement and void ratio
+	</th>
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 4.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICD-Tx test using NorSand on a normally consolidated sample with the following parameters: <br>
+
+<div class='container'>
+<div class='col'>
+	<table style="font-size: 0.75em;"> 
+		<tr>
+			<th>Parameter</th>
+			<th>Value</th>
+		</tr>
+		<tr>
+			<td>Initial void ratio</td>
+			<td>0.4</td>
+		</tr>
+		<tr>
+			<td>Initial mean effective stress</td>
+			<td>140 kPa</td>
+		</tr>
+		<tr>
+			<td>\(M_{tc}\)</td>
+			<td>1.26</td>
+		</tr>
+		<tr>
+			<td>\(\lambda\)</td>
+			<td>0.15</td>
+		</tr>
+		<tr>
+			<td>\(\Gamma\)</td>
+			<td>1.2</td>
+		</tr>
+		<tr>
+			<td>\(h_0\)</td>
+			<td>150</td>
+		</tr>
+		<tr>
+			<td>\(b\)</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>\(N\)</td>
+			<td>0.4</td>
+		</tr>
+		<tr>
+			<td>\(\chi_{tc}\)</td>
+			<td>3.5</td>
+		</tr>
+	
+	
+	
+	
+	</table>
+</div>
+<div class='col'>
+	<table style="font-size: 0.75em;"> 
+		<tr>
+			<th>Parameter</th>
+			<th>Value</th>
+		</tr>
+		<tr>
+			<td>\(G_0\) @ \(p_{atm}\) </td>
+			<td>50000 kPa</td>
+		</tr>
+		<tr>
+			<td>\(n\)</td>
+			<td>0.5</td>
+		</tr>
+		<tr>
+			<td>\(\nu'\)</td>
+			<td>0.2</td>
+		</tr>
+
+	
+	
+	
+	
+	</table>
+</div>
+</div>
+
+
+</div>
 
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Example 5.x</h1>
-
+<h1>Example 4.7</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICD-Tx test using NorSand on a normally consolidated sample with same parameters but \(e_0=0.85\): <br>
+</div>
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Example 5.</h1>
-
+<h1>Example 4.8</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICU-Tx test using NorSand on a normally consolidated sample with same parameters as in 4.7 <br>
+</div>
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Example 5.</h1>
-
+<h1>Example 4.9</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Run a ICU-Tx test using NorSand on a normally consolidated sample with same parameters as in 4.7 but \(e_0=0.85\) <br>
+</div>
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Advantages/disadvantages</h1>
 
+<div class='container'>
+<div class='col bordered'>
+<h4>Strengths</h4>
+
+<ul style="font-size: 0.9em;">
+	<li class='fragment'>Critical state based model</li>
+	<li class='fragment'>Unique set of parameters can simulate a large range of soil behavior.</li>
+	<li class='fragment'>Capable of accurately capturing soil dilation</li>
+	<li class='fragment'>Can be used for <strong style='color:#7abbe6'>sands and clay</strong></li>
+	<li class='fragment'>Can reproduce eodometric loading</li>
+	<li class='fragment'><strong style='color:#7abbe6'>Excellent</strong> for <strong style='color:#7abbe6'>static liquefaction</strong></li>
+	<li class='fragment'>Stress-path dependent</li>
+</ul>
+
+</div>
+<div class='col bordered'>
+<h4>Limitations</h4>
+<ul style="font-size: 0.9em;">
+	<li class='fragment'>As it is can not capture <strong style='color:#7abbe6'>liquefaction triggering</strong></li>
+	<li class='fragment'> Expensive to calibrate</li>
+	<li class='fragment'> Moderately difficult to implement</li>
+	<li class='fragment'> Non-linearity of model makes it slow compared to previous models.</li>
+	<li class='fragment'>Can not capture more advanced features such as particle breakage, cementation, viscosity, suction.</li>
+</ul>
+</div>
+</div>
 </section>
 
 <section data-background-image="FiguresGeneral/Main_slide_Maine.svg">
