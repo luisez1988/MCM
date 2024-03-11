@@ -140,22 +140,439 @@
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Finite differences</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-	<p>Finite differences is a <strong style='color:#7abbe6'>numerical method</strong> to solve <strong style='color:#7abbe6'>ordinary differential equations</strong> (<span class='atb'>ODEs</span>) or <strong style='color:#7abbe6'>partial differential equations</strong> (<span class='atb'>PDEs</span>). It is based on the approximation of derivatives using Taylor's expansion.</p>
+	<p>Finite differences is a <strong style='color:#7abbe6'>numerical method</strong> to solve <strong style='color:#7abbe6'>ordinary differential equations</strong> (<span class='atb'>ODEs</span>) or <strong style='color:#7abbe6'>partial differential equations</strong> (<span class='atb'>PDEs</span>).</p>
 </div>
 
-<div class="fragment">
-	<div class='theorem2' name="Taylor's expansion" style='margin-top: 10px;margin-left: 0px;'>
-		For every \(f(x)\) continuous and derivable in the interval \(\mathcal{I}\equiv [x_1,x_2]\) with \(a \in \mathcal{I}\) the function can be expanded as function of its derivatives as:
-		
-		<p style="font-size: 0.9em;">\(f(x)=f(a)+f'(a) (x-a)+\frac{(x-a)^2}{2}f''(a)+\frac{(x-a)^3}{6}f'''(a)+\cdots\)</p>
+<p class="fragment">When the FD discretization is done with respect to <strong style='color:#7abbe6'>space</strong>, we call this a <span class='atb'>boundary value problem.</span></p>
+
+<p class="fragment">When the discretization is done with respect to <strong style='color:#7abbe6'>time</strong>, we call this a <span class='atb'>initial value problem</span>.</p>
+
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Forward approximation</h1>
+<div class='defBox' name='Forward approximation:' style='margin-top: 10px;margin-left: 0px;'> We can use the definition of derivative and get: <br>
+	<div class='equationBox'>
+	\( \frac{d u}{d x} \approx  \hat{u}^+_x = \cfrac{u(\bar{x} + h)- u(\bar{x})}{h}= \cfrac{u_{i+1}-u_i}{\Delta x_i} \)
+	</div>
+	</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/fordware_diference.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p>
+\(\hat{u}^+_x\)= Forward approximation<br> 	
+\(\bar{x}=x_i\)= point of interest<br>
+\(h=\Delta x_i\)= step size<br>
+\(u_i\)= value at point \(\bar{x}\)<br>
+\(u_{i+1}\)= value at point \(\bar{x}+h\)<br>
+</p>
+
+</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.1</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Approximate the numerical derivative of the function \(u(x)=3x^2+\sin(\pi x)\) from \(x=0\)	to \(x=1\). Evaluate the effect of the step size in the approximation.
+</div>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+	<h1>Backward approximation</h1>
+	<div class='defBox' name='Backward approximation:' style='margin-top: 10px;margin-left: 0px;'> From the definition of derivative and get: <br>
+		<div class='equationBox'>
+		\( \frac{d u}{d x} \approx  \hat{u}^-_x = \cfrac{u(\bar{x})- u(\bar{x}-h)}{h}= \cfrac{u_i-u_{i-1}}{\Delta x_{i-1}} \)
+		</div>
+	</div>
+	<div class='container'>
+		<div class='col'>
+		<figure>
+		<img src='FiguresGeneral/backware_diference.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+		</figure>
+		</div>
+		<div class='col'>
+		<p>
+		\(\hat{u}^-_x\)= Backward approximation<br> 	
+		\(\bar{x}=x_i\)= point of interest<br>
+		\(h=\Delta x_{i-1}\)= step size<br>
+		\(u_i\)= value at point \(\bar{x}\)<br>
+		\(u_{i-1}\)= value at point \(\bar{x}-h\)<br>
+		</p>
 		
 		</div>
+		</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.2</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Repeat Example 5.1 using the backward approximation. Compare results with the forward approximation.
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Centered approximation</h1>
+<div class='defBox' name='Centered approximation:' style='margin-top: 0px;margin-left: 0px;'>
+can be obtained as the average of the forward and backward approximations:
+	<div class='equationBox'>
+		\( \frac{d u}{d x} \approx  \hat{u}^0_x = \cfrac{u(\bar{x}+h)- u(\bar{x}-h)}{2h}= \cfrac{u_{i+1}-u_{i-1}}{\Delta x_{i-1}+\Delta x_i} \)
+	</div>
+</div>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/centered_diference.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p>
+\(\hat{u}^0_x\)= Centered approximation<br>
+\(\bar{x}=x_i\)= point of interest<br>
+\(\Delta x_{i-1} \ \text{and} \ \Delta x_i\)= step size<br>
+\(u_{i+1}\)= value at point \(\bar{x}+h\)<br>
+\(u_{i-1}\)= value at point \(\bar{x}-h\)<br>
+</div>
 </div>
 </section>
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.3</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Repeat Example 5.1 using the centered approximation. Compare results with the forward and backward approximations.
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Second order derivative</h1>
+<p style="font-size: 0.8em;"> Let's start with definition: <br>
+	\( \begin{align}
+	\frac{d^2 u}{d x^2} \approx \hat{u}_{xx} &= \cfrac{\hat{u}^-_{x}(\bar{x}+h) -  \hat{u}^-_{x}(\bar{x})}{h}\\
+	&= \cfrac{\cfrac{u(\bar{x}+h)- u(\bar{x})}{h}-\cfrac{u(\bar{x})- u(\bar{x}-h)}{h}}{h}\\
+	&= \cfrac{\cfrac{u_{i+1}-u_i}{\Delta x_i}- \cfrac{u_{i}-u_{i-1}}{\Delta x_{i-1}}}{\Delta x_i}\\
+	&= \cfrac{\Delta x_{i-1} u_{i+1}-u_i(\Delta x_{i} + \Delta x_{i-1}) - \Delta x_i u_{i-1}}{\Delta x_i^2 \Delta x_{i-1}}
+	\end{align} \)
+
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Second order derivative:' style='margin-top: 0px;margin-left: 0px;'>
+We can now express the second order derivative as:
+	<div class='equationBox'>
+		\( \hat{u}_{xx} =  \cfrac{\Delta x_{i-1} u_{i+1}-u_i(\Delta x_{i} + \Delta x_{i-1}) - \Delta x_i u_{i-1}}{\Delta x_i^2 \Delta x_{i-1}} \)
+	</div>
+</div>
+
+
+<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+Note that if the mesh discretization is uniform, leads to: <br>
+	<div class='equationBox'>
+		\( \hat{u}_{xx} =  \cfrac{u_{i+1}-2u_i + u_{i-1}}{\Delta x^2} \)
+	</div> <br>
+
+You need three nodes to calculate the second order derivative. One before (\(i-1\)), one at (\(i\)), and one after (\(i+1\)) the point of interest.
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.4</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'> Approximate the second derivative of the same function in problem 5.1. Evaluate the effect of the mesh discretization in the error.</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Boundary value problem</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+A boundary value problem is a differential equation that is solved in a domain \(\mathcal{\Omega}\) with boundary conditions at the edges of the domain \(\partial \Omega\).
+</div>
+
+<div class='defBox' name='Dirichlet boundary conditions' style='margin-top: 5px;margin-left: 0px;'>
+Dirichlet or <span class='atb'>essential</span> boundary conditions are given as:
+	<div class='equationBox'>
+		\( \boldsymbol{u}(\boldsymbol{x}_0)=\boldsymbol{u}_0 \forall \boldsymbol{x}_0 \in \partial \Omega^u \)
+	</div>
+
+</div>
+
+<div class='defBox' name='Neuman boundary condition' style='margin-top: 5px;margin-left: 0px;'>
+Neuman or <span class='atb'>natural</span> boundary conditions are given as:
+	<div class='equationBox'>
+		\( \boldsymbol{n} \cdot \nabla \boldsymbol{u}(\boldsymbol{x}_0)=\boldsymbol{q} \forall \boldsymbol{x}_0 \in \partial \Omega^\tau \)
+	</div>
+</div>
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.5</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+<ol>
+	<li>Use mass balance equation to derive an equation to describe groundwater flow assuming the water and the soil skeleton is incompressible and assuming Darcy's law is valid.</li>
+	<li>Define Dirichlet and Neuman boundary conditions of the problem.</li>
+	<li>Discretize the governing equations using finite difference methods.</li>
+	<li>Plot the velocity of water for the Figure below.</li>
+	<li>What is the total amount of water passing below the dam.</li>
+</ol>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.5</h1>
+<figure>
+<img src='FiguresGeneral/dam_problem.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<ol>
+<li class='fragment'> <strong style='color:#7abbe6'>Define</strong> <span class='atb'>governing equations</span> 
+<div class='container'>
+<div class='col'>
+<figure class="fragment">
+<img src='FiguresGeneral/ex55_bodies.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<p class="fragment">We will use a <strong style='color:#7abbe6'>fixed mesh</strong> \(\implies \) <strong style='color:#7abbe6'>Eulerian</strong> description of movement.</p>
+
+<p class="fragment">Start with general mass balance equation: <br>
+\( \frac{\partial \rho}{\partial t} + \rho \nabla \cdot \boldsymbol{v}= 0 \)
+</p>
+
+<p class="fragment">Apply incompressibility condition: <br>
+\(\nabla \cdot \boldsymbol{v}=0 \)
+</p>
+</div>
+</div>
+
+</li>
+
+</ol>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<p>We can impose the incompressibility the solid and water phase. Here, we focus in the water: <br>
+\(\nabla \cdot \boldsymbol{v}_w=0  \)
+</p>
+<div class="fragment">
+	<div class='defBox' name="Darcy's law:" style='margin-top: 0px;margin-left: 0px;'>
+		Darcy's law express the water seepage velocity as: <br>
+		<div class='equationBox'>
+		\( \boldsymbol{v}_w= \boldsymbol{k} \nabla h \)
+		</div> <br>
+		where \(\boldsymbol{k}\) is the hydraulic conductivity tensor and \(h\) is the total head.
+		</div>
+
+</div>
+<div class='container'>
+<div class='col bordered'>
+<p style="font-size: 0.9em;margin-top: -10px;" class="fragment">Now replace Darcy's law in the continuity equation: <br>
+\( \begin{align}
+\nabla \cdot \boldsymbol{v}_w&=0\\
+\nabla \cdot (\boldsymbol{k} \nabla h)&=0
+\end{align} \)
+</p>
+</div>
+<div class='col bordered'>
+<p style="font-size: 0.8em;margin-top: -10px;" class="fragment">
+\( \begin{align}
+\frac{\partial}{\partial x} (k_{x} \frac{\partial h}{\partial x}) + \frac{\partial}{\partial y} (k_{y} \frac{\partial h}{\partial y}) + \frac{\partial}{\partial z} (k_{z} \frac{\partial h}{\partial z})&=0\\
+k_x \frac{\partial^2 h}{\partial x^2} +k_y \frac{\partial^2 h}{\partial y^2} + k_z \frac{\partial^2 h}{\partial z^2}&=0
+
+\end{align} \)
+</p>
+</div>
+</div>
+
+
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='container'>
+<div class='col'>
+<figure>
+<img src='FiguresGeneral/ex55_bodies.svg' width='100%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+</div>
+<div class='col'>
+<h4>Governing Equations:</h4>
+
+<ol>
+	<li class='fragment'>2D mass balance: <br>
+	\(k_x \frac{\partial^2 h}{\partial x^2} + k_z \frac{\partial^2 h}{\partial z^2}=0\)
+	</li>
+
+	<li class='fragment'>Darcy's law: <br>
+	\(\boldsymbol{v}_w= \boldsymbol{k} \nabla h\)
+	</li>
+
+	<li class='fragment'>Dirichlet BC: <br>
+	\(h( \boldsymbol{x}_0 )= h_0 \forall \boldsymbol{x}_0 \in \partial \Omega^h \)
+	</li>
+
+	<li class='fragment'>Neuman BC:
+	\(\boldsymbol{n} \cdot \boldsymbol{k} \nabla h(\boldsymbol{x}_0)=q \forall \boldsymbol{x}_0 \in \partial \Omega^q \)
+	</li>
+</ol>
+
+</div>
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<ol start="2">
+<li> <strong style='color:#7abbe6'>Discretize</strong> the governing equations using <span class='atb'>finite differences</span>.
+	 <div class='container'>
+	 <div class='col'>
+	 <figure>
+	 <img src='FiguresGeneral/stencil.svg' width='100%'/>
+	 <footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	 </figure>
+	 </div>
+	 <div class='col'>
+	 <p>The <span class='atb'>stencil</span> used has <strong style='color:#7abbe6'>five</strong> nodes. In the center node we can define the derivatives as: <br>
+	\( \begin{align}
+	\frac{\partial^2 h }{\partial x^2}= \cfrac{h_{i+1,j}-2h_{i,j}+h_{i-1,j}}{\Delta x^2} \\
+	\frac{\partial^2 h }{\partial z^2}= \cfrac{h_{i,j+1}-2h_{i,j}+h_{i,j-1}}{\Delta z^2}
+	\end{align} \)
+	</p>
+	 </div>
+	 </div>
+<div class='findingBox' style='margin-top: 0px;margin-left: 0px; font-size: 0.85em;'>
+Now we can replace the derivatives in the mass balance equation: <br>
+\( \begin{align}
+k_x \cfrac{h_{i+1,j}-2h_{i,j}+h_{i-1,j}}{\Delta x^2} + k_z \cfrac{h_{i,j+1}-2h_{i,j}+h_{i,j-1}}{\Delta z^2}=0
+\end{align} \)
+
+</div>
+</li>	
+</ol>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We want to <strong style='color:#7abbe6'>find \(h_{i,j}\)</strong>, so therefore:
+	<div class='equationBox' style="font-size: 0.9em;">
+		\( \begin{align}
+		h_{i,j}= \cfrac{k_z \Delta x^2 h_{i+1,j}+k_x \Delta z^2 h_{i,j+1}+k_z \Delta x^2 h_{i-1,j}+k_x \Delta z^2 h_{i,j-1}}{2(k_x \Delta z^2 + k_z \Delta x^2)}
+		\end{align} \)
+	</div>
+</div>
+
+<p>If we want to get velocities in the domain, we must also discretize Darcy's equation: <br>
+	<div class='equationBox' style="margin-left: 500px;">
+		\( \begin{align}
+		v_{wx,ij}= k_x \cfrac{h_{i+1,j}-h_{i-1,j}}{2\Delta x} \\
+		v_{wz,ij}= k_z \cfrac{h_{i,j+1}-h_{i,j-1}}{2\Delta z}
+		\end{align} \) 
+	</div>
+<br>
+Here, the <strong style='color:#7abbe6'>centered</strong> approximation is used.
+</p>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+The same must be done for the Neuman boundary conditions. Either a forward or backward approximation should be used.</div>
+
+
+<div class='container'>
+	<div class='col'>
+	
+	<figure>
+	<img src='FiguresGeneral/border_right.svg' width='100%'/>
+	<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+	</figure>
+	
+	</div>
+	<div class='col'>
+	Example at <strong style='color:#7abbe6'>left face</strong>:
+		<div class='equationBox' style="font-size: 0.9em;">
+			\( \begin{align}
+			q_{ij}= n_x k_x \cfrac{h_{i+1,j}-h_{i,j}}{\Delta x}
+			\end{align} \)
+		</div>
+	</div>
+	</div>
+
+<div class='container'>
+<div class='col'>
+	<figure>
+		<img src='FiguresGeneral/border_left.svg' width='100%'/>
+		<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+		</figure>
+</div>
+<div class='col'>
+Example at <strong style='color:#7abbe6'>right face</strong>:
+	<div class='equationBox' style="font-size: 0.9em;">
+		\( \begin{align}
+		q_{ij}= n_x k_x \cfrac{h_{i,j}-h_{i-1,j}}{\Delta x}
+		\end{align} \)
+	</div>
+</div>
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<figure>
+<img src='FiguresGeneral/flowlines.svg' width='80%'/>
+<footer style='margin-top: px;font-size: 0.8em;'> <em></em> </footer>
+</figure>
+
+</section>
+
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+
+
+
 	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 		The objective is to <strong style='color:#7abbe6'>approximate</strong> derivatives.
+	</div>
+
+	<div class="fragment">
+		<div class='theorem2' name="Taylor's expansion" style='margin-top: 10px;margin-left: 0px;'>
+			For every \(f(x)\) continuous and derivable in the interval \(\mathcal{I}\equiv [x_1,x_2]\) with \(a \in \mathcal{I}\) the function can be expanded as function of its derivatives as:
+			
+			<p style="font-size: 0.9em;">\(f(x)=f(a)+f'(a) (x-a)+\frac{(x-a)^2}{2}f''(a)+\frac{(x-a)^3}{6}f'''(a)+\cdots\)</p>
+			
+			</div>
 	</div>
 
 </section>
