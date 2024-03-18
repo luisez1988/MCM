@@ -558,22 +558,117 @@ Example at <strong style='color:#7abbe6'>right face</strong>:
 
 
 
+
+
+
+
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Truncation error</h1>
+<div class='defBox' name='Truncation error' style='margin-top: -20px;margin-left: 0px;'>
+<strong style='color:#7abbe6'>Difference</strong> between the <strong style='color:#7abbe6'>exact</strong> solution and the <strong style='color:#7abbe6'>approximate</strong> solution. 
+<div class='equationBox'>
+\( \mathcal{R}= u - \hat{u}  \)
+</div> <br>
+Where \(\mathcal{R}\) is the truncation error, \(u\) is the exact solution, and \(\hat{u}\) is the approximate solution.
+</div>
+
+<p>We will need Taylor's expansion series</p>
+
+<div class="fragment">
+	<div class='theorem2' name="Taylor's expansion" style='margin-top: 0px;margin-left: 0px;'>
+		For every \(f(x)\) continuous and derivable in the interval \(\mathcal{I}\equiv [x_1,x_2]\) with \(a \in \mathcal{I}\) the function can be expanded as function of its derivatives as:
+		
+		<p style="font-size: 0.9em;">\(f(x)=f(a)+f'(a) (x-a)+\frac{(x-a)^2}{2}f''(a)+\frac{(x-a)^3}{6}f'''(a)+\cdots\)</p>
+		
+		</div>
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.6</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Use Taylor's expansion to derive the truncation error of the forward approximation.
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.7</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+	Use Taylor's expansion to derive the truncation error of the centered approximation.
+</div>
+
+</section>
 
 
 
-	<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
-		The objective is to <strong style='color:#7abbe6'>approximate</strong> derivatives.
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+	<h1>Global error</h1>
+<div class='defBox' name='Error:' style='margin-top: 0px;margin-left: 0px;'>
+	There are several definitions of error. For scalar and vector <strong style='color:#7abbe6'>fields</strong> we can define the error using the L-2 norm as:
+	<div class='equationBox'>
+	\( \begin{align}
+	E^2=\int_{\Omega} ||( \boldsymbol{u} - \boldsymbol{u}_h )||^2 d\Omega
+	\end{align} \)
+	</div> <br>
+	Where \(\boldsymbol{u}\) is the exact solution, \(\boldsymbol{u}_h\) is the approximate solution, and \(||\cdot||\) is the Euclidean norm.
+</div>
+
+<p>In finite differences \(\boldsymbol{u}_h\) is not continuous. <br>	
+	How do we do use this definition for the finite difference approximation?</p>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+This problem is solved assuming an average solution within the cell. The error is then calculated as the difference between the exact solution and the average solution. <br>
+	<div class='equationBox'>
+	\( \begin{align}
+	E=\sqrt{\cfrac{1}{N} \sum_{i=1}^{N} (u_i - \hat{u}_i)^2}
+	\end{align} \)
 	</div>
+</div>
 
-	<div class="fragment">
-		<div class='theorem2' name="Taylor's expansion" style='margin-top: 10px;margin-left: 0px;'>
-			For every \(f(x)\) continuous and derivable in the interval \(\mathcal{I}\equiv [x_1,x_2]\) with \(a \in \mathcal{I}\) the function can be expanded as function of its derivatives as:
-			
-			<p style="font-size: 0.9em;">\(f(x)=f(a)+f'(a) (x-a)+\frac{(x-a)^2}{2}f''(a)+\frac{(x-a)^3}{6}f'''(a)+\cdots\)</p>
-			
-			</div>
+<div class='findingBox' style='margin-top: 10px;margin-left: 0px;'>
+Note that the term \(1/N \longrightarrow \Delta \Omega\), therefore for 2D grid solutions:
+	<div class='equationBox'>
+	\( \begin{align}
+	E=\sqrt{\Delta x \Delta y  \sum_{i=1}^{N} (u_i - \hat{u}_i)^2}
+	\end{align} \)
 	</div>
+</div>
+
+
+
+</section>
+
+
+<!-- <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Method of the fabricated solutions</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+We will use fabricated solutions to <span class='atb'>verify</span> that our code is doing what it is suppose to do and to find an approximation of the error.
+</div>
+
+<p>The method consists of:
+	
+<ol>
+	<li class='fragment'>Assume an exact field solution for the the PDE of interest.</li>
+	<li class='fragment'>Replace the solution into the PDE to find the <strong style='color:#7abbe6'>forcing</strong> term.</li>
+	<li class='fragment'>Find <strong style='color:#7abbe6'>consistent BCs</strong> for the problem.</li>
+	<li class='fragment'>Solve the problem numerically and <span class='atb'>compare</span> the analytical and numerical solutions.</li>
+</ol>
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.8</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+
+</div> -->
+
 
 </section>
 
