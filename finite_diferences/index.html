@@ -800,9 +800,66 @@ Use the semi-implicit solution to solve Terzaghi's one-dimensional consolidation
 
 
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
-<h1>Courant-Lewi-Freasdas condition</h1>
+<h1>Courant-Friedrichs-Levy condition</h1>
+<div class='textBox' style='margin-top: 0px;font-size: 1em;'> 
+This is a necessary condition for the stability of IVPs. It states that the time step must be smaller than the space step. <br>
+	<div class='equationBox' style="margin-left: 200px;">
+		\( \Delta t \leq \cfrac{\Delta x}{c} \)
+	</div> <br>
+Where \(c\) is the speed of the wave (or information speed).
+</div>
+
+<div class="fragment">
+<div class='container'>
+<div class='col bordered'>
+<p>Rearranging the solution equation: <br>
+\( \begin{align}
+\boldsymbol{u}^{k+1}=  |\boldsymbol{A}^k| \boldsymbol{u}^k 
+\end{align} \) <br>
+Where \(|\boldsymbol{A}^k|\) is the amplification factor.
+</p>
+</div>
+<div class='col bordered'>
+<p>The stability is ensured if the spectral radius of \( \boldsymbol{A}^k \) is less or equal than 1. <br>
+\( \begin{align}
+\varrho(  \boldsymbol{A}^k) \leq 1
+\end{align} \)
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
 
 
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Spectral radius:' style='margin-top: 0px;font-size: 1em;'>  Is defined as:
+<div class='equationBox'> 
+	\(	\begin{align}
+\varrho(  \boldsymbol{A}^k) = \text{max}(\lambda_e)
+\end{align} \)
+</div> <br>
+Where \(\lambda_e\) are the eigenvalues of the matrix \(\boldsymbol{A}^k\).
+</div>
+
+
+<p> Thus, to get the critical time step:
+<ol>
+	<li class='fragment'>Write the ODE system as function of the amplification matrix.</li>
+	<li class='fragment'>Determine the maximum value of the amplification factor.</li>
+	<li class='fragment'>Use the CFL condition.</li>
+	<li class='fragment'>Apply for specific mesh size and material properties.</li>
+</ol>
+
+</p>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.11</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Find the critical time step for the Terzaghi's one-dimensional consolidation problem. Compare the effect of the time discretization in the solution.
+</div>
 </section>
 
 
