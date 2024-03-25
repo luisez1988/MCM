@@ -636,7 +636,7 @@ This problem is solved assuming an average solution within the cell. The error i
 Note that the term \(1/N \longrightarrow \Delta \Omega\), therefore for 2D grid solutions:
 	<div class='equationBox'>
 	\( \begin{align}
-	E=\sqrt{\Delta x \Delta y  \sum_{i=1}^{N} (u_i - \hat{u}_i)^2}
+	E=\sqrt{\Delta x \Delta y  \sum_{i=1}^{N} (\boldsymbol{u}_i - \hat{\boldsymbol{u}}_i)^2}
 	\end{align} \)
 	</div>
 </div>
@@ -646,7 +646,7 @@ Note that the term \(1/N \longrightarrow \Delta \Omega\), therefore for 2D grid 
 </section>
 
 
-<!-- <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Method of the fabricated solutions</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
 We will use fabricated solutions to <span class='atb'>verify</span> that our code is doing what it is suppose to do and to find an approximation of the error.
@@ -666,8 +666,141 @@ We will use fabricated solutions to <span class='atb'>verify</span> that our cod
 <section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
 <h1>Example 5.8</h1>
 <div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Use the method of prefabricated solutions to <strong style='color:#7abbe6'>verify</strong> the code developed for Example 5.5. Plot error vs mesh size.
+</div>
 
-</div> -->
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Stability and convergence</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+If a finite difference method gives a sequence of linear equations of the form \(\boldsymbol{A}^h \boldsymbol{u}^h= \boldsymbol{F}^h \), where \(h\) is the mesh size. We say that the method is <span class='atb'>stable</span> \( \boldsymbol{A}^{-1} \) exists and if there is a constant \(C\) such that:
+	<div class='equationBox' style="margin-left: 400px;">
+		\( \begin{align}
+		||\boldsymbol{A}^{-1}|| \leq C
+		\end{align} \)
+	</div>
+</div>
+
+
+
+<div class='container'>
+<div class='col bordered'>
+<div class="fragment">
+<p> Let's start with the relationship between global and truncation error. <br>
+\( \begin{align}
+\boldsymbol{A}^h  \boldsymbol{E}^h &= -\mathcal{R}^h 
+\end{align} \)
+
+</p>
+
+	
+</div>
+
+
+</div>
+<div class='col bordered'>
+<div class="fragment">
+<p>
+	\( \begin{align}
+	 \boldsymbol{E}^h &= -(\boldsymbol{A}^h)^{-1} \mathcal{R}^h\\
+	 ||\boldsymbol{E}^h|| &\leq ||(\boldsymbol{A}^h)^{-1}|| ||\mathcal{R}^h||
+	\end{align} \) <br>
+	Therefore, the global error is bounded by the truncation error <strong style='color:#7abbe6'>if and only if</strong> \(||(\boldsymbol{A}^h)^{-1}|| \leq C\)
+</p> 
+
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Convergence:' style='margin-top: 0px;margin-left: 0px;'>
+A method is said to be <span class='atb'>convergent</span> if the global error goes to zero as the mesh size goes to zero. <br>
+	<div class='equationBox'>
+		\( \lim_{h \rightarrow 0} ||\boldsymbol{E}^h||=0 \)
+	</div>
+</div>
+
+<div class='findingBox' style='margin-top: 20px;margin-left: 0px;'>
+Note: All these concepts can be proved for any discretization method. However, these proofs are out of the scope of this class.
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Initial value problems</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Initial value problems are differential equations that are solved in a domain \(\mathcal{\Omega}\) with initial conditions at the initial time \(t_0\). <strong style='color:#7abbe6'>Final state is unknown</strong> and is the objective of the calculation.
+</div>
+
+<p>Initial value problem involve finding the value of the rate of change of the solution \(\dot{ \boldsymbol{u}}= \boldsymbol{g}  \) and update states using finite difference.</p>
+
+<div class='defBox' name='Explicit solution:' style='margin-top: 0px;margin-left: 0px;'>
+We can find the updated state using a explicit solution as:
+	<div class='equationBox'>
+		\( \boldsymbol{u}^{k+1}= \boldsymbol{u}^k + \Delta t \dot{\boldsymbol{u}}^k \)
+	</div>
+<br>
+Where \(k\) is the step index and \(\Delta t\) is the time step.
+</div>
+
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.9</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Use the explicit solution to solve Terzaghi's one-dimensional consolidation problem.
+<ol>
+	<li>Compare the solution with the analytical solution. </li>
+	<li>What is the effect of \(\Delta t\) in the solution.</li>
+</ol>
+
+</div>
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<div class='defBox' name='Implicit solution:' style='margin-top: 0px;margin-left: 0px;'>
+The implicit solution is found by solving the equation for the future state. This is done by using the future state in the equation and solving for the unknown. <br>
+	<div class='equationBox'>
+		\( \boldsymbol{u}^{k+1}= \boldsymbol{u}^k + \Delta t \dot{\boldsymbol{u}}^{k+1} \)
+	</div> <br>
+	Note that the future state is unknown and must be found using an iterative method.
+</div>
+
+<div class='defBox' name='Semi-implicit solution:' style='margin-top: 5px;margin-left: 0px;'>
+The explicit and implicit solution might be combined as follows: <br>
+	<div class='equationBox'>
+		\( \boldsymbol{u}^{k+1}= \boldsymbol{u}^k + \Delta t [ \beta \dot{\boldsymbol{u}}^{k} + (1-\beta) \dot{\boldsymbol{u}}^{k+1} ]\)
+	</div> <br>
+	Where the future state is found using the explicit solution and the future rate of change is found using the implicit solution.
+
+</div>
+
+</section>
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Example 5.10</h1>
+<div class='textBox' style='margin-top: 0px;margin-left: 0px;'>
+Use the semi-implicit solution to solve Terzaghi's one-dimensional consolidation problem. Compare the effect of the time discretization in the solution.
+</div>
+</section>
+
+
+<section data-background-image='FiguresGeneral/Normal_slide_Maine.svg'>
+<h1>Courant-Lewi-Freasdas condition</h1>
 
 
 </section>
